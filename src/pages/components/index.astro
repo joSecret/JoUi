@@ -24,7 +24,7 @@ const components = (await getCollection('components')).sort((a, b) =>
             const slug = entry.id.split('/')[0];
             return (
               <li>
-                <a href={`/components/${slug}/`}>
+                <a href={`/joui/components/${slug}/`}>
                   <strong>{entry.data.title}</strong>
                   <p>{entry.data.description}</p>
                 </a>

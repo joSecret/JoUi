@@ -1,0 +1,28 @@
+---
+import './tooltip.css';
+
+interface Props {
+  text: string;
+  placement?: 'top' | 'bottom' | 'start' | 'end';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  text,
+  placement = 'top',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = ['tooltip-wrapper', ...classes].filter(Boolean);
+---
+
+<span
+  class:list={classList}
+  data-tooltip={text}
+  data-tooltip-placement={placement}
+  {...attrs}
+>
+  <slot />
+</span>

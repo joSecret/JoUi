@@ -1,0 +1,262 @@
+:root {
+  --header_container: min(1200px, calc(100% - var(--size_400)));
+}
+
+.header-2 {
+  max-width: var(--header_container);
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 600px 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0px 0px;
+
+  .w-lang {
+    grid-area: 1 / 1 / 2 / 3;
+  }
+
+  .w-livrare {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+
+  .w-user {
+    grid-area: 1 / 4 / 2 / 5;
+  }
+
+  .w-logo {
+    grid-area: 2 / 1 / 3 / 3;
+  }
+
+  .w-search {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+
+  .w-commerce {
+    grid-area: 2 / 4 / 3 / 5;
+  }
+
+  .w-catalog {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+
+  .w-menu {
+    grid-area: 3 / 2 / 4 / 5;
+  }
+}
+
+.c--header {
+  --_header_p-b: var(--header_p-b, var(--size_200));
+  --header_gap: 0px;
+
+
+  display: var(--_header_display, flex);
+  align-items: center;
+  padding-block: var(--_header_p-b);
+  gap: var(--header_gap);
+  top: 0;
+  max-width: var(--header_container);
+
+  .region-buttons {
+    display: flex;
+  }
+
+  .block_commerce {
+    display: flex;
+  }
+
+  .r-lang {
+    grid-area: rLang;
+
+    display: flex;
+    gap: var(--size_300);
+    align-items: center;
+  }
+
+  .r-info {
+    grid-area: rInfo;
+
+    justify-self: center;
+    font-size: var(--f-s_1);
+  }
+
+  .r-user {
+    grid-area: rUser;
+
+    align-items: flex-end;
+  }
+
+  .r-logo {
+    grid-area: rLogo;
+    flex-grow: 1;
+
+    .logo {
+      padding-inline: var(--header_p);
+      flex-grow: 1;
+
+      svg {
+        width: var(--header_logo_w, 65px);
+      }
+    }
+  }
+
+  .section-search {
+    grid-area: rSearch;
+  }
+
+  .r-commerce {
+    grid-area: rCommerce;
+  }
+
+  .section-nav {
+    grid-area: rNav;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: 0 0 0 100vmax var(--c_primary);
+      clip-path: inset(0 -100vmax);
+    }
+  }
+
+  @media (max-width: 767px) {
+    position: sticky;
+    .header_w-sm_hidden {
+      display: none;
+    }
+
+    .is-search {
+      position: absolute;
+      inset: 16px;
+      inset-block-start: 40px;
+      height: fit-content;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    --_header_display: grid;
+    --_header_p-b: 0px;
+
+    --header_logo_w: 138px;
+
+    margin-inline: auto;
+    grid-template-columns: 1fr min(50%, 600px) 1fr;
+    grid-template-areas:
+      'rLang rInfo rUser'
+      'rLogo rSearch rCommerce'
+      'rNav rNav rNav';
+
+    #main-menu,
+    #dialog-search {
+      display: contents;
+      pointer-events: all;
+    }
+
+    .header_w-lg_hidden {
+      display: none;
+    }
+
+    .r-user,
+    .r-commerce {
+      justify-self: end;
+    }
+
+    .section-nav {
+      grid-area: rNav;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--c_primary);
+        box-shadow: 0 0 0 100vmax var(--c_primary);
+        clip-path: inset(0 -100vmax);
+        z-index: -1;
+      }
+    }
+
+    .btn_cart {
+      anchor-name: --commerce;
+    }
+
+    #cart {
+      position-anchor: --commerce;
+      inset: auto;
+      top: anchor(bottom);
+      right: anchor(right);
+
+      &::backdrop {
+        background: transparent;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+#cart {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+  }
+}
+
+dialog {
+  --animation-slide-in-right: slide-in-right .5s var(--ease-3);
+
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+  }
+
+  &.is-sidebar {
+    width: 320px;
+    background: red;
+    height: auto;
+    max-height: none;
+  }
+
+  &.is-search {
+    background: white;
+    height: auto;
+    max-height: none;
+  }
+}
+
+dialog[open] {
+  animation: var(--animation-slide-in-right) forwards;
+}
+
+dialog:not([open]) {
+  animation: var(--animation-slide-out-left) forwards;
+  pointer-events: none;
+}
+
+button[popovertarget] {
+  anchor-name: --userMenu;
+}
+
+[popover] {
+  position-anchor: --userMenu;
+  border: 1px solid var(--hr_b-c);
+  border-radius: var(--b-r);
+  padding: var(--size_300);
+  position: absolute;
+  inset: auto;
+  top: anchor(bottom);
+  right: anchor(right);
+
+  &:popover-open {
+    display: grid;
+  }
+}

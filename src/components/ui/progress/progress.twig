@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Template for a progress bar component.
+ *
+ * Available properties:
+ * - progress_value: (number) default: 0 — Progress value (0–100).
+ * - progress_color: (string|null) default: null
+ *    enum: null | primary | secondary | success | warning | danger | info | light | dark
+ * - progress_striped: (boolean) default: false — Show striped pattern on the bar.
+ * - progress_animated: (boolean) default: false — Animate the stripes (implies striped).
+ * - progress_label: (string|boolean) default: false — Text inside the bar.
+ *    Pass true for automatic percentage label, or a custom string.
+ * - progress_height: (string|null) default: null — CSS height value (e.g. '2rem').
+ *
+ * Utility classes / attributes:
+ * - progress_uc: (array) Extra utility classes on the wrapper.
+ * - progress_att: (Drupal\Core\Template\Attribute) Attributes for the wrapper.
+ *
+ * @see progress.component.yml
+ */
+#}
+
+{% set progress_value = progress_value|default(0) %}
+{% set progress_color = progress_color|default(null) %}
+{% set progress_striped = progress_striped|default(false) %}
+{% set progress_animated = progress_animated|default(false) %}
+{% set progress_label = progress_label|default(false) %}
+{% set progress_height = progress_height|default(null) %}
+
+{% set clamped = [[progress_value, 0]|max, 100]|min %}
+{% set is_striped = progress_striped or progress_animated %}
+
+{% if progress_label == true %}
+  {% set label_text = clamped ~ '%' %}
+{% elseif progress_label %}
+  {% set label_text = progress_label %}
+{% else %}
+  {% set label_text = null %}
+{% endif %}
+
+{%
+  set progress_classes = [
+    'progress',
+    progress_color ? 'progress-' ~ progress_color,
+  ]|merge(progress_uc ?: [])
+%}
+
+{%
+  set bar_classes = [
+    'progress-bar',
+    is_striped ? 'progress-bar-striped',
+    progress_animated ? 'progress-bar-animated',
+  ]|filter
+%}
+
+{% set progress_att = progress_att ?: create_attribute() %}
+{% set progress_att = progress_att
+  .setAttribute('role', 'progressbar')
+  .setAttribute('aria-valuenow', clamped)
+  .setAttribute('aria-valuemin', 0)
+  .setAttribute('aria-valuemax', 100)
+  .setAttribute('aria-label', label_text ?: (clamped ~ '%'))
+%}
+
+{% if progress_height %}
+  {% set progress_att = progress_att.setAttribute('style', '--prog_h: ' ~ progress_height ~ ';') %}
+{% endif %}
+
+<div{{ progress_att.addClass(progress_classes) }}>
+  <div{{ create_attribute().addClass(bar_classes).setAttribute('style', 'width: ' ~ clamped ~ '%') }}>
+    {%- if label_text -%}
+      <span>{{- label_text -}}</span>
+    {%- endif -%}
+  </div>
+</div>

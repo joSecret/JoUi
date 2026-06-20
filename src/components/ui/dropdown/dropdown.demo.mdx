@@ -1,0 +1,96 @@
+---
+title: Dropdown
+description: Toggleable dropdown menu triggered by a button click
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Dropdown from './Dropdown.astro'
+
+# Dropdown
+
+Toggleable menu that opens on button click. Closes on outside click, Escape key, and automatically positions the menu. Requires `dropdown.js`.
+
+## Installation
+
+```bash
+npx joui add dropdown --platform astro
+```
+
+```bash
+npx joui add dropdown --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Dropdown from '@ui/dropdown/Dropdown.astro'
+---
+<Dropdown
+  label="Options"
+  color="secondary"
+  items={[
+    { label: 'Action', href: '#' },
+    { label: 'Another action', href: '#' },
+    { divider: true },
+    { label: 'Something else', href: '#' },
+  ]}
+/>
+```
+
+## Examples
+
+### Default
+
+<Dropdown
+  label="Secondary"
+  color="secondary"
+  items={[
+    { label: 'Action', href: '#' },
+    { label: 'Another action', href: '#' },
+    { divider: true },
+    { label: 'Something else', href: '#' },
+  ]}
+/>
+
+### Colors
+
+<Dropdown label="Primary" color="primary" items={[{ label: 'Item', href: '#' }]} />
+<Dropdown label="Danger" color="danger" items={[{ label: 'Delete', href: '#' }]} />
+
+```astro
+<Dropdown label="Primary" color="primary" items={[...]} />
+<Dropdown label="Danger" color="danger" items={[...]} />
+```
+
+### With disabled item
+
+<Dropdown
+  label="With disabled"
+  items={[
+    { label: 'Active link', href: '#' },
+    { label: 'Disabled link', href: '#', disabled: true },
+  ]}
+/>
+
+```astro
+<Dropdown
+  label="With disabled"
+  items={[
+    { label: 'Active link', href: '#' },
+    { label: 'Disabled link', href: '#', disabled: true },
+  ]}
+/>
+```
+
+### Direction variants
+
+```astro
+<Dropdown label="Drop Up" direction="up" items={[...]} />
+<Dropdown label="Drop End" direction="end" items={[...]} />
+```
+
+## API Reference
+
+See [`dropdown.md`](./dropdown.md) for the full reference and [`dropdown.astro.md`](./dropdown.astro.md) / [`dropdown.drupal.md`](./dropdown.drupal.md) for platform notes.

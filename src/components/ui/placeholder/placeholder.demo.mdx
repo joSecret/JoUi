@@ -1,0 +1,79 @@
+---
+title: Placeholder
+description: Skeleton loading placeholders with glow and wave animation variants
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Placeholder from './Placeholder.astro'
+
+# Placeholder
+
+Skeleton loading indicators used while content is loading. Two animation styles: `glow` (opacity pulse) and `wave` (shimmer). No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add placeholder --platform astro
+```
+
+```bash
+npx joui add placeholder --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Placeholder from '@ui/placeholder/Placeholder.astro'
+---
+<Placeholder lines={[{ cols: 7 }, { cols: 4 }, { cols: 12 }]} />
+```
+
+## Examples
+
+### Glow (default)
+
+<Placeholder lines={[{ cols: 7 }, { cols: 4 }, { cols: 12 }, { cols: 8 }]} />
+
+```astro
+<Placeholder lines={[{ cols: 7 }, { cols: 4 }, { cols: 12 }, { cols: 8 }]} />
+```
+
+### Wave
+
+<Placeholder animation="wave" lines={[{ cols: 8 }, { cols: 6 }, { cols: 10 }]} />
+
+```astro
+<Placeholder animation="wave" lines={[{ cols: 8 }, { cols: 6 }, { cols: 10 }]} />
+```
+
+### Sizes
+
+<Placeholder lines={[
+  { cols: 6, size: 'lg' },
+  { cols: 9 },
+  { cols: 4, size: 'sm' },
+  { cols: 7, size: 'xs' },
+]} />
+
+```astro
+<Placeholder lines={[
+  { cols: 6, size: 'lg' },
+  { cols: 9 },
+  { cols: 4, size: 'sm' },
+  { cols: 7, size: 'xs' },
+]} />
+```
+
+### No animation
+
+<Placeholder animation="none" lines={[{ cols: 12 }, { cols: 8 }]} />
+
+```astro
+<Placeholder animation="none" lines={[{ cols: 12 }, { cols: 8 }]} />
+```
+
+## API Reference
+
+See [`placeholder.md`](./placeholder.md) for the full reference and [`placeholder.astro.md`](./placeholder.astro.md) / [`placeholder.drupal.md`](./placeholder.drupal.md) for platform notes.

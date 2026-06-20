@@ -1,0 +1,128 @@
+---
+title: Nav
+description: Flexible navigation links with tabs and pills variants
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Nav from './Nav.astro'
+
+# Nav
+
+Flexible navigation links. Supports plain nav, tabs, and pills variants. Tabs with panels require the included `nav.js` behavior.
+
+## Installation
+
+```bash
+npx joui add nav --platform astro
+```
+
+```bash
+npx joui add nav --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Nav from '@ui/nav/Nav.astro'
+---
+<Nav items={[
+  { label: 'Active', href: '#', active: true },
+  { label: 'Link', href: '#' },
+  { label: 'Another link', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+```
+
+## Examples
+
+### Default
+
+<Nav items={[
+  { label: 'Active', href: '#', active: true },
+  { label: 'Link', href: '#' },
+  { label: 'Another link', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+
+```astro
+<Nav items={[
+  { label: 'Active', href: '#', active: true },
+  { label: 'Link', href: '#' },
+  { label: 'Another link', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+```
+
+### Tabs
+
+<Nav variant="tabs" items={[
+  { label: 'Home', href: '#', active: true },
+  { label: 'Profile', href: '#' },
+  { label: 'Contact', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+
+```astro
+<Nav variant="tabs" items={[
+  { label: 'Home', href: '#', active: true },
+  { label: 'Profile', href: '#' },
+  { label: 'Contact', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+```
+
+### Pills
+
+<Nav variant="pills" items={[
+  { label: 'Active', href: '#', active: true },
+  { label: 'Link', href: '#' },
+  { label: 'Another link', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+
+```astro
+<Nav variant="pills" items={[
+  { label: 'Active', href: '#', active: true },
+  { label: 'Link', href: '#' },
+  { label: 'Another link', href: '#' },
+  { label: 'Disabled', disabled: true },
+]} />
+```
+
+### Tabs with panels
+
+<Nav variant="tabs" items={[
+  { label: 'Tab 1', tabTarget: 'demo-panel1', active: true },
+  { label: 'Tab 2', tabTarget: 'demo-panel2' },
+  { label: 'Tab 3', tabTarget: 'demo-panel3' },
+]} />
+<div class="tab-content">
+  <div class="tab-pane active" id="demo-panel1" role="tabpanel">
+    <p>Content for Tab 1. Click the tabs above to switch panels.</p>
+  </div>
+  <div class="tab-pane" id="demo-panel2" role="tabpanel">
+    <p>Content for Tab 2.</p>
+  </div>
+  <div class="tab-pane" id="demo-panel3" role="tabpanel">
+    <p>Content for Tab 3.</p>
+  </div>
+</div>
+
+```astro
+<Nav variant="tabs" items={[
+  { label: 'Tab 1', tabTarget: 'panel1', active: true },
+  { label: 'Tab 2', tabTarget: 'panel2' },
+  { label: 'Tab 3', tabTarget: 'panel3' },
+]} />
+<div class="tab-content">
+  <div class="tab-pane active" id="panel1" role="tabpanel">Content 1</div>
+  <div class="tab-pane" id="panel2" role="tabpanel">Content 2</div>
+  <div class="tab-pane" id="panel3" role="tabpanel">Content 3</div>
+</div>
+```
+
+## API Reference
+
+See [`nav.md`](./nav.md) for the full reference and [`nav.astro.md`](./nav.astro.md) / [`nav.drupal.md`](./nav.drupal.md) for platform notes.

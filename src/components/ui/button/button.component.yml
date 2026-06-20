@@ -1,0 +1,149 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Button
+status: stable
+group: Globals
+version: 1.0.0
+description: Use quickskin custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
+
+# Props.
+props:
+  type: object
+  properties:
+
+    # properties
+    button_tag:
+      type: string
+      title: Button tag
+      description: The HTML tag to use for the button (button|a|span). Defaults to `button`.
+      default: button
+      enum:
+        - a
+        - button
+        - span
+        - input
+        - summary
+
+    button_color:
+      type: ['string', 'null']
+      title: Color
+      description: Button color.
+      default: null
+      enum:
+        - null
+        - primary
+        - secondary
+        - accent
+        - success
+        - warning
+        - danger
+        - info
+        - light
+        - dark
+
+    button_type:
+      type: ['string', 'null']
+      title: Button type
+      description: Button type.
+      default: null
+      enum:
+        - null
+        - outline
+        - ghost
+        - clear
+
+    button_size:
+      type: ['string', 'null']
+      title: Size
+      description: quickskin button size
+      default: null
+      enum:
+        - null
+        - sm
+        - lg
+
+    button_icon_position:
+      type: string
+      title: Icon position
+      description: Icon position right | left | only
+      default: 'right'
+      enum:
+        - right
+        - left
+        - only
+
+    button_radius:
+      type: ['string', 'null']
+      title: Button radius
+      description: Button radius.
+      default: null
+      enum:
+        - null
+        - none
+        - sm
+        - lg
+        - pill
+
+    button_disabled:
+      type: boolean
+      title: Disabled
+      description: Disabled button
+      default: false
+
+    button_aria_expanded:
+      type: boolean
+      title: Aria expanded
+      description: Indicates whether the button is expanded or not. Used for buttons that toggle visibility, such as a dropdown or accordion.
+      default: false
+
+    # values
+    button_id:
+      type: ['string', 'null']
+      title: Button ID
+      description: The ID of the button.
+      default: null
+
+    button_label:
+      type: string
+      title: Button label.
+      default: ''
+
+    button_url:
+      type: ['string', 'null']
+      title: URL Link
+      description: URL link for the button when the HTML tag is an anchor link.
+      default: null
+
+    button_icon:
+      type: ['string', 'null']
+      title: Icon
+      description: SVG icon code.
+      default: null
+
+    # uc -> utility_classes
+    button_uc:
+      type: array
+      items:
+        type: string
+      title: Button Utility Classes
+      default: []
+      description: An array of utility classes. Use to add extra quickskin utility classes or custom CSS classes over to this component.
+
+    # att -> attributes
+    button_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the button.
+
+slots:
+  slot_icon_before:
+    title: Icon Before
+    description: The slot for the button icon when its position is set to left
+
+  slot_content:
+    title: Content
+    description: The content for the button
+
+  slot_icon:
+    title: Icon
+    description: The slot for the button icon

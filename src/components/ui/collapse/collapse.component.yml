@@ -1,0 +1,49 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Collapse
+status: stable
+group: UI
+version: 1.0.0
+description: A collapsible content panel toggled by an external trigger via data-collapse-target.
+
+props:
+  type: object
+  properties:
+
+    collapse_id:
+      type: ['string', 'null']
+      title: Collapse ID
+      description: The id attribute of the collapsible element. Must match the data-collapse-target on the trigger.
+      default: null
+
+    collapse_open:
+      type: boolean
+      title: Open by default
+      description: Whether the collapse panel is open on page load.
+      default: false
+
+    collapse_content:
+      type: ['string', 'null']
+      title: Content
+      description: HTML content rendered inside the collapse body.
+      default: null
+
+    # uc -> utility_classes
+    collapse_uc:
+      type: array
+      items:
+        type: string
+      title: Collapse Utility Classes
+      default: []
+      description: An array of utility classes to add to the collapse wrapper.
+
+    # att -> attributes
+    collapse_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the collapse wrapper.
+
+slots:
+  slot_content:
+    title: Content
+    description: The content rendered inside the collapse body.

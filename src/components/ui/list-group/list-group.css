@@ -1,0 +1,154 @@
+.list-group {
+  /* === Public vars === */
+  --lg_bg: var(--body_bg);
+  --lg_c: var(--body_c);
+  --lg_b-c: var(--b-c);
+  --lg_b-r: var(--b-r);
+  --lg_b-w: var(--b-w);
+  --lg_p-b: var(--size_300);
+  --lg_p-i: var(--size_400);
+
+  /* === Private vars === */
+  --_lg_bg: var(--lg-type_bg, var(--lg_bg));
+  --_lg_c: var(--lg-type_c, var(--lg_c));
+  --_lg_b-c: var(--lg_b-c);
+  --_lg_b-r: var(--lg_b-r);
+  --_lg_p-b: var(--lg_p-b);
+  --_lg_p-i: var(--lg_p-i);
+
+  /* === Mix helpers === */
+  --_lg-mix_c: var(--lg-mix_c, light-dark(var(--c_black), var(--c_white)));
+
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-radius: var(--_lg_b-r);
+  overflow: clip;
+
+  &:not(.list-group-flush) {
+    border: var(--_lg_b-w) solid var(--_lg_b-c);
+  }
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding-block: var(--_lg_p-b);
+  padding-inline: var(--_lg_p-i);
+  color: var(--lg-item-state_c, var(--_lg_c));
+  background-color: var(--lg-item-state_bg, var(--_lg_bg));
+  border: none;
+  width: 100%;
+  text-align: start;
+  text-decoration: none;
+
+  &:not(:first-child) {
+    border-block-start: var(--_lg_b-w) solid var(--_lg_b-c);
+  }
+
+  &.active,
+  &[aria-current] {
+    --lg-item-state_c: var(--lg_active_c, var(--c_white));
+    --lg-item-state_bg: var(--lg_active_bg, var(--c_primary_500));
+    --_lg_b-c: var(--lg_active_bg, var(--c_primary_500));
+
+    z-index: 2;
+  }
+
+  &.disabled,
+  &[aria-disabled="true"] {
+    color: var(--lg_disabled_c, color-mix(in oklab, var(--_lg_c), transparent 50%));
+    pointer-events: none;
+    background-color: var(--_lg_bg);
+  }
+}
+
+/* === Action items (a or button) === */
+a.list-group-item,
+button.list-group-item,
+.list-group-item-action {
+  cursor: pointer;
+  transition: color var(--t), background-color var(--t);
+
+  &:hover,
+  &.hover {
+    --lg-item-state_c: var(--lg_c_h, var(--_lg_c));
+    --lg-item-state_bg: var(--lg_bg_h, color-mix(in oklab, var(--_lg_bg), var(--_lg-mix_c) 5%));
+
+    z-index: 1;
+  }
+
+  &:focus-visible {
+    z-index: 3;
+    outline: 2px solid var(--c_primary_500);
+    outline-offset: -2px;
+  }
+
+  &:active {
+    --lg-item-state_c: var(--lg_c_a, var(--_lg_c));
+    --lg-item-state_bg: var(--lg_bg_a, color-mix(in oklab, var(--_lg_bg), var(--_lg-mix_c) 10%));
+  }
+}
+
+/* === Flush variant === */
+.list-group-flush {
+  border-radius: 0;
+
+  .list-group-item {
+    &:first-child {
+      border-block-start: none;
+    }
+    &:last-child {
+      border-block-end: none;
+    }
+  }
+}
+
+/* === Horizontal variant === */
+.list-group-horizontal {
+  flex-direction: row;
+
+  .list-group-item {
+    &:not(:first-child) {
+      border-block-start: none;
+      border-inline-start: var(--_lg_b-w) solid var(--_lg_b-c);
+    }
+  }
+
+  &:not(.list-group-flush) {
+    border-radius: var(--_lg_b-r);
+  }
+}
+
+/* === Color variants === */
+.list-group-item-primary {
+  --lg-type_c: color-mix(in oklab, var(--c_primary_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_primary_500), white 85%);
+}
+
+.list-group-item-secondary {
+  --lg-type_c: color-mix(in oklab, var(--c_secondary_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_secondary_500), white 85%);
+}
+
+.list-group-item-success {
+  --lg-type_c: color-mix(in oklab, var(--c_success_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_success_500), white 85%);
+}
+
+.list-group-item-warning {
+  --lg-type_c: color-mix(in oklab, var(--c_warning_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_warning_500), white 85%);
+}
+
+.list-group-item-danger {
+  --lg-type_c: color-mix(in oklab, var(--c_danger_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_danger_500), white 85%);
+}
+
+.list-group-item-info {
+  --lg-type_c: color-mix(in oklab, var(--c_info_500), black 40%);
+  --lg-type_bg: color-mix(in oklab, var(--c_info_500), white 85%);
+}

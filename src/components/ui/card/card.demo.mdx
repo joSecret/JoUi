@@ -1,0 +1,164 @@
+---
+title: Card
+description: A flexible content container with image, header, body, and footer sections. Supports color variants, horizontal layout, and shadow.
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Card from './Card.astro'
+
+# Card
+
+A flexible content container. Compose the internals using `.card-header`, `.card-body`, `.card-footer`, `.card-title`, `.card-text`, and image helpers. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add card --platform astro
+```
+
+```bash
+npx joui add card --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Card from '@ui/card/Card.astro'
+---
+<Card>
+  <img src="https://picsum.photos/400/200" class="card-img-top" alt="Sample image">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title.</p>
+    <a href="#" class="button button-primary">Go somewhere</a>
+  </div>
+</Card>
+```
+
+## Examples
+
+### Default
+
+<Card>
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title.</p>
+    <a href="#" class="button button-primary">Go somewhere</a>
+  </div>
+</Card>
+
+```astro
+<Card>
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle">Card subtitle</h6>
+    <p class="card-text">Some quick example text.</p>
+    <a href="#" class="button button-primary">Go somewhere</a>
+  </div>
+</Card>
+```
+
+### With header and footer
+
+<Card>
+  <div class="card-header">Featured</div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="button button-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer">2 days ago</div>
+</Card>
+
+```astro
+<Card>
+  <div class="card-header">Featured</div>
+  <div class="card-body">...</div>
+  <div class="card-footer">2 days ago</div>
+</Card>
+```
+
+### Color variants
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+  <Card color="primary">
+    <div class="card-body">
+      <h5 class="card-title">Primary</h5>
+      <p class="card-text">Primary card variant.</p>
+    </div>
+  </Card>
+  <Card color="secondary">
+    <div class="card-body">
+      <h5 class="card-title">Secondary</h5>
+      <p class="card-text">Secondary card variant.</p>
+    </div>
+  </Card>
+  <Card color="success">
+    <div class="card-body">
+      <h5 class="card-title">Success</h5>
+      <p class="card-text">Success card variant.</p>
+    </div>
+  </Card>
+  <Card color="danger">
+    <div class="card-body">
+      <h5 class="card-title">Danger</h5>
+      <p class="card-text">Danger card variant.</p>
+    </div>
+  </Card>
+</div>
+
+```astro
+<Card color="primary">...</Card>
+<Card color="secondary">...</Card>
+<Card color="success">...</Card>
+<Card color="danger">...</Card>
+```
+
+### Horizontal layout
+
+<Card horizontal>
+  <img src="https://picsum.photos/200/200" class="card-img" alt="Sample">
+  <div class="card-body">
+    <h5 class="card-title">Horizontal card</h5>
+    <p class="card-text">This is a wider card with supporting text. Image on the left, content on the right.</p>
+  </div>
+</Card>
+
+```astro
+<Card horizontal>
+  <img src="..." class="card-img" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Horizontal card</h5>
+    <p class="card-text">...</p>
+  </div>
+</Card>
+```
+
+### Shadow
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+  <Card shadow>
+    <div class="card-body">
+      <h5 class="card-title">Default shadow</h5>
+      <p class="card-text">Subtle elevation.</p>
+    </div>
+  </Card>
+  <Card shadow="lg">
+    <div class="card-body">
+      <h5 class="card-title">Large shadow</h5>
+      <p class="card-text">More prominent elevation.</p>
+    </div>
+  </Card>
+</div>
+
+```astro
+<Card shadow>...</Card>
+<Card shadow="lg">...</Card>
+```
+
+## API Reference
+
+See [`card.md`](./card.md) for the full reference and [`card.astro.md`](./card.astro.md) / [`card.drupal.md`](./card.drupal.md) for platform notes.

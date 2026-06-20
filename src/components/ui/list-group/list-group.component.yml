@@ -1,0 +1,56 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: List Group
+status: stable
+group: UI
+version: 1.0.0
+description: Flexible list of bordered items with active, disabled, color, action, flush, and horizontal variants. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    list_group_items:
+      type: array
+      title: Items
+      description: >
+        Array of item objects. Each item has:
+        label (string), href (string|null), active (boolean), disabled (boolean), color (string|null).
+      default: []
+
+    list_group_flush:
+      type: boolean
+      title: Flush
+      description: Removes outer border and border-radius for edge-to-edge layout.
+      default: false
+
+    list_group_horizontal:
+      type: boolean
+      title: Horizontal
+      description: Render items in a horizontal row.
+      default: false
+
+    list_group_tag:
+      type: string
+      title: Tag
+      description: HTML tag for the wrapper element — ul, ol, or div.
+      default: 'ul'
+
+    # uc -> utility_classes
+    list_group_uc:
+      type: array
+      items:
+        type: string
+      title: List Group Utility Classes
+      default: []
+
+    # att -> attributes
+    list_group_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the wrapper element.
+
+slots:
+  slot_items:
+    title: Items
+    description: Custom list items appended after the items array.

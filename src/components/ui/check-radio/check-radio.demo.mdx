@@ -1,0 +1,81 @@
+---
+title: Checks & Radios
+description: Custom styled checkbox, radio button, and toggle switch form controls
+category: ui
+preview: ./thumbnail.svg
+---
+
+import CheckRadio from './CheckRadio.astro'
+
+# Checks & Radios
+
+Custom-styled checkbox, radio button, and toggle switch controls. All styled via CSS with no browser defaults. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add check-radio --platform astro
+```
+
+```bash
+npx joui add check-radio --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import CheckRadio from '@ui/check-radio/CheckRadio.astro'
+---
+<CheckRadio id="default-check" label="Default checkbox" />
+```
+
+## Examples
+
+### Checkboxes
+
+<CheckRadio id="check-1" label="Default checkbox" />
+<CheckRadio id="check-2" label="Checked checkbox" checked />
+<CheckRadio id="check-3" label="Disabled checkbox" disabled />
+
+```astro
+<CheckRadio id="check-1" label="Default checkbox" />
+<CheckRadio id="check-2" label="Checked checkbox" checked />
+<CheckRadio id="check-3" label="Disabled checkbox" disabled />
+```
+
+### Radios
+
+<CheckRadio type="radio" id="r1" name="demo-radio" value="1" label="Option 1" checked />
+<CheckRadio type="radio" id="r2" name="demo-radio" value="2" label="Option 2" />
+<CheckRadio type="radio" id="r3" name="demo-radio" value="3" label="Option 3" disabled />
+
+```astro
+<CheckRadio type="radio" id="r1" name="choice" value="1" label="Option 1" checked />
+<CheckRadio type="radio" id="r2" name="choice" value="2" label="Option 2" />
+```
+
+### Switches
+
+<CheckRadio type="switch" id="sw1" label="Default switch" />
+<CheckRadio type="switch" id="sw2" label="Checked switch" checked />
+
+```astro
+<CheckRadio type="switch" id="sw1" label="Default switch" />
+<CheckRadio type="switch" id="sw2" label="Checked switch" checked />
+```
+
+### Inline
+
+<CheckRadio inline id="in1" name="colors" value="r" label="Red" />
+<CheckRadio inline id="in2" name="colors" value="g" label="Green" checked />
+<CheckRadio inline id="in3" name="colors" value="b" label="Blue" />
+
+```astro
+<CheckRadio inline id="c1" name="colors" value="r" label="Red" />
+<CheckRadio inline id="c2" name="colors" value="g" label="Green" />
+```
+
+## API Reference
+
+See [`check-radio.md`](./check-radio.md) for the full reference and [`check-radio.astro.md`](./check-radio.astro.md) / [`check-radio.drupal.md`](./check-radio.drupal.md) for platform notes.

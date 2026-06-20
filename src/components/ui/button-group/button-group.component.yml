@@ -1,0 +1,59 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Button Group
+status: stable
+group: UI
+version: 1.0.0
+description: Groups multiple buttons into a visually connected horizontal or vertical row. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    button_group_vertical:
+      type: boolean
+      title: Vertical
+      description: Stack buttons vertically instead of horizontally.
+      default: false
+
+    button_group_size:
+      type: ['string', 'null']
+      title: Size
+      description: Size variant applied to all buttons — sm or lg.
+      enum:
+        - 'sm'
+        - 'lg'
+        - null
+      default: null
+
+    button_group_label:
+      type: string
+      title: Accessible Label
+      description: aria-label for the group wrapper.
+      default: 'Button group'
+
+    button_group_content:
+      type: ['string', 'null']
+      title: Content
+      description: HTML button elements to render inside the group.
+      default: null
+
+    # uc -> utility_classes
+    button_group_uc:
+      type: array
+      items:
+        type: string
+      title: Button Group Utility Classes
+      default: []
+      description: An array of extra utility classes for the wrapper.
+
+    # att -> attributes
+    button_group_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the wrapper div.
+
+slots:
+  slot_buttons:
+    title: Buttons
+    description: Button elements to render inside the group.

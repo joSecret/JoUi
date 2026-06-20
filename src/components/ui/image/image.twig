@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * Image component — responsive image with optional thumbnail and rounded styles.
+ *
+ * Available properties:
+ * - image_src: (string) Image source URL (required).
+ * - image_alt: (string) Alt text (required).
+ * - image_fluid: (boolean) default: true — adds img-fluid (max-width: 100%).
+ * - image_thumbnail: (boolean) default: false — adds thumbnail border.
+ * - image_rounded: (string|false) default: false
+ *    Rounded variant: true/'', 'circle', 'pill', 'sm', 'lg', '0'.
+ * - image_width: (int|null) Width attribute.
+ * - image_height: (int|null) Height attribute.
+ * - image_loading: (string) default: 'lazy' — loading attribute.
+ *
+ * Available Utility classes -> uc
+ * - image_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - image_att: Attributes (Drupal\Core\Template\Attribute).
+ */
+#}
+
+{% set image_fluid = image_fluid|default(true) %}
+{% set image_thumbnail = image_thumbnail|default(false) %}
+{% set image_rounded = image_rounded|default(false) %}
+{% set image_loading = image_loading|default('lazy') %}
+
+{# Create attributes #}
+{% set image_att = image_att ?: create_attribute() %}
+
+{# Build rounded class #}
+{% set rounded_class = '' %}
+{% if image_rounded == 'circle' %}
+  {% set rounded_class = 'rounded-circle' %}
+{% elseif image_rounded == 'pill' %}
+  {% set rounded_class = 'rounded-pill' %}
+{% elseif image_rounded == 'sm' %}
+  {% set rounded_class = 'rounded-sm' %}
+{% elseif image_rounded == 'lg' %}
+  {% set rounded_class = 'rounded-lg' %}
+{% elseif image_rounded == '0' %}
+  {% set rounded_class = 'rounded-0' %}
+{% elseif image_rounded %}
+  {% set rounded_class = 'rounded' %}
+{% endif %}
+
+{# Component classes #}
+{%
+  set image_classes = [
+    image_fluid ? 'img-fluid',
+    image_thumbnail ? 'img-thumbnail',
+    rounded_class,
+  ]|filter|merge(image_uc ?: [])
+%}
+
+{% if image_width %}
+  {% set image_att = image_att.setAttribute('width', image_width) %}
+{% endif %}
+{% if image_height %}
+  {% set image_att = image_att.setAttribute('height', image_height) %}
+{% endif %}
+
+<img
+  {{ image_att.addClass(image_classes) }}
+  src="{{ image_src }}"
+  alt="{{ image_alt }}"
+  loading="{{ image_loading }}"
+>

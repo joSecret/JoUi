@@ -1,0 +1,41 @@
+---
+import './alert.css';
+import CloseButton from '@ui/close-button/CloseButton.astro';
+
+interface Props {
+  color?: string | null;
+  dismissible?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  color = null,
+  dismissible = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'alert',
+  color && `alert-${color}`,
+  dismissible && 'alert-dismissible',
+  ...classes,
+].filter(Boolean);
+---
+
+<div class:list={classList} role="alert" {...attrs}>
+  <slot />
+  {dismissible && (
+    <CloseButton attrs={{ 'data-alert-dismiss': true }} />
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-alert-dismiss]:not([data-alert-initialized])').forEach((trigger) => {
+    trigger.setAttribute('data-alert-initialized', 'true');
+    trigger.addEventListener('click', () => {
+      trigger.closest('.alert')?.remove();
+    });
+  });
+</script>

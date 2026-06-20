@@ -1,0 +1,247 @@
+.button {
+  --btn_c: var(--body_c);
+  --btn_bg: var(--body_bg);
+  --btn_b-c: var(--btn_bg);
+
+  --_btn_c: var(--btn-type_c, var(--btn_c));
+  --_btn_bg: var(--btn-type_bg, var(--btn_bg, var(--body-bg)));
+  --_btn_b-c: var(--btn-type_b-c, var(--btn_b-c));
+
+  --_btn_d: var(--btn_d, inline-block);
+  --_btn_f-s: var(--btn_f-s, 1rem);
+  --_btn_l-h: var(--btn_l-h, 1.2);
+  --_btn_p-b: var(--btn_p-b, 8px);
+  --_btn_p-i: var(--btn_p-i, 10px);
+  --_btn_b: var(--btn_b, var(--_btn_b-w) var(--_btn_b-s) var(--btn-state_b-c, var(--_btn_b-c)));
+  --_btn_b-w: var(--btn_b-w, 0px);
+  --_btn_b-s: var(--btn_b-s, solid);
+  --_btn_b-r: var(--btn_b-r, var(--b-r));
+  --_btn_t: color 0.3s ease-in-out, background 0.3s ease-in-out, border-color 0.3s ease-in-out, outline 0.1s ease-in-out;
+  --_btn_cursor: var(--btn_cursor, pointer);
+  --_btn_t-a: var(--btn_t-a, center);
+  --_btn_t-d: var(--btn_t-d, none);
+  --_btn_o-o: var(--btn_o-o, 2px);
+  --_btn_o-w: var(--btn_o-w, 0px);
+  --_btn_o-s: var(--btn_o-s, solid);
+  --_btn_o-c: var(--btn_o-c, transparent);
+
+  /* === Mix Colors === */
+  --_btn-mix_c: var(--btn-mix_c, light-dark(var(--c_black), var(--c_white)));
+  --_btn-mix_c-d: var(--btn-mix_c-d, light-dark(var(--c_white), var(--c_black)));
+
+  /* === States === */
+  --_btn_c_f: var(--btn_c_f, var(--_btn_c));
+  --_btn_c_a: var(--btn_c_a, var(--_btn_c));
+
+  /* === Styles === */
+  color: var(--btn-state_c, var(--_btn_c));
+  background: var(--btn-state_bg, var(--_btn_bg));
+  border: var(--_btn_b);
+  display: var(--_btn_d);
+  padding-block: var(--btn-type_p-b, var(--_btn_p-b));
+  padding-inline: var(--btn-type_p-i, var(--_btn_p-i));
+  border-radius: var(--_btn_b-r);
+  font-size: var(--_btn_f-s);
+  line-height: var(--_btn_l-h);
+  cursor: var(--_btn_cursor);
+  transition: var(--btn_transition, var(--_btn_t));
+  text-align: var(--_btn_t-a);
+  text-decoration: var(--_btn_t-d);
+  outline-offset: var(--_btn_o-o);
+  outline: var(--_btn_o-w) var(--_btn_o-s) var(--_btn_o-c);
+
+  &.hover,
+  &:hover {
+    --btn-state_c: var(--btn_c_h, var(--_btn_c));
+    --btn-state_bg: var(--btn_bg_h, color-mix(in oklab, var(--_btn_bg), var(--_btn-mix_c) 10%));
+    --btn-state_b-c: var(--btn_b-c_h, var(--btn-state_bg));
+  }
+
+  &:focus,
+  &:focus-visible {
+    --btn-state_c: var(--btn_c_f, var(--_btn_c));
+    --btn-state_bg: var(--btn_bg_f, color-mix(in oklab, var(--_btn_bg), var(--_btn-mix_c) 30%));
+    --btn-state_b-c: var(--btn_b-c_f, var(--btn-state_bg));
+
+    --_btn_o-w: 2px;
+    --_btn_o-c: var(--btn_bg_f, var(--btn-state_bg));
+  }
+
+  &.active,
+  &:active {
+    --btn-state_c: var(--btn_c_a, var(--_btn_c));
+    --btn-state_bg: var(--btn_bg_a, color-mix(in oklab, var(--_btn_bg), var(--_btn-mix_c) 35%));
+    --btn-state_b-c: var(--btn_b-c_a, var(--btn-state_bg));
+  }
+
+  &:disabled,
+  &[disabled],
+  &[aria-disabled="true"] {
+    --btn-state_c: var(--btn_c_d, var(--_btn_c));
+    --btn-state_bg: var(--btn_bg_d, var(--_btn_bg));
+    --btn-state_b-c: var(--btn_b-c_d, var(--_btn_b-c));
+    --_btn_cursor: var(--btn_cursor-disabled, not-allowed);
+
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* === OUTLINE. === */
+  &.button-outline {
+    --_btn_b-w: 1px;
+    --_btn-outline_c: var(--btn_c);
+    --_btn-outline_bg: var(--btn_bg);
+
+    --btn-type_bg: var(--btn-outline_bg, var(--_btn-outline_bg));
+    --btn-type_c: var(--btn-accent_c, var(--_btn-outline_c));
+    --btn-type_b-c: var(--btn-accent_b-c, var(--_btn-outline_c));
+
+    --btn_c_h: var(--_btn-outline_bg);
+    --btn_c_a: var(--_btn-outline_bg);
+    --btn_c_f: var(--_btn-outline_bg);
+
+    --btn_bg_h: var(--_btn-outline_c);
+    --btn_bg_a: color-mix(in oklab, var(--_btn-outline_c), var(--_btn-mix_c-d) 20%);
+    --btn_bg_f: color-mix(in oklab, var(--_btn-outline_c), var(--_btn-mix_c-d) 10%);
+
+    --btn_b-c_h: var(--btn_bg_h);
+    --btn_b-c_a: color-mix(in oklab, var(--_btn-outline_c), var(--_btn-mix_c-d) 20%);
+    --btn_b-c_f: color-mix(in oklab, var(--_btn-outline_c), var(--_btn-mix_c-d) 10%);
+  }
+
+  /* === GHOST. === */
+  &.button-ghost {
+    --_btn_b: none;
+
+    --_btn-ghost_c: var(--btn_c);
+    --_btn-ghost_bg: var(--btn_bg);
+
+    --btn-type_bg: transparent;
+    --btn-type_c: var(--_btn-ghost_bg);
+    --btn-type_p-b: calc(var(--_btn_p-b) + var(--_btn_b-w));
+    --btn-type_p-i: calc(var(--_btn_p-i) + var(--_btn_b-w));
+
+    --btn_bg_h: color-mix(in oklab, var(--_btn-ghost_bg), transparent 80%);
+    --btn_bg_a: color-mix(in oklab, var(--_btn-ghost_bg), transparent 85%);
+    --btn_bg_f: var(--btn_bg_h);
+  }
+
+  /* === CLEAR. === */
+  &.button-clear {
+    --_btn-clear_c: var(--btn-clear_c, var(--btn_bg));
+
+    --btn-type_c: var(--_btn-clear_c);
+    --btn-type_bg: transparent;
+
+    --btn_c_h: var(--_btn-clear_c_h, color-mix(in oklab, var(--_btn-clear_c), var(--_btn-mix_c) 10%));
+    --btn_c_a: var(--_btn-clear_c_a, color-mix(in oklab, var(--_btn-clear_c), var(--_btn-mix_c) 20%));
+    --btn_c_f: var(--_btn-clear_c_f, color-mix(in oklab, var(--_btn-clear_c), var(--_btn-mix_c) 32%));
+
+    --btn_bg_h: var(--btn-type_bg);
+    --btn_bg_a: var(--btn-type_bg);
+    --btn_bg_f: var(--btn-type_bg);
+
+    --_btn_b: none;
+    --_btn_p-i: 0px;
+    --_btn_p-b: 0px;
+  }
+}
+
+/* === Types === */
+.button-primary {
+  --btn_c: var(--btn-primary_c, var(--c_white));
+  --btn_bg: var(--btn-primary_bg, var(--c_primary_500));
+}
+
+.button-secondary {
+  --btn_c: var(--btn-secondary_c, var(--c_white));
+  --btn_bg: var(--btn-secondary_bg, var(--c_secondary_500));
+}
+
+.button-accent {
+  --btn_c: var(--btn-accent_c, var(--c_white));
+  --btn_bg: var(--btn-accent_bg, var(--c_accent_500));
+}
+
+.button-success {
+  --btn_c: var(--btn-success_c, var(--c_white));
+  --btn_bg: var(--btn-success_bg, var(--c_success_500));
+}
+
+.button-warning {
+  --btn_c: var(--btn-warning_c, var(--c_white));
+  --btn_bg: var(--btn-warning_bg, var(--c_warning_500));
+}
+
+.button-danger {
+  --btn_c: var(--btn-danger_c, var(--c_white));
+  --btn_bg: var(--btn-danger_bg, var(--c_danger_500));
+}
+
+.button-info {
+  --btn_c: var(--btn-info_c, var(--c_white));
+  --btn_bg: var(--btn-info_bg, var(--c_info_500));
+}
+
+.button-light {
+  --btn_c: var(--btn-light_c, var(--c_dark));
+  --btn_bg: var(--btn-light_bg, var(--c_light));
+}
+
+.button-dark {
+  --btn_c: var(--btn-dark_c, var(--c_light));
+  --btn_bg: var(--btn-dark_bg, var(--c_dark));
+}
+
+/* === Size === */
+.button-sm {
+  --_btn_f-s: var(--btn_sm_f-s, 0.875em);
+  --_btn_p-b: var(--btn_sm_p-b, 4px);
+  --_btn_p-i: var(--btn_sm_p-i, 6px);
+}
+
+.button-lg {
+  --_btn_f-s: var(--btn_lg_f-s, 1.25em);
+  --_btn_p-b: var(--btn_lg_p-b, 1em);
+  --_btn_p-i: var(--btn_lg_p-i, 2em);
+}
+
+/* === Radius === */
+.button-radius-none {
+  --_btn_b-r: var(--btn_b-r_0, 0px);
+}
+
+.button-radius-sm {
+  --_btn_b-r: var(--btn_b-r_sm, 0.25em);
+}
+
+.button-radius-lg {
+  --_btn_b-r: var(--btn_b-r_lg, 0.75em);
+}
+
+.button-radius-pill {
+  --_btn_b-r: var(--btn_b-r_pill, 9999px);
+}
+
+/* === Icon === */
+[class*="button-icon-"] {
+  --_btn_d: inline-flex;
+
+  gap: var(--btn-icon_gap, 0.5em);
+  align-items: var(--btn-icon_a-i, center);
+  vertical-align: var(--btn-icon_v-a, middle);
+
+  svg {
+    max-height: calc(var(--_btn_f-s) * var(--_btn_l-h));
+    width: var(--btn-icon_svg_w, auto);
+    pointer-events: var(--btn-icon_svg_p-e, none);
+  }
+}
+
+.button-icon-only {
+  --_btn_p-i: 0px;
+
+  min-width: calc(var(--_btn_f-s) * var(--_btn_l-h) + 2 * (var(--_btn_p-b) + var(--_btn_b-w)));
+  aspect-ratio: var(--btn-icon-only_a-r, 1);
+  justify-content: var(--btn-icon-only_j-c, center);
+}

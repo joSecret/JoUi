@@ -1,0 +1,55 @@
+.figure {
+  /* === Public vars (consumers override these) === */
+  --fig_d: var(--body_bg);
+
+  /* === Private vars === */
+  --_fig_d: var(--fig_d, inline-block);
+  --_fig_m-b: var(--fig_m-b, var(--size_400));
+
+  /* === Styles === */
+  display: var(--_fig_d);
+  margin-block-end: var(--_fig_m-b);
+}
+
+.figure-img {
+  --_fig-img_b-r: var(--fig-img_b-r, 0px);
+  --_fig-img_m-b: var(--fig-img_m-b, var(--size_100));
+
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--_fig-img_b-r);
+  margin-block-end: var(--_fig-img_m-b);
+}
+
+.figure-caption {
+  --_fig-caption_f-s: var(--fig-caption_f-s, 0.875em);
+  --_fig-caption_c: var(--fig-caption_c, color-mix(in oklab, var(--body_c), transparent 40%));
+  --_fig-caption_t-a: var(--fig-caption_t-a, start);
+
+  font-size: var(--_fig-caption_f-s);
+  color: var(--_fig-caption_c);
+  text-align: var(--_fig-caption_t-a);
+}
+
+/* === Caption alignment variants === */
+
+.figure-caption-center .figure-caption,
+.figure-caption-center.figure-caption {
+  --fig-caption_t-a: center;
+}
+
+.figure-caption-end .figure-caption,
+.figure-caption-end.figure-caption {
+  --fig-caption_t-a: end;
+}
+
+/* === Rounded image === */
+
+.figure-rounded .figure-img {
+  --fig-img_b-r: var(--b-r);
+}
+
+.figure-rounded-circle .figure-img {
+  --fig-img_b-r: 50%;
+}

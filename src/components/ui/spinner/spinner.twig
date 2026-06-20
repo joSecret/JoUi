@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Template for a spinner (loading indicator) component.
+ *
+ * Available properties:
+ * - spinner_type: (string) default: 'border'
+ *    enum: border | grow
+ * - spinner_color: (string|null) default: null
+ *    enum: null | primary | secondary | success | warning | danger | info | light | dark
+ * - spinner_size: (string|null) default: null
+ *    enum: null | sm
+ * - spinner_label: (string) default: 'Loading...' — Visually hidden accessible label.
+ *
+ * Utility classes / attributes:
+ * - spinner_uc: (array) Extra utility classes.
+ * - spinner_att: (Drupal\Core\Template\Attribute) HTML attributes.
+ *
+ * @see spinner.component.yml
+ */
+#}
+
+{% set spinner_type = spinner_type|default('border') %}
+{% set spinner_color = spinner_color|default(null) %}
+{% set spinner_size = spinner_size|default(null) %}
+{% set spinner_label = spinner_label|default('Loading...') %}
+
+{%
+  set spinner_classes = [
+    'spinner',
+    'spinner-' ~ spinner_type,
+    spinner_size ? 'spinner-' ~ spinner_size,
+    spinner_color ? 'spinner-' ~ spinner_color,
+  ]|merge(spinner_uc ?: [])
+%}
+
+{% set spinner_att = spinner_att ?: create_attribute() %}
+{% set spinner_att = spinner_att.setAttribute('role', 'status') %}
+
+<div{{ spinner_att.addClass(spinner_classes) }}>
+  <span class="visually-hidden">{{- spinner_label -}}</span>
+</div>

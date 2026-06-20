@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * joui textarea component — overrides textarea.html.twig.
+ *
+ * Accepts both Drupal core variables and prefixed joui variables.
+ * Use as override: drop in templates/form/textarea.html.twig
+ * Use as SDC: {% include 'joui:textarea' with { txta_rows: 5 } %}
+ *
+ * Available variables:
+ * - txta_value (string|null) Textarea content.
+ * - txta_rows (int) Number of rows. Default: 3.
+ * - txta_resize (string|null) 'none' | 'horizontal' | 'both'. Default: vertical.
+ * - txta_uc (array) Utility classes.
+ * - txta_att (Attribute) HTML attributes.
+ */
+#}
+
+{% set txta_value = txta_value|default(value) %}
+{% set txta_rows = txta_rows|default(rows)|default(3) %}
+{% set txta_resize = txta_resize|default(null) %}
+{% set txta_att = txta_att|default(attributes) ?: create_attribute() %}
+
+{% set resize_map = { 'none': 'is--no-resize', 'horizontal': 'is--h-resize', 'both': 'is--both-resize' } %}
+
+{%
+  set txta_classes = [
+    'c--textarea',
+    txta_resize ? resize_map[txta_resize]|default(''),
+  ]|merge(txta_uc ?: [])
+%}
+
+<textarea {{ txta_att.addClass(txta_classes) }} rows="{{ txta_rows }}">{{ txta_value }}</textarea>

@@ -1,0 +1,33 @@
+---
+import './popover.css';
+
+interface Props {
+  title?: string;
+  placement?: 'top' | 'bottom' | 'start' | 'end';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  title,
+  placement = 'bottom',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'popover',
+  placement !== 'bottom' && `popover-${placement}`,
+  ...classes,
+].filter(Boolean);
+---
+
+<details class:list={classList} {...attrs}>
+  <slot name="trigger" />
+  <div class="popover-content">
+    {title && <strong class="popover-title">{title}</strong>}
+    <div class="popover-body">
+      <slot />
+    </div>
+  </div>
+</details>

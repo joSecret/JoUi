@@ -1,0 +1,52 @@
+---
+import './image.css';
+
+interface Props {
+  src: string;
+  alt: string;
+  fluid?: boolean;
+  thumbnail?: boolean;
+  rounded?: boolean | 'circle' | 'pill' | 'sm' | 'lg' | '0';
+  width?: number;
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  src,
+  alt,
+  fluid = true,
+  thumbnail = false,
+  rounded = false,
+  width,
+  height,
+  loading = 'lazy',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const roundedClass = rounded === true
+  ? 'rounded'
+  : rounded
+    ? `rounded-${rounded}`
+    : null;
+
+const classList = [
+  fluid && 'img-fluid',
+  thumbnail && 'img-thumbnail',
+  roundedClass,
+  ...classes,
+].filter(Boolean);
+---
+
+<img
+  src={src}
+  alt={alt}
+  class:list={classList}
+  width={width}
+  height={height}
+  loading={loading}
+  {...attrs}
+/>

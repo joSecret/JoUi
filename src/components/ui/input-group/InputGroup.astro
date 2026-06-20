@@ -1,0 +1,25 @@
+---
+import './input-group.css';
+
+interface Props {
+  size?: 'sm' | 'lg';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  size,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'input-group',
+  size && `input-group-${size}`,
+  ...classes,
+].filter(Boolean);
+---
+
+<div class:list={classList} {...attrs}>
+  <slot />
+</div>

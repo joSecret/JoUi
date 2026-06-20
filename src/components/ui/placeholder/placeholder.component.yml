@@ -1,0 +1,56 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Placeholder
+status: stable
+group: UI
+version: 1.0.0
+description: Skeleton loading placeholder with glow and wave animation variants.
+
+props:
+  type: object
+  properties:
+
+    placeholder_animation:
+      type: string
+      title: Animation
+      description: Animation style applied to the placeholder lines.
+      default: glow
+      enum:
+        - glow
+        - wave
+        - none
+
+    placeholder_lines:
+      type: array
+      title: Lines
+      description: Array of placeholder lines. Each item has `cols` (1–12) and optional `size` (xs|sm|lg).
+      default: []
+      items:
+        type: object
+        properties:
+          cols:
+            type: integer
+            title: Columns
+            description: Width expressed as Bootstrap-style columns (1–12).
+          size:
+            type: ['string', 'null']
+            title: Size
+            description: Height variant for this line.
+            enum:
+              - null
+              - xs
+              - sm
+              - lg
+
+    placeholder_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: Extra utility classes on the wrapper element.
+
+    placeholder_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the wrapper element.

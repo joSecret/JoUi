@@ -1,0 +1,16 @@
+<svg width="250" height="160" viewBox="0 0 250 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="20" width="210" height="120" rx="4" fill="var(--c_primary_500, #0d6efd)" fill-opacity="0.15"/>
+  <rect x="20" y="20" width="210" height="120" rx="4" stroke="var(--c_neutral_400, #adb5bd)" stroke-width="1"/>
+  <!-- Image content area -->
+  <circle cx="95" cy="65" r="15" fill="var(--c_primary_500, #0d6efd)" fill-opacity="0.2"/>
+  <path d="M20 110 L60 75 L95 95 L130 60 L230 110Z" fill="var(--c_primary_500, #0d6efd)" fill-opacity="0.12"/>
+  <!-- Prev/next controls -->
+  <rect x="20" y="50" width="24" height="60" rx="0" fill="rgba(0,0,0,0.1)"/>
+  <path d="M36 75 L28 80 L36 85" stroke="var(--c_neutral_100, #f8f9fa)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <rect x="206" y="50" width="24" height="60" rx="0" fill="rgba(0,0,0,0.1)"/>
+  <path d="M214 75 L222 80 L214 85" stroke="var(--c_neutral_100, #f8f9fa)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Indicators -->
+  <circle cx="110" cy="148" r="4" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.5"/>
+  <rect x="116" y="144" width="16" height="8" rx="4" fill="var(--c_primary_500, #0d6efd)" fill-opacity="0.6"/>
+  <circle cx="138" cy="148" r="4" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.5"/>
+</svg>

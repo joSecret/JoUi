@@ -1,0 +1,70 @@
+---
+title: Popover
+description: Click-triggered popup built on native details/summary with optional JS
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Popover from './Popover.astro'
+
+# Popover
+
+Click-triggered popup panel built on the native `<details>`/`<summary>` toggle. No JavaScript required for basic behavior. Optional `popover.js` adds close-on-outside-click and Escape key.
+
+## Installation
+
+```bash
+npx joui add popover --platform astro
+```
+
+```bash
+npx joui add popover --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Popover from '@ui/popover/Popover.astro'
+---
+<Popover title="Popover title">
+  <button slot="trigger" class="button button-primary">Click me</button>
+  <p>And here's some amazing content. It's very engaging. Right?</p>
+</Popover>
+```
+
+## Examples
+
+### With title
+
+<Popover title="Popover title">
+  <button slot="trigger" class="button button-secondary">Click me</button>
+  <p>Content inside the popover body.</p>
+</Popover>
+
+### Without title
+
+<Popover>
+  <button slot="trigger" class="button button-outline button-secondary" style="margin:4px">Info</button>
+  <p>Some helpful context information here.</p>
+</Popover>
+
+```astro
+<Popover title="Popover title">
+  <button slot="trigger" class="button button-primary">Click me</button>
+  <p>Popover body content.</p>
+</Popover>
+```
+
+### Placements
+
+```astro
+<Popover title="Top" placement="top"><button slot="trigger">Top</button>Content</Popover>
+<Popover title="Bottom" placement="bottom"><button slot="trigger">Bottom</button>Content</Popover>
+<Popover title="Start" placement="start"><button slot="trigger">Start</button>Content</Popover>
+<Popover title="End" placement="end"><button slot="trigger">End</button>Content</Popover>
+```
+
+## API Reference
+
+See [`popover.md`](./popover.md) for the full reference and [`popover.astro.md`](./popover.astro.md) / [`popover.drupal.md`](./popover.drupal.md) for platform notes.

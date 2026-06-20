@@ -1,0 +1,61 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Offcanvas
+status: stable
+group: UI
+version: 1.0.0
+description: Slide-in side panel with backdrop. Opens from start, end, top, or bottom. Requires offcanvas.js.
+
+props:
+  type: object
+  properties:
+
+    offcanvas_id:
+      type: string
+      title: ID
+      description: Required unique ID for the panel. Must match the data-offcanvas-target on the trigger.
+
+    offcanvas_placement:
+      type: string
+      title: Placement
+      description: Which edge the panel slides in from.
+      enum:
+        - 'start'
+        - 'end'
+        - 'top'
+        - 'bottom'
+      default: 'start'
+
+    offcanvas_title:
+      type: ['string', 'null']
+      title: Title
+      description: Panel header title.
+      default: null
+
+    offcanvas_content:
+      type: ['string', 'null']
+      title: Content
+      description: HTML content of the panel body.
+      default: null
+
+    # uc -> utility_classes
+    offcanvas_uc:
+      type: array
+      items:
+        type: string
+      title: Offcanvas Utility Classes
+      default: []
+
+    # att -> attributes
+    offcanvas_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the root element.
+
+slots:
+  slot_header:
+    title: Header
+    description: Custom header content.
+  slot_content:
+    title: Content
+    description: Panel body content.

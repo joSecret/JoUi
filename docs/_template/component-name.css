@@ -1,0 +1,13 @@
+.{{component-name}} {
+  /* === Base configuration (public) === */
+  --{{component_name}}_c: var(--body_c);
+  --{{component_name}}_bg: var(--body_bg);
+
+  /* === Private (internal) === */
+  --_{{component_name}}_c: var(--{{component_name}}_c);
+  --_{{component_name}}_bg: var(--{{component_name}}_bg);
+
+  /* === Styles === */
+  color: var(--_{{component_name}}_c);
+  background: var(--_{{component_name}}_bg);
+}

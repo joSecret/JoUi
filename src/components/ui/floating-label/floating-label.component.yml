@@ -1,0 +1,94 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Floating Label
+status: stable
+group: UI
+version: 1.0.0
+description: Form control where the label floats above the input on focus or when filled. Works with input, select, and textarea. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    float_label_id:
+      type: ['string', 'null']
+      title: ID
+      description: Input id (required — must match label for).
+      default: null
+
+    float_label_type:
+      type: string
+      title: Type
+      description: Input type attribute (text, email, password, etc.).
+      default: 'text'
+
+    float_label_label:
+      type: string
+      title: Label
+      description: The label text (required).
+      default: ''
+
+    float_label_name:
+      type: ['string', 'null']
+      title: Name
+      description: Input name attribute.
+      default: null
+
+    float_label_value:
+      type: ['string', 'null']
+      title: Value
+      description: Default value.
+      default: null
+
+    float_label_placeholder:
+      type: string
+      title: Placeholder
+      description: Must be at least a space for the CSS float trick to work.
+      default: ' '
+
+    float_label_required:
+      type: boolean
+      title: Required
+      description: Required validation.
+      default: false
+
+    float_label_disabled:
+      type: boolean
+      title: Disabled
+      description: Disabled state.
+      default: false
+
+    float_label_tag:
+      type: string
+      title: Tag
+      description: Control element — input, select, or textarea.
+      enum:
+        - 'input'
+        - 'select'
+        - 'textarea'
+      default: 'input'
+
+    float_label_options:
+      type: ['string', 'null']
+      title: Options
+      description: HTML <option> elements for select tag (rendered raw).
+      default: null
+
+    # uc -> utility_classes
+    float_label_uc:
+      type: array
+      items:
+        type: string
+      title: Floating Label Utility Classes
+      default: []
+
+    # att -> attributes
+    float_label_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the input/select/textarea element.
+
+slots:
+  slot_options:
+    title: Select options
+    description: <option> elements for the select tag.

@@ -1,0 +1,45 @@
+.c--lang {
+  --_lang_f-s: var(--lang_f-s, 12px);
+  --_lang_bg: var(--lang-bg, var(--c_gray_100));
+  --_lang_p: var(--lang-p, 2px);
+  --_lang_b-r: var(--lang-b-r, var(--b-r));
+
+  --lang-item_c: var(--lang-item-c, var(--body_c));
+  --lang-item_bg: var(--lang-item-bg, transparent);
+  --lang-item_f-w: var(--lang-item-f-w, var(--f-w_normal));
+  --lang-item_size: var(--lang-item-size, 1.5rem);
+  --lang-item_t: color 0.25s ease-in-out, background 0.25s ease-in-out;
+
+  --lang-item-active_bg: var(--lang-item-active-bg, var(--c_white));
+  --lang-item-active_f-w: var(--lang-item-active-f-w, var(--f-w_semi-bold));
+
+  --btn_f-s: var(--_lang_f-s);
+  --btn_p-b: 3px;
+  --btn_p-i: 6px;
+  --btn_b-r: calc(var(--_lang_b-r) - var(--_lang_p));
+  --btn_b-w: 0px;
+
+  font-size: var(--_lang_f-s);
+  background: var(--_lang_bg);
+  border-radius: var(--_lang_b-r);
+  padding: var(--_lang_p);
+}
+
+.lang-item {
+  --_link_d: var(--_lang-item_d, none);
+
+  color: var(--lang-item-state_c, var(--lang-item_c));
+  background: var(--lang-item-state_bg, var(--lang-item_bg));
+  font-weight: var(--lang-item_f-w);
+  transition: var(--lang-item_t);
+
+  &:hover:not(.is--active) {
+    --lang-item-state_bg: color-mix(in oklab, var(--lang-item-active_bg), transparent 50%);
+  }
+
+  &.is--active {
+    --lang-item-state_bg: var(--lang-item-active_bg);
+    font-weight: var(--lang-item-active_f-w);
+    pointer-events: none;
+  }
+}

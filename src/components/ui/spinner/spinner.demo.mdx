@@ -1,0 +1,78 @@
+---
+title: Spinner
+description: Animated loading indicator in border or grow style — no JS required
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Spinner from './Spinner.astro'
+
+# Spinner
+
+Animated loading indicator. Two styles: `border` (rotating ring) and `grow` (pulsing circle). Fully accessible with a visually hidden label.
+
+## Installation
+
+```bash
+npx joui add spinner --platform astro
+```
+
+```bash
+npx joui add spinner --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Spinner from '@ui/spinner/Spinner.astro'
+---
+<Spinner color="primary" />
+```
+
+## Examples
+
+### Border (default)
+
+<Spinner />
+
+```astro
+<Spinner />
+```
+
+### Grow
+
+<Spinner type="grow" />
+
+```astro
+<Spinner type="grow" />
+```
+
+### Colors
+
+<Spinner color="primary" />
+<Spinner color="secondary" />
+<Spinner color="success" />
+<Spinner color="warning" />
+<Spinner color="danger" />
+<Spinner color="info" />
+
+```astro
+<Spinner color="primary" />
+<Spinner color="secondary" />
+<Spinner color="success" />
+```
+
+### Small
+
+<Spinner size="sm" color="primary" />
+<Spinner type="grow" size="sm" color="primary" />
+
+```astro
+<Spinner size="sm" color="primary" />
+<Spinner type="grow" size="sm" color="primary" />
+```
+
+## API Reference
+
+See [`spinner.md`](./spinner.md) for the full reference and [`spinner.astro.md`](./spinner.astro.md) / [`spinner.drupal.md`](./spinner.drupal.md) for platform notes.

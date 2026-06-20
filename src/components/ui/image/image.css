@@ -1,0 +1,45 @@
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-thumbnail {
+  /* === Public vars === */
+  --img_p: var(--img_padding, var(--size_100));
+  --img_bg: var(--img_thumbnail_bg, var(--body_bg));
+  --img_b-c: var(--img_thumbnail_b-c, var(--b-c));
+  --img_b-w: var(--img_thumbnail_b-w, var(--b-w));
+  --img_b-r: var(--img_thumbnail_b-r, var(--b-r));
+
+  max-width: 100%;
+  height: auto;
+  padding: var(--img_p);
+  background-color: var(--img_bg);
+  border: var(--img_b-w) solid var(--img_b-c);
+  border-radius: var(--img_b-r);
+}
+
+/* === Rounded variants === */
+.rounded {
+  border-radius: var(--img_rounded_b-r, var(--b-r)) !important;
+}
+
+.rounded-sm {
+  border-radius: var(--img_rounded-sm_b-r, var(--b-r_md)) !important;
+}
+
+.rounded-lg {
+  border-radius: var(--img_rounded-lg_b-r, var(--b-r_lg)) !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: 9999px !important;
+}
+
+.rounded-0 {
+  border-radius: 0px !important;
+}

@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Template for a collapse component.
+ *
+ * Available properties:
+ * - collapse_id: (string) The id attribute for the collapsible element.
+ *    Required if using a trigger with data-collapse-target.
+ * - collapse_open: (boolean) default: false
+ *    Whether the collapse is open on load.
+ *
+ * Available values:
+ * - collapse_content: (string) HTML content inside the collapse body.
+ *
+ * Available Utility classes -> uc
+ * - collapse_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - collapse_att: Attributes array.
+ *
+ * Available slots:
+ * - slot_content: The content for the collapse body.
+ *
+ * usage example: @see collapse.drupal.md
+ */
+#}
+
+{% set collapse_open = collapse_open|default(false) %}
+
+{# Create attributes #}
+{% set collapse_att = collapse_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set collapse_classes = [
+    'collapse',
+    collapse_open ? 'is--open',
+  ]|merge(collapse_uc ?: [])
+%}
+
+{% if collapse_id %}
+  {% set collapse_att = collapse_att.setAttribute('id', collapse_id) %}
+{% endif %}
+
+<div{{ collapse_att.addClass(collapse_classes) }}>
+  <div class="collapse-body">
+    {%- block slot_content -%}
+      {{- collapse_content|raw -}}
+    {%- endblock -%}
+  </div>
+</div>

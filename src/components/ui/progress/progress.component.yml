@@ -1,0 +1,70 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Progress
+status: stable
+group: UI
+version: 1.0.0
+description: A horizontal progress bar with optional striped and animated variants.
+
+props:
+  type: object
+  properties:
+
+    progress_value:
+      type: number
+      title: Value
+      description: Progress value between 0 and 100.
+      default: 0
+
+    progress_color:
+      type: ['string', 'null']
+      title: Color
+      description: Bar color variant.
+      default: null
+      enum:
+        - null
+        - primary
+        - secondary
+        - success
+        - warning
+        - danger
+        - info
+        - light
+        - dark
+
+    progress_striped:
+      type: boolean
+      title: Striped
+      description: Show a striped pattern on the progress bar.
+      default: false
+
+    progress_animated:
+      type: boolean
+      title: Animated
+      description: Animate the stripes (implies striped).
+      default: false
+
+    progress_label:
+      type: ['string', 'boolean', 'null']
+      title: Label
+      description: Text displayed inside the bar. Pass true for automatic percentage, or a custom string.
+      default: false
+
+    progress_height:
+      type: ['string', 'null']
+      title: Height
+      description: CSS value for bar height (e.g. "2rem"). Overrides --prog_h.
+      default: null
+
+    progress_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: Extra utility classes on the wrapper element.
+
+    progress_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the wrapper element.

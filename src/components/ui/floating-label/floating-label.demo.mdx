@@ -1,0 +1,84 @@
+---
+title: Floating Label
+description: Form inputs where the label floats above on focus or fill — pure CSS
+category: ui
+preview: ./thumbnail.svg
+---
+
+import FloatingLabel from './FloatingLabel.astro'
+
+# Floating Label
+
+Form controls where the label animates from inside the input to above it on focus or when filled. Pure CSS using `:placeholder-shown`. Works with `input`, `select`, and `textarea`. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add floating-label --platform astro
+```
+
+```bash
+npx joui add floating-label --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import FloatingLabel from '@ui/floating-label/FloatingLabel.astro'
+---
+<FloatingLabel id="demo-email" type="email" label="Email address" />
+```
+
+## Examples
+
+### Input types
+
+<FloatingLabel id="fl-text" label="Full name" />
+<FloatingLabel id="fl-email" type="email" label="Email address" />
+<FloatingLabel id="fl-pass" type="password" label="Password" />
+
+```astro
+<FloatingLabel id="name" label="Full name" />
+<FloatingLabel id="email" type="email" label="Email address" />
+<FloatingLabel id="pass" type="password" label="Password" />
+```
+
+### Pre-filled value
+
+<FloatingLabel id="fl-filled" label="Username" value="john_doe" />
+
+```astro
+<FloatingLabel id="username" label="Username" value="john_doe" />
+```
+
+### Textarea
+
+<FloatingLabel id="fl-ta" tag="textarea" label="Comments" />
+
+```astro
+<FloatingLabel id="message" tag="textarea" label="Comments" />
+```
+
+### Select
+
+<FloatingLabel id="fl-sel" tag="select" label="Country">
+  <option value="">Choose a country...</option>
+  <option value="us">United States</option>
+  <option value="gb">United Kingdom</option>
+</FloatingLabel>
+
+```astro
+<FloatingLabel id="country" tag="select" label="Country">
+  <option value="">Choose...</option>
+  <option value="us">United States</option>
+</FloatingLabel>
+```
+
+### Disabled
+
+<FloatingLabel id="fl-dis" label="Disabled field" value="locked value" disabled />
+
+## API Reference
+
+See [`floating-label.md`](./floating-label.md) for the full reference and [`floating-label.astro.md`](./floating-label.astro.md) / [`floating-label.drupal.md`](./floating-label.drupal.md) for platform notes.

@@ -1,0 +1,35 @@
+---
+import './button-group.css';
+
+interface Props {
+  vertical?: boolean;
+  size?: 'sm' | 'lg';
+  label?: string;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  vertical = false,
+  size,
+  label = 'Button group',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'button-group',
+  vertical && 'button-group-vertical',
+  size && `button-group-${size}`,
+  ...classes,
+].filter(Boolean);
+---
+
+<div
+  class:list={classList}
+  role="group"
+  aria-label={label}
+  {...attrs}
+>
+  <slot />
+</div>

@@ -1,0 +1,82 @@
+---
+import './carousel.css';
+
+interface CarouselItem {
+  src: string;
+  alt: string;
+  caption?: { title?: string; text?: string };
+}
+
+interface Props {
+  id?: string;
+  items?: CarouselItem[];
+  interval?: number;
+  controls?: boolean;
+  indicators?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id,
+  items = [],
+  interval = 0,
+  controls = true,
+  indicators = true,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const carouselId = id || `carousel-${Math.random().toString(36).slice(2, 9)}`;
+
+const classList = ['carousel', ...classes].filter(Boolean);
+
+const prevSvg = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>`;
+const nextSvg = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>`;
+---
+
+<div
+  class:list={classList}
+  id={carouselId}
+  data-carousel
+  data-carousel-interval={interval > 0 ? interval : undefined}
+  {...attrs}
+>
+  <div class="carousel-inner">
+    {items.map((item, i) => (
+      <div class:list={['carousel-item', i === 0 && 'active']}>
+        <img src={item.src} alt={item.alt} class="carousel-img" loading={i === 0 ? 'eager' : 'lazy'} />
+        {item.caption && (
+          <div class="carousel-caption">
+            {item.caption.title && <h5>{item.caption.title}</h5>}
+            {item.caption.text && <p>{item.caption.text}</p>}
+          </div>
+        )}
+      </div>
+    ))}
+    <slot />
+  </div>
+
+  {controls && items.length > 1 && (
+    <>
+      <button class="carousel-control carousel-control-prev" data-carousel-prev aria-label="Previous">
+        <Fragment set:html={prevSvg} />
+      </button>
+      <button class="carousel-control carousel-control-next" data-carousel-next aria-label="Next">
+        <Fragment set:html={nextSvg} />
+      </button>
+    </>
+  )}
+
+  {indicators && items.length > 1 && (
+    <div class="carousel-indicators">
+      {items.map((_, i) => (
+        <button
+          class:list={['carousel-indicator', i === 0 && 'active']}
+          data-carousel-goto={i}
+          aria-label={`Slide ${i + 1}`}
+        />
+      ))}
+    </div>
+  )}
+</div>

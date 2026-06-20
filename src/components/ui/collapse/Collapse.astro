@@ -1,0 +1,35 @@
+---
+import './collapse.css';
+
+interface Props {
+  id?: string;
+  open?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id,
+  open = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const collapseId = id || `collapse-${Math.random().toString(36).slice(2, 9)}`;
+
+const classList = [
+  'collapse',
+  open && 'is--open',
+  ...classes,
+].filter(Boolean);
+---
+
+<div
+  class:list={classList}
+  id={collapseId}
+  {...attrs}
+>
+  <div class="collapse-body">
+    <slot />
+  </div>
+</div>

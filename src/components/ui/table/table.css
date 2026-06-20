@@ -1,0 +1,99 @@
+.c--table {
+  /* Border */
+  --tbl_b-c: var(--c_gray_200);
+  --tbl_b-w: var(--b-w);
+  --tbl_b-r: var(--b-r_md);
+
+  /* Caption */
+  --_tbl-caption_c: var(--tbl-caption_c, var(--c_muted));
+  --_tbl-caption_f-s: var(--tbl-caption_f-s, var(--f-s_sm));
+  --_tbl-caption_p-b: var(--tbl-caption_p-b, var(--size_200));
+
+  /* Header */
+  --_tbl-head_bg: var(--tbl-head_bg, var(--c_light));
+  --_tbl-head_c: var(--tbl-head_c, var(--body_c));
+  --_tbl-head_f-w: var(--tbl-head_f-w, var(--f-w_semi-bold));
+
+  /* Cell */
+  --_tbl-cell_p-b: var(--tbl-cell_p-b, var(--size_200));
+  --_tbl-cell_p-i: var(--tbl-cell_p-i, var(--size_300));
+
+  /* Row */
+  --tbl-row_bg: transparent;
+  --tbl-row_bg_stripe: color-mix(in oklab, var(--c_neutral), white 90%);
+  --tbl-row_bg_h: color-mix(in oklab, var(--c_primary), white 90%);
+
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  caption {
+    color: var(--_tbl-caption_c);
+    font-size: var(--_tbl-caption_f-s);
+    padding-block-end: var(--_tbl-caption_p-b);
+    text-align: start;
+    caption-side: top;
+  }
+
+  thead {
+    background: var(--_tbl-head_bg);
+
+    th {
+      color: var(--_tbl-head_c);
+      font-weight: var(--_tbl-head_f-w);
+      text-align: start;
+      border-block-end: calc(var(--tbl_b-w) * 2) solid var(--tbl_b-c);
+    }
+  }
+
+  tfoot {
+    background: var(--_tbl-head_bg);
+
+    td,
+    th {
+      border-block-start: calc(var(--tbl_b-w) * 2) solid var(--tbl_b-c);
+    }
+  }
+
+  th,
+  td {
+    padding-block: var(--_tbl-cell_p-b);
+    padding-inline: var(--_tbl-cell_p-i);
+    border-block-end: var(--tbl_b-w) solid var(--tbl_b-c);
+    vertical-align: top;
+  }
+
+  tbody tr {
+    background: var(--tbl-row_bg);
+    transition: var(--t);
+  }
+}
+
+/* Variants */
+.table--striped tbody tr:nth-child(even) {
+  background: var(--tbl-row_bg_stripe);
+}
+
+.table--hover tbody tr:hover {
+  background: var(--tbl-row_bg_h);
+}
+
+.table--bordered {
+  border: var(--tbl_b-w) solid var(--tbl_b-c);
+  border-radius: var(--tbl_b-r);
+
+  th,
+  td {
+    border-inline-end: var(--tbl_b-w) solid var(--tbl_b-c);
+
+    &:last-child {
+      border-inline-end: none;
+    }
+  }
+}
+
+/* Responsive wrapper */
+.table--responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,86 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Pager
+status: stable
+version: 1.0.0
+group: Globals
+description: 'Documentation and examples for displaying pager to indicate a series of related content exists across multiple pages.'
+
+# Props.
+props:
+  type: object
+
+  properties:
+    # Variations (affect component appearance/style: color, size, type, style, etc.)
+    pager_alignment:
+      type: ['string', 'null']
+      title: Alignment
+      description: 'Determines the alignment of the pager component. Can be one of `"start"` (default alignment), `"end"` (right aligned), `"center"` (center aligned), or `"vertical"` (vertically stacked).'
+      default: null
+      enum:
+        - null
+        - start
+        - end
+        - center
+        - vertical
+
+    # Fields values (component content/data: label, url, content, title, etc.)
+    pager_show_first:
+      type: boolean
+      title: Show first
+      description: 'Determines whether the first page link should be displayed.'
+      default: true
+
+    pager_show_last:
+      type: boolean
+      title: Show last
+      description: 'Determines whether the last page link should be displayed.'
+      default: true
+
+    pager_show_ellipsis:
+      type: boolean
+      title: Show ellipsis
+      description: 'Determines whether the ellipsis should be displayed.'
+      default: true
+
+    pager_items:
+      type: ['object', 'null']
+      title: Pager items
+      description: 'The items to be displayed in the pager component (first, previous, pages, next, last).'
+      default: null
+
+    pager_current:
+      type: ['integer', 'null']
+      title: Current page
+      description: 'The current active page number.'
+      default: null
+
+    pager_ellipses:
+      type: ['object', 'null']
+      title: Ellipses
+      description: 'Object with previous and next ellipsis flags.'
+      default: null
+
+    # uc -> utility_classes
+    pager_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      description: An array of utility classes. Use to add extra classes or custom CSS classes over to this component.
+      default: []
+
+    # att -> attributes
+    pager_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      description: A list of HTML attributes for the Pager.
+
+# Slots.
+slots:
+  slot_pager_next:
+    title: Next Link
+    description: 'The next page link content.'
+
+  slot_pager_previous:
+    title: Previous Link
+    description: 'The previous page link content.'

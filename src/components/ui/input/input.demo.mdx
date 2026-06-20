@@ -1,0 +1,46 @@
+---
+title: Input
+description: Text input field for forms
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Input from './Input.astro'
+
+# Input
+
+Text input field. Overrides Drupal's `input.html.twig`.
+
+## Usage
+
+```astro live
+---
+import Input from '@ui/input/Input.astro'
+---
+<Input type="email" placeholder="you@example.com" />
+```
+
+## Types
+
+<Input type="text" placeholder="text" />
+<Input type="email" placeholder="email" />
+<Input type="password" placeholder="password" />
+<Input type="search" placeholder="search" />
+<Input type="number" placeholder="number" />
+
+## Sizes
+
+<Input size="sm" placeholder="Small" />
+<Input placeholder="Default" />
+<Input size="lg" placeholder="Large" />
+
+## States
+
+<Input placeholder="Default" />
+<Input placeholder="Disabled" disabled />
+<Input placeholder="Read-only" readonly value="Cannot edit" />
+<Input placeholder="Invalid" invalid />
+
+## API Reference
+
+See [`input.md`](./input.md) · [`input.astro.md`](./input.astro.md) · [`input.drupal.md`](./input.drupal.md)

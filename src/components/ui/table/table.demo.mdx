@@ -1,0 +1,101 @@
+---
+title: Table
+description: Styled table with striped, bordered, and hover variants
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Table from './Table.astro'
+
+# Table
+
+CSS-styled table. Overrides Drupal's `table.html.twig`. No sorting or filtering — styling only.
+
+## Installation
+
+```bash
+npx joui add table --platform astro
+```
+
+```bash
+npx joui add table --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Table from '@ui/table/Table.astro'
+---
+<Table striped hover>
+  <thead>
+    <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Alice</td><td>Admin</td><td>Active</td></tr>
+    <tr><td>Bob</td><td>Editor</td><td>Active</td></tr>
+    <tr><td>Carol</td><td>Viewer</td><td>Inactive</td></tr>
+  </tbody>
+</Table>
+```
+
+## Examples
+
+### Default
+
+<Table>
+  <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>Admin</td><td>Active</td></tr>
+    <tr><td>Bob</td><td>Editor</td><td>Active</td></tr>
+    <tr><td>Carol</td><td>Viewer</td><td>Inactive</td></tr>
+  </tbody>
+</Table>
+
+### Striped
+
+<Table striped>
+  <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>Admin</td><td>Active</td></tr>
+    <tr><td>Bob</td><td>Editor</td><td>Active</td></tr>
+    <tr><td>Carol</td><td>Viewer</td><td>Inactive</td></tr>
+  </tbody>
+</Table>
+
+### Hover
+
+<Table hover>
+  <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>Admin</td><td>Active</td></tr>
+    <tr><td>Bob</td><td>Editor</td><td>Active</td></tr>
+    <tr><td>Carol</td><td>Viewer</td><td>Inactive</td></tr>
+  </tbody>
+</Table>
+
+### Bordered
+
+<Table bordered>
+  <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>Admin</td><td>Active</td></tr>
+    <tr><td>Bob</td><td>Editor</td><td>Active</td></tr>
+  </tbody>
+</Table>
+
+### With caption + footer
+
+<Table striped caption="Team members">
+  <thead><tr><th>Name</th><th>Score</th></tr></thead>
+  <tbody>
+    <tr><td>Alice</td><td>98</td></tr>
+    <tr><td>Bob</td><td>87</td></tr>
+    <tr><td>Carol</td><td>91</td></tr>
+  </tbody>
+  <tfoot><tr><th>Average</th><td>92</td></tr></tfoot>
+</Table>
+
+## API Reference
+
+See [`table.md`](./table.md) for the full reference and [`table.astro.md`](./table.astro.md) / [`table.drupal.md`](./table.drupal.md) for platform notes.

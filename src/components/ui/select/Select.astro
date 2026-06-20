@@ -1,0 +1,66 @@
+---
+import './select.css';
+
+interface SelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+  selected?: boolean;
+}
+
+interface Props {
+  options?: SelectOption[];
+  emptyOption?: string | null;
+  size?: 'sm' | 'lg' | null;
+  multiple?: boolean;
+  name?: string | null;
+  id?: string | null;
+  disabled?: boolean;
+  invalid?: boolean;
+  required?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  options = [],
+  emptyOption = null,
+  size = null,
+  multiple = false,
+  name = null,
+  id = null,
+  disabled = false,
+  invalid = false,
+  required = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'c--select',
+  size && `is--${size}`,
+  ...classes,
+].filter(Boolean);
+
+const finalAttrs: Record<string, unknown> = { ...attrs };
+if (multiple) finalAttrs.multiple = true;
+if (name) finalAttrs.name = name;
+if (id) finalAttrs.id = id;
+if (disabled) finalAttrs.disabled = true;
+if (invalid) finalAttrs['aria-invalid'] = 'true';
+if (required) finalAttrs.required = true;
+---
+
+<select class:list={classList} {...finalAttrs}>
+  {emptyOption && <option value="">{emptyOption}</option>}
+  {options.map(opt => (
+    <option
+      value={opt.value}
+      disabled={opt.disabled}
+      selected={opt.selected}
+    >
+      {opt.label}
+    </option>
+  ))}
+  <slot />
+</select>

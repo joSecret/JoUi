@@ -1,0 +1,73 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Range
+status: stable
+group: UI
+version: 1.0.0
+description: Custom-styled range slider input with consistent cross-browser appearance. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    range_id:
+      type: ['string', 'null']
+      title: ID
+      description: Input id attribute (must match label for).
+      default: null
+
+    range_name:
+      type: ['string', 'null']
+      title: Name
+      description: Input name attribute.
+      default: null
+
+    range_label:
+      type: ['string', 'null']
+      title: Label
+      description: Label text.
+      default: null
+
+    range_min:
+      type: number
+      title: Min
+      description: Minimum value.
+      default: 0
+
+    range_max:
+      type: number
+      title: Max
+      description: Maximum value.
+      default: 100
+
+    range_step:
+      type: number
+      title: Step
+      description: Step increment.
+      default: 1
+
+    range_value:
+      type: number
+      title: Value
+      description: Default/current value.
+      default: 50
+
+    range_disabled:
+      type: boolean
+      title: Disabled
+      description: Disabled state.
+      default: false
+
+    # uc -> utility_classes
+    range_uc:
+      type: array
+      items:
+        type: string
+      title: Range Utility Classes
+      default: []
+
+    # att -> attributes
+    range_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the input element.

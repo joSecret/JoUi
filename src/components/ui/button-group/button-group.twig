@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Button group component — groups buttons into a visually connected row or column.
+ *
+ * Available properties:
+ * - button_group_vertical: (boolean) default: false — vertical layout.
+ * - button_group_size: (string|null) default: null — 'sm' or 'lg'.
+ * - button_group_label: (string) default: 'Button group' — aria-label.
+ *
+ * Available Utility classes -> uc
+ * - button_group_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - button_group_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * Slots:
+ * - slot_buttons: Button elements to render inside the group.
+ */
+#}
+
+{% set button_group_vertical = button_group_vertical|default(false) %}
+{% set button_group_label = button_group_label|default('Button group') %}
+
+{# Create attributes #}
+{% set button_group_att = button_group_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set button_group_classes = [
+    'button-group',
+    button_group_vertical ? 'button-group-vertical',
+    button_group_size ? 'button-group-' ~ button_group_size,
+  ]|filter|merge(button_group_uc ?: [])
+%}
+
+<div
+  {{ button_group_att.addClass(button_group_classes) }}
+  role="group"
+  aria-label="{{ button_group_label }}"
+>
+  {%- block slot_buttons -%}
+    {{- button_group_content|raw -}}
+  {%- endblock -%}
+</div>

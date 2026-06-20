@@ -1,0 +1,100 @@
+.alert {
+  /* === Public vars (consumers override these) === */
+  --alrt_c: var(--body_c);
+  --alrt_bg: var(--body_bg);
+  --alrt_b-c: var(--b-c);
+
+  /* === Private vars (resolved from public + type modifier) === */
+  --_alrt_c: var(--alrt-type_c, var(--alrt_c));
+  --_alrt_bg: var(--alrt-type_bg, var(--alrt_bg));
+  --_alrt_b-c: var(--alrt-type_b-c, var(--alrt_b-c));
+
+  --_alrt_p-b: var(--alrt_p-b, var(--size_300));
+  --_alrt_p-i: var(--alrt_p-i, var(--size_400));
+  --_alrt_b-r: var(--alrt_b-r, var(--b-r));
+  --_alrt_b-w: var(--alrt_b-w, var(--b-w));
+  --_alrt_b-s: var(--alrt_b-s, solid);
+  --_alrt_f-s: var(--alrt_f-s, 1rem);
+  --_alrt_l-h: var(--alrt_l-h, 1.5);
+
+  /* === Mix helpers === */
+  --_alrt-mix_c: var(--alrt-mix_c, light-dark(var(--c_black), var(--c_white)));
+  --_alrt-mix_c-d: var(--alrt-mix_c-d, light-dark(var(--c_white), var(--c_black)));
+
+  /* === Styles === */
+  color: var(--_alrt_c);
+  background: var(--_alrt_bg);
+  border: var(--_alrt_b-w) var(--_alrt_b-s) var(--_alrt_b-c);
+  padding-block: var(--_alrt_p-b);
+  padding-inline: var(--_alrt_p-i);
+  border-radius: var(--_alrt_b-r);
+  font-size: var(--_alrt_f-s);
+  line-height: var(--_alrt_l-h);
+  position: relative;
+
+  /* === Dismissible === */
+  &.alert-dismissible {
+    padding-inline-end: calc(var(--_alrt_p-i) * 2.5);
+
+    .close-button {
+      position: absolute;
+      inset-block-start: var(--_alrt_p-b);
+      inset-inline-end: var(--_alrt_p-i);
+    }
+  }
+}
+
+/* === Color Variants === */
+.alert-primary {
+  --alrt-type_c: var(--alrt-primary_c, color-mix(in oklab, var(--c_primary_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-primary_bg, color-mix(in oklab, var(--c_primary_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-primary_b-c, color-mix(in oklab, var(--c_primary_500), var(--c_white) 60%));
+}
+
+.alert-secondary {
+  --alrt-type_c: var(--alrt-secondary_c, color-mix(in oklab, var(--c_secondary_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-secondary_bg, color-mix(in oklab, var(--c_secondary_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-secondary_b-c, color-mix(in oklab, var(--c_secondary_500), var(--c_white) 60%));
+}
+
+.alert-accent {
+  --alrt-type_c: var(--alrt-accent_c, color-mix(in oklab, var(--c_accent_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-accent_bg, color-mix(in oklab, var(--c_accent_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-accent_b-c, color-mix(in oklab, var(--c_accent_500), var(--c_white) 60%));
+}
+
+.alert-success {
+  --alrt-type_c: var(--alrt-success_c, color-mix(in oklab, var(--c_success_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-success_bg, color-mix(in oklab, var(--c_success_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-success_b-c, color-mix(in oklab, var(--c_success_500), var(--c_white) 60%));
+}
+
+.alert-warning {
+  --alrt-type_c: var(--alrt-warning_c, color-mix(in oklab, var(--c_warning_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-warning_bg, color-mix(in oklab, var(--c_warning_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-warning_b-c, color-mix(in oklab, var(--c_warning_500), var(--c_white) 60%));
+}
+
+.alert-danger {
+  --alrt-type_c: var(--alrt-danger_c, color-mix(in oklab, var(--c_danger_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-danger_bg, color-mix(in oklab, var(--c_danger_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-danger_b-c, color-mix(in oklab, var(--c_danger_500), var(--c_white) 60%));
+}
+
+.alert-info {
+  --alrt-type_c: var(--alrt-info_c, color-mix(in oklab, var(--c_info_500), var(--_alrt-mix_c) 70%));
+  --alrt-type_bg: var(--alrt-info_bg, color-mix(in oklab, var(--c_info_500), var(--c_white) 85%));
+  --alrt-type_b-c: var(--alrt-info_b-c, color-mix(in oklab, var(--c_info_500), var(--c_white) 60%));
+}
+
+.alert-light {
+  --alrt-type_c: var(--alrt-light_c, var(--c_dark));
+  --alrt-type_bg: var(--alrt-light_bg, var(--c_light));
+  --alrt-type_b-c: var(--alrt-light_b-c, color-mix(in oklab, var(--c_light), var(--_alrt-mix_c) 15%));
+}
+
+.alert-dark {
+  --alrt-type_c: var(--alrt-dark_c, var(--c_light));
+  --alrt-type_bg: var(--alrt-dark_bg, var(--c_dark));
+  --alrt-type_b-c: var(--alrt-dark_b-c, color-mix(in oklab, var(--c_dark), var(--_alrt-mix_c-d) 15%));
+}

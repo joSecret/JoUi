@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Textarea
+status: stable
+version: 1.0.0
+group: Forms
+description: 'Multiline text input. Overrides textarea.html.twig.'
+
+props:
+  type: object
+  properties:
+    txta_rows:
+      type: integer
+      title: Rows
+      description: 'Number of visible text rows.'
+      default: 3
+
+    txta_resize:
+      type: ['string', 'null']
+      title: Resize
+      description: 'Resize behavior.'
+      default: null
+      enum: [null, none, horizontal, both]
+
+    txta_value:
+      type: ['string', 'null']
+      title: Value
+      default: null
+
+    txta_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+
+    txta_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes

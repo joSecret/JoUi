@@ -1,0 +1,117 @@
+{#
+/**
+ * @file
+ * joui table component — overrides table.html.twig.
+ *
+ * Accepts both standard Drupal core variables and prefixed joui variables.
+ * Use as SDC: {% include 'joui:table' with { tbl_caption: 'Users' } %}
+ * Use as override: drop in templates/ — Drupal vars are picked up automatically.
+ *
+ * Available variables:
+ * - tbl_caption (string|null) Table caption.
+ * - tbl_header (array) Header cells (tag, attributes, content).
+ * - tbl_rows (array) Body rows (attributes, cells).
+ * - tbl_footer (array|null) Footer rows.
+ * - tbl_colgroups (array|null) Column groups.
+ * - tbl_empty (string|null) Message when no rows.
+ * - tbl_header_columns (int) Column count (used for empty colspan).
+ * - tbl_striped (bool) Striped rows. Default: false.
+ * - tbl_bordered (bool) All-cell borders. Default: false.
+ * - tbl_hover (bool) Row hover highlight. Default: false.
+ * - tbl_responsive (bool) Wrap in horizontal-scroll container. Default: false.
+ * - tbl_uc (array) Utility classes.
+ * - tbl_att (Attribute) HTML attributes on <table>.
+ */
+#}
+
+{# Accept both Drupal core vars and prefixed joui vars #}
+{% set tbl_caption = tbl_caption|default(caption) %}
+{% set tbl_header = tbl_header|default(header) %}
+{% set tbl_rows = tbl_rows|default(rows) %}
+{% set tbl_footer = tbl_footer|default(footer) %}
+{% set tbl_colgroups = tbl_colgroups|default(colgroups) %}
+{% set tbl_empty = tbl_empty|default(empty) %}
+{% set tbl_header_columns = tbl_header_columns|default(header_columns) %}
+{% set tbl_striped = tbl_striped|default(false) %}
+{% set tbl_bordered = tbl_bordered|default(false) %}
+{% set tbl_hover = tbl_hover|default(false) %}
+{% set tbl_responsive = tbl_responsive|default(false) %}
+
+{% set tbl_att = tbl_att|default(attributes) ?: create_attribute() %}
+
+{%
+  set tbl_classes = [
+    'c--table',
+    tbl_striped ? 'table--striped',
+    tbl_bordered ? 'table--bordered',
+    tbl_hover ? 'table--hover',
+  ]|merge(tbl_uc ?: [])
+%}
+
+{% set table_content %}
+<table {{ tbl_att.addClass(tbl_classes) }}>
+  {% if tbl_caption %}
+    <caption>{{ tbl_caption }}</caption>
+  {% endif %}
+
+  {% if tbl_colgroups %}
+    {% for colgroup in tbl_colgroups %}
+      {% if colgroup.cols %}
+        <colgroup {{ colgroup.attributes }}>
+          {% for col in colgroup.cols %}
+            <col {{ col.attributes }} />
+          {% endfor %}
+        </colgroup>
+      {% else %}
+        <colgroup {{ colgroup.attributes }} />
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if tbl_header %}
+    <thead>
+      <tr>
+        {% for cell in tbl_header %}
+          <{{ cell.tag }}{{ cell.attributes }}>{{- cell.content -}}</{{ cell.tag }}>
+        {% endfor %}
+      </tr>
+    </thead>
+  {% endif %}
+
+  {% if tbl_rows %}
+    <tbody>
+      {% for row in tbl_rows %}
+        <tr {{ row.attributes }}>
+          {% for cell in row.cells %}
+            <{{ cell.tag }}{{ cell.attributes }}>{{- cell.content -}}</{{ cell.tag }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  {% elseif tbl_empty %}
+    <tbody>
+      <tr>
+        <td colspan="{{ tbl_header_columns }}">{{ tbl_empty }}</td>
+      </tr>
+    </tbody>
+  {% endif %}
+
+  {% if tbl_footer %}
+    <tfoot>
+      {% for row in tbl_footer %}
+        <tr {{ row.attributes }}>
+          {% for cell in row.cells %}
+            <{{ cell.tag }}{{ cell.attributes }}>{{- cell.content -}}</{{ cell.tag }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tfoot>
+  {% endif %}
+</table>
+{% endset %}
+
+{% if tbl_responsive %}
+  <div class="table--responsive">{{ table_content }}</div>
+{% else %}
+  {{ table_content }}
+{% endif %}

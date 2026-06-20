@@ -1,0 +1,78 @@
+.c--textarea {
+  /* === Public vars === */
+  --txta_c: var(--body_c);
+  --txta_bg: var(--body_bg);
+  --txta_b-c: var(--b-c);
+  --txta_b-c_focus: var(--link_c);
+
+  /* === Private vars === */
+  --_txta_c: var(--txta_c);
+  --_txta_bg: var(--txta_bg);
+  --_txta_b-c: var(--txta_b-c);
+
+  --_txta_w: var(--txta_w, 100%);
+  --_txta_f-s: var(--txta_f-s, var(--f-s_base));
+  --_txta_l-h: var(--txta_l-h, var(--l-h));
+  --_txta_p-b: var(--txta_p-b, var(--size_200));
+  --_txta_p-i: var(--txta_p-i, var(--size_300));
+  --_txta_b-w: var(--txta_b-w, var(--b-w));
+  --_txta_b-r: var(--txta_b-r, var(--b-r));
+  --_txta_resize: var(--txta_resize, vertical);
+  --_txta_min-h: var(--txta_min-h, var(--size_1000));
+
+  /* === Mix === */
+  --_txta-mix_c: var(--txta-mix_c, light-dark(var(--c_black), var(--c_white)));
+
+  /* === Styles === */
+  display: block;
+  width: var(--_txta_w);
+  min-height: var(--_txta_min-h);
+  color: var(--_txta_c);
+  background: var(--_txta_bg);
+  border: var(--_txta_b-w) solid var(--_txta_b-c);
+  border-radius: var(--_txta_b-r);
+  font-size: var(--_txta_f-s);
+  font-family: inherit;
+  line-height: var(--_txta_l-h);
+  padding-block: var(--_txta_p-b);
+  padding-inline: var(--_txta_p-i);
+  resize: var(--_txta_resize);
+  transition: var(--t);
+  appearance: none;
+
+  &:hover {
+    --_txta_b-c: var(--txta_b-c_h, color-mix(in oklab, var(--txta_b-c), var(--_txta-mix_c) 30%));
+  }
+
+  &:focus,
+  &:focus-visible {
+    --_txta_b-c: var(--txta_b-c_focus);
+    outline: 2px solid color-mix(in oklab, var(--txta_b-c_focus), transparent 70%);
+    outline-offset: 2px;
+    border-color: var(--_txta_b-c);
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+    resize: none;
+  }
+
+  &[readonly] {
+    --_txta_bg: var(--txta_bg_readonly, color-mix(in oklab, var(--txta_bg), var(--_txta-mix_c) 5%));
+    cursor: default;
+    resize: none;
+  }
+
+  &[aria-invalid="true"] {
+    --_txta_b-c: var(--txta_b-c_invalid, var(--c_danger_500));
+    outline-color: color-mix(in oklab, var(--c_danger_500), transparent 70%);
+  }
+
+  /* Resize variants */
+  &.is--no-resize  { --_txta_resize: none; }
+  &.is--h-resize   { --_txta_resize: horizontal; }
+  &.is--both-resize { --_txta_resize: both; }
+}

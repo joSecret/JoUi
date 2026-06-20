@@ -1,0 +1,94 @@
+.input-group {
+  /* === Public vars === */
+  --ing_bg: var(--body_bg);
+  --ing_c: var(--body_c);
+  --ing_b-c: var(--b-c);
+  --ing_b-r: var(--b-r);
+  --ing_b-w: var(--b-w);
+  --ing_p-b: var(--size_200, 0.5rem);
+  --ing_p-i: var(--size_300, 0.75rem);
+  --ing_f-s: 1rem;
+
+  /* === Private vars === */
+  --_ing_bg: var(--ing-type_bg, var(--ing_bg));
+  --_ing_b-c: var(--ing_b-c);
+  --_ing_b-r: var(--ing_b-r);
+  --_ing_p-b: var(--ing-type_p-b, var(--ing_p-b));
+  --_ing_p-i: var(--ing-type_p-i, var(--ing_p-i));
+  --_ing_f-s: var(--ing-type_f-s, var(--ing_f-s));
+
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  /* Remove outer border-radius from inner children */
+  > * {
+    position: relative;
+
+    &:not(:first-child) {
+      margin-inline-start: calc(-1 * var(--_ing_b-w));
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+
+    &:not(:last-child) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+
+    &:focus,
+    &:focus-within {
+      z-index: 3;
+    }
+  }
+
+  .form-control,
+  .form-select,
+  .form-floating {
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+  }
+
+  .form-floating {
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+
+    > .form-control {
+      border-radius: inherit;
+    }
+  }
+}
+
+/* === Addon text === */
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding-block: var(--_ing_p-b);
+  padding-inline: var(--_ing_p-i);
+  font-size: var(--_ing_f-s);
+  font-weight: normal;
+  color: var(--ing_c);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--ing_addon-bg, color-mix(in oklab, var(--_ing_bg), light-dark(var(--c_black), var(--c_white)) 4%));
+  border: var(--_ing_b-w) solid var(--_ing_b-c);
+  border-radius: var(--_ing_b-r);
+
+  /* Radius handled by parent > * rules */
+}
+
+/* === Size variants === */
+.input-group-sm {
+  --ing-type_f-s: var(--ing_sm_f-s, 0.875rem);
+  --ing-type_p-b: var(--ing_sm_p-b, var(--size_100, 0.25rem));
+  --ing-type_p-i: var(--ing_sm_p-i, var(--size_200, 0.5rem));
+  --ing_b-r: var(--b-r_md);
+}
+
+.input-group-lg {
+  --ing-type_f-s: var(--ing_lg_f-s, 1.125rem);
+  --ing-type_p-b: var(--ing_lg_p-b, var(--size_300, 0.75rem));
+  --ing-type_p-i: var(--ing_lg_p-i, var(--size_400, 1rem));
+}

@@ -1,0 +1,11 @@
+<svg width="250" height="160" viewBox="0 0 250 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Track 1 -->
+  <rect x="20" y="36" width="210" height="14" rx="7" fill="var(--c_neutral_100, #f1f3f5)"/>
+  <rect x="20" y="36" width="140" height="14" rx="7" fill="var(--c_primary_500, #4c6ef5)"/>
+  <!-- Track 2 -->
+  <rect x="20" y="68" width="210" height="14" rx="7" fill="var(--c_neutral_100, #f1f3f5)"/>
+  <rect x="20" y="68" width="90" height="14" rx="7" fill="var(--c_neutral_400, #ced4da)"/>
+  <!-- Track 3 -->
+  <rect x="20" y="100" width="210" height="14" rx="7" fill="var(--c_neutral_100, #f1f3f5)"/>
+  <rect x="20" y="100" width="168" height="14" rx="7" fill="var(--c_primary_500, #4c6ef5)"/>
+</svg>

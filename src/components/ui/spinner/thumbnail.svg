@@ -1,0 +1,8 @@
+<svg width="250" height="160" viewBox="0 0 250 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Border spinner -->
+  <circle cx="85" cy="80" r="36" stroke="var(--c_neutral_100, #f1f3f5)" stroke-width="6" fill="none"/>
+  <path d="M85 44 A36 36 0 0 1 121 80" stroke="var(--c_primary_500, #4c6ef5)" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- Grow spinner (filled circle) -->
+  <circle cx="175" cy="80" r="28" fill="var(--c_neutral_400, #ced4da)" opacity="0.5"/>
+  <circle cx="175" cy="80" r="18" fill="var(--c_primary_500, #4c6ef5)"/>
+</svg>

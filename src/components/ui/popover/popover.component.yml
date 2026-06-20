@@ -1,0 +1,61 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Popover
+status: stable
+group: UI
+version: 1.0.0
+description: Click-triggered popover built on native details/summary. Optional popover.js adds close-on-outside-click and Escape key behavior.
+
+props:
+  type: object
+  properties:
+
+    popover_title:
+      type: ['string', 'null']
+      title: Title
+      description: Popover header title.
+      default: null
+
+    popover_body:
+      type: ['string', 'null']
+      title: Body
+      description: Popover body HTML content.
+      default: null
+
+    popover_trigger:
+      type: ['string', 'null']
+      title: Trigger
+      description: HTML content for the summary/trigger element.
+      default: null
+
+    popover_placement:
+      type: string
+      title: Placement
+      description: Popover position relative to the trigger.
+      enum:
+        - 'top'
+        - 'bottom'
+        - 'start'
+        - 'end'
+      default: 'bottom'
+
+    # uc -> utility_classes
+    popover_uc:
+      type: array
+      items:
+        type: string
+      title: Popover Utility Classes
+      default: []
+
+    # att -> attributes
+    popover_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+
+slots:
+  slot_trigger:
+    title: Trigger
+    description: Content inside the summary element (click target).
+  slot_body:
+    title: Body
+    description: Popover body content.

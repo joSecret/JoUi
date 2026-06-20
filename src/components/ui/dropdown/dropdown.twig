@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Template for a dropdown component.
+ *
+ * Available properties:
+ * - dropdown_label: (string) default: 'Dropdown'
+ *    Label for the toggle button.
+ * - dropdown_color: (string) default: 'secondary'
+ *    Button color variant (primary, secondary, etc.).
+ * - dropdown_direction: (string) default: 'down'
+ *    Direction: down, up, end, start.
+ * - dropdown_items: (array) default: ([])
+ *    Array of menu items, each with:
+ *    - label: (string) Display text.
+ *    - href: (string|null) Link URL (omit for button items).
+ *    - divider: (boolean) Render a divider rule instead.
+ *    - disabled: (boolean) Disabled state.
+ *
+ * Available Utility classes -> uc
+ * - dropdown_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - dropdown_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * usage example: @see dropdown.drupal.md
+ */
+#}
+
+{% set dropdown_label = dropdown_label|default('Dropdown') %}
+{% set dropdown_color = dropdown_color|default('secondary') %}
+{% set dropdown_direction = dropdown_direction|default('down') %}
+{% set dropdown_items = dropdown_items|default([]) %}
+
+{# Create attributes #}
+{% set dropdown_att = dropdown_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set dropdown_classes = [
+    'dropdown',
+    dropdown_direction != 'down' ? 'dropdown-' ~ dropdown_direction,
+  ]|merge(dropdown_uc ?: [])
+%}
+
+{%
+  set btn_classes = [
+    'button',
+    dropdown_color ? 'button-' ~ dropdown_color,
+    'dropdown-toggle',
+  ]
+%}
+
+<div{{ dropdown_att.addClass(dropdown_classes) }}>
+  <button
+    type="button"
+    class="{{ btn_classes|join(' ') }}"
+    data-dropdown-toggle
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    {{- dropdown_label -}}
+  </button>
+
+  <ul class="dropdown-menu" role="menu">
+    {%- for item in dropdown_items -%}
+      {%- if item.divider -%}
+        <li><hr class="dropdown-divider"></li>
+      {%- else -%}
+        <li>
+          {%- if item.href -%}
+            <a
+              class="dropdown-item{{ item.disabled ? ' disabled' }}"
+              href="{{ item.disabled ? '' : item.href }}"
+              role="menuitem"
+              {{ item.disabled ? 'aria-disabled="true" tabindex="-1"' }}
+            >
+              {{- item.label -}}
+            </a>
+          {%- else -%}
+            <button
+              type="button"
+              class="dropdown-item{{ item.disabled ? ' disabled' }}"
+              role="menuitem"
+              {{ item.disabled ? 'aria-disabled="true" disabled' }}
+            >
+              {{- item.label -}}
+            </button>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- block slot_items -%}{%- endblock -%}
+  </ul>
+</div>

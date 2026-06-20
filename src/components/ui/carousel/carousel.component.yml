@@ -1,0 +1,61 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Carousel
+status: stable
+group: UI
+version: 1.0.0
+description: Image slideshow with prev/next controls, dot indicators, auto-play, and touch swipe support. Requires carousel.js.
+
+props:
+  type: object
+  properties:
+
+    carousel_id:
+      type: ['string', 'null']
+      title: ID
+      description: Unique ID for the carousel element.
+      default: null
+
+    carousel_items:
+      type: array
+      title: Items
+      description: >
+        Array of slide objects. Each item has:
+        src (string), alt (string), caption (optional: { title, text }).
+      default: []
+
+    carousel_interval:
+      type: integer
+      title: Auto-play interval
+      description: Auto-play interval in milliseconds. Set to 0 to disable.
+      default: 0
+
+    carousel_controls:
+      type: boolean
+      title: Controls
+      description: Show previous/next arrow controls.
+      default: true
+
+    carousel_indicators:
+      type: boolean
+      title: Indicators
+      description: Show dot indicator buttons.
+      default: true
+
+    # uc -> utility_classes
+    carousel_uc:
+      type: array
+      items:
+        type: string
+      title: Carousel Utility Classes
+      default: []
+
+    # att -> attributes
+    carousel_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+
+slots:
+  slot_items:
+    title: Custom slides
+    description: Custom carousel-item elements added after the items array.

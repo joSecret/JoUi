@@ -1,0 +1,81 @@
+{#
+/**
+ * @file
+ * Floating label form control — label floats above input on focus/fill.
+ *
+ * IMPORTANT: The input placeholder must be a space (" ") or any non-empty
+ * value for the :placeholder-shown CSS trick to work correctly.
+ *
+ * Available properties:
+ * - float_label_id: (string) Input id (required for label association).
+ * - float_label_type: (string) default: 'text' — input type.
+ * - float_label_label: (string) Label text (required).
+ * - float_label_name: (string|null) Input name attribute.
+ * - float_label_value: (string|null) Input value.
+ * - float_label_placeholder: (string) default: ' ' — must be space or non-empty.
+ * - float_label_required: (boolean) default: false.
+ * - float_label_disabled: (boolean) default: false.
+ * - float_label_tag: (string) default: 'input' — input, select, or textarea.
+ *
+ * Available Utility classes -> uc
+ * - float_label_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - float_label_att: Attributes (Drupal\Core\Template\Attribute) for the input.
+ */
+#}
+
+{% set float_label_type = float_label_type|default('text') %}
+{% set float_label_placeholder = float_label_placeholder|default(' ') %}
+{% set float_label_required = float_label_required|default(false) %}
+{% set float_label_disabled = float_label_disabled|default(false) %}
+{% set float_label_tag = float_label_tag|default('input') %}
+
+{# Create attributes #}
+{% set float_label_att = float_label_att ?: create_attribute() %}
+
+{# Wrapper classes #}
+{%
+  set wrapper_classes = [
+    'form-floating',
+  ]|merge(float_label_uc ?: [])
+%}
+
+<div class="{{ wrapper_classes|join(' ') }}">
+  {%- if float_label_tag == 'textarea' -%}
+    <textarea
+      {{ float_label_att.addClass('form-control') }}
+      {{ float_label_id ? 'id="' ~ float_label_id ~ '"' }}
+      {{ float_label_name ? 'name="' ~ float_label_name ~ '"' }}
+      placeholder="{{ float_label_placeholder }}"
+      {{ float_label_required ? 'required' }}
+      {{ float_label_disabled ? 'disabled' }}
+    >{{- float_label_value -}}</textarea>
+  {%- elseif float_label_tag == 'select' -%}
+    <select
+      {{ float_label_att.addClass(['form-control', 'form-select']) }}
+      {{ float_label_id ? 'id="' ~ float_label_id ~ '"' }}
+      {{ float_label_name ? 'name="' ~ float_label_name ~ '"' }}
+      {{ float_label_required ? 'required' }}
+      {{ float_label_disabled ? 'disabled' }}
+    >
+      {%- block slot_options -%}
+        {{- float_label_options|raw -}}
+      {%- endblock -%}
+    </select>
+  {%- else -%}
+    <input
+      {{ float_label_att.addClass('form-control') }}
+      type="{{ float_label_type }}"
+      {{ float_label_id ? 'id="' ~ float_label_id ~ '"' }}
+      {{ float_label_name ? 'name="' ~ float_label_name ~ '"' }}
+      {{ float_label_value ? 'value="' ~ float_label_value ~ '"' }}
+      placeholder="{{ float_label_placeholder }}"
+      {{ float_label_required ? 'required' }}
+      {{ float_label_disabled ? 'disabled' }}
+    >
+  {%- endif -%}
+  <label {{ float_label_id ? 'for="' ~ float_label_id ~ '"' }}>
+    {{- float_label_label -}}
+  </label>
+</div>

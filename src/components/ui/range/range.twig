@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Range slider form control.
+ *
+ * Available properties:
+ * - range_id: (string) Input id attribute.
+ * - range_name: (string) Input name attribute.
+ * - range_label: (string|null) Label text.
+ * - range_min: (int) default: 0 — Minimum value.
+ * - range_max: (int) default: 100 — Maximum value.
+ * - range_step: (int|float) default: 1 — Step increment.
+ * - range_value: (int|float) default: 50 — Current value.
+ * - range_disabled: (boolean) default: false.
+ *
+ * Available Utility classes -> uc
+ * - range_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - range_att: Attributes (Drupal\Core\Template\Attribute) for the input.
+ */
+#}
+
+{% set range_min = range_min|default(0) %}
+{% set range_max = range_max|default(100) %}
+{% set range_step = range_step|default(1) %}
+{% set range_value = range_value|default(50) %}
+{% set range_disabled = range_disabled|default(false) %}
+
+{# Create attributes #}
+{% set range_att = range_att ?: create_attribute() %}
+
+{# Input classes #}
+{%
+  set range_classes = [
+    'form-range',
+  ]|merge(range_uc ?: [])
+%}
+
+{% if range_label %}
+  <label class="form-label" {{ range_id ? 'for="' ~ range_id ~ '"' }}>
+    {{- range_label -}}
+  </label>
+{% endif %}
+
+<input
+  {{ range_att.addClass(range_classes) }}
+  type="range"
+  {{ range_id ? 'id="' ~ range_id ~ '"' }}
+  {{ range_name ? 'name="' ~ range_name ~ '"' }}
+  min="{{ range_min }}"
+  max="{{ range_max }}"
+  step="{{ range_step }}"
+  value="{{ range_value }}"
+  {{ range_disabled ? 'disabled' }}
+>

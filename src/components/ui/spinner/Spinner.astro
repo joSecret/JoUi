@@ -1,0 +1,33 @@
+---
+import './spinner.css';
+
+interface Props {
+  type?: 'border' | 'grow';
+  color?: string;
+  size?: 'sm';
+  label?: string;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  type = 'border',
+  color = null,
+  size = null,
+  label = 'Loading...',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'spinner',
+  `spinner-${type}`,
+  size && `spinner-${size}`,
+  color && `spinner-${color}`,
+  ...classes,
+].filter(Boolean);
+---
+
+<div class:list={classList} role="status" {...attrs}>
+  <span class="visually-hidden">{label}</span>
+</div>

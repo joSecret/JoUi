@@ -1,0 +1,82 @@
+---
+title: Alert
+description: Contextual feedback messages for user actions with optional dismiss support
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Alert from './Alert.astro'
+
+# Alert
+
+Contextual feedback messages for typical user actions. Choose from color variants to convey meaning or use the dismissible variant for temporary notices.
+
+## Installation
+
+```bash
+npx joui add alert --platform astro
+```
+
+```bash
+npx joui add alert --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Alert from '@ui/alert/Alert.astro'
+---
+<Alert color="primary">A simple primary alert — check it out!</Alert>
+```
+
+## Examples
+
+### Colors
+
+<Alert color="primary">Primary alert</Alert>
+<Alert color="secondary">Secondary alert</Alert>
+<Alert color="accent">Accent alert</Alert>
+<Alert color="success">Success alert</Alert>
+<Alert color="warning">Warning alert</Alert>
+<Alert color="danger">Danger alert</Alert>
+<Alert color="info">Info alert</Alert>
+<Alert color="light">Light alert</Alert>
+<Alert color="dark">Dark alert</Alert>
+
+```astro
+<Alert color="primary">Primary alert</Alert>
+<Alert color="secondary">Secondary alert</Alert>
+<Alert color="success">Success alert</Alert>
+<Alert color="warning">Warning alert</Alert>
+<Alert color="danger">Danger alert</Alert>
+<Alert color="info">Info alert</Alert>
+```
+
+### Dismissible
+
+<Alert color="warning" dismissible>
+  This is a dismissible alert. Click the × to remove it.
+</Alert>
+
+```astro
+<Alert color="warning" dismissible>
+  This is a dismissible alert. Click the × to remove it.
+</Alert>
+```
+
+### With rich content
+
+<Alert color="success">
+  <strong>Well done!</strong> You successfully completed the action.
+</Alert>
+
+```astro
+<Alert color="success">
+  <strong>Well done!</strong> You successfully completed the action.
+</Alert>
+```
+
+## API Reference
+
+See [`alert.md`](./alert.md) for the full reference and [`alert.astro.md`](./alert.astro.md) / [`alert.drupal.md`](./alert.drupal.md) for platform notes.

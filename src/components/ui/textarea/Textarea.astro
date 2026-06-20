@@ -1,0 +1,56 @@
+---
+import './textarea.css';
+
+interface Props {
+  rows?: number;
+  resize?: 'vertical' | 'horizontal' | 'both' | 'none' | null;
+  placeholder?: string | null;
+  value?: string | null;
+  name?: string | null;
+  id?: string | null;
+  disabled?: boolean;
+  readonly?: boolean;
+  invalid?: boolean;
+  required?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  rows = 3,
+  resize = null,
+  placeholder = null,
+  value = null,
+  name = null,
+  id = null,
+  disabled = false,
+  readonly = false,
+  invalid = false,
+  required = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const resizeMap: Record<string, string> = {
+  none: 'is--no-resize',
+  horizontal: 'is--h-resize',
+  both: 'is--both-resize',
+};
+
+const classList = [
+  'c--textarea',
+  resize && resizeMap[resize],
+  ...classes,
+].filter(Boolean);
+
+const finalAttrs: Record<string, unknown> = { ...attrs, rows };
+if (placeholder) finalAttrs.placeholder = placeholder;
+if (name) finalAttrs.name = name;
+if (id) finalAttrs.id = id;
+if (disabled) finalAttrs.disabled = true;
+if (readonly) finalAttrs.readonly = true;
+if (invalid) finalAttrs['aria-invalid'] = 'true';
+if (required) finalAttrs.required = true;
+---
+
+<textarea class:list={classList} {...finalAttrs}>{value}</textarea>

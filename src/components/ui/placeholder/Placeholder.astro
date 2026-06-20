@@ -1,0 +1,47 @@
+---
+import './placeholder.css';
+
+interface PlaceholderLine {
+  cols: number;
+  size?: 'xs' | 'sm' | 'lg';
+}
+
+interface Props {
+  animation?: 'glow' | 'wave' | 'none';
+  lines?: PlaceholderLine[];
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  animation = 'glow',
+  lines = null,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const hasLines = lines && lines.length > 0;
+
+const wrapperClasses = [
+  animation !== 'none' && `placeholder-${animation}`,
+  ...classes,
+].filter(Boolean);
+---
+
+{hasLines ? (
+  <p class:list={wrapperClasses} {...attrs}>
+    {lines!.map(({ cols, size }) => (
+      <span class:list={[
+        'placeholder',
+        `col-${Math.min(12, Math.max(1, cols))}`,
+        size && `placeholder-${size}`,
+      ].filter(Boolean)} />
+    ))}
+  </p>
+) : (
+  <p class:list={wrapperClasses} {...attrs}>
+    <slot>
+      <span class="placeholder col-12" />
+    </slot>
+  </p>
+)}

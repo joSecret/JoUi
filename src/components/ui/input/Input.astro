@@ -1,0 +1,51 @@
+---
+import './input.css';
+
+interface Props {
+  type?: 'text' | 'email' | 'password' | 'search' | 'number' | 'tel' | 'url' | 'date' | 'time';
+  size?: 'sm' | 'lg' | null;
+  placeholder?: string | null;
+  value?: string | null;
+  name?: string | null;
+  id?: string | null;
+  disabled?: boolean;
+  readonly?: boolean;
+  invalid?: boolean;
+  required?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  type = 'text',
+  size = null,
+  placeholder = null,
+  value = null,
+  name = null,
+  id = null,
+  disabled = false,
+  readonly = false,
+  invalid = false,
+  required = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'c--input',
+  size && `is--${size}`,
+  ...classes,
+].filter(Boolean);
+
+const finalAttrs: Record<string, unknown> = { ...attrs };
+if (placeholder) finalAttrs.placeholder = placeholder;
+if (value !== null) finalAttrs.value = value;
+if (name) finalAttrs.name = name;
+if (id) finalAttrs.id = id;
+if (disabled) finalAttrs.disabled = true;
+if (readonly) finalAttrs.readonly = true;
+if (invalid) finalAttrs['aria-invalid'] = 'true';
+if (required) finalAttrs.required = true;
+---
+
+<input type={type} class:list={classList} {...finalAttrs} />

@@ -1,0 +1,53 @@
+---
+import './breadcrumb.css';
+
+interface BreadcrumbItem {
+  label: string;
+  url?: string;
+  active?: boolean;
+}
+
+interface Props {
+  items?: BreadcrumbItem[];
+  separator?: string;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  items = [],
+  separator,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'breadcrumb',
+  ...classes,
+].filter(Boolean);
+
+const navAttrs: Record<string, unknown> = {
+  'aria-label': 'breadcrumb',
+};
+
+const olStyle = separator ? `--bcrumb_sep: '${separator}'` : undefined;
+---
+
+<nav {...navAttrs}>
+  <ol class:list={classList} style={olStyle} {...attrs}>
+    {items.map((item) => {
+      const isActive = item.active ?? false;
+      const itemClasses = ['breadcrumb-item', isActive && 'active'].filter(Boolean);
+      return (
+        <li class:list={itemClasses} aria-current={isActive ? 'page' : undefined}>
+          {isActive || !item.url ? (
+            item.label
+          ) : (
+            <a href={item.url}>{item.label}</a>
+          )}
+        </li>
+      );
+    })}
+    <slot />
+  </ol>
+</nav>

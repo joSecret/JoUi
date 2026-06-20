@@ -1,0 +1,90 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Form Item
+status: stable
+version: 1.0.0
+group: Forms
+description: 'Wrapper for form fields. Combines label, input, description, and error into a single accessible unit. Overrides form-element.html.twig.'
+
+props:
+  type: object
+
+  properties:
+    fi_label_display:
+      type: string
+      title: Label display
+      description: 'Position of the label relative to the input.'
+      default: before
+      enum:
+        - before
+        - after
+        - invisible
+
+    fi_description_display:
+      type: string
+      title: Description display
+      description: 'Position of the description text.'
+      default: after
+      enum:
+        - before
+        - after
+        - invisible
+
+    fi_errors:
+      type: ['string', 'null']
+      title: Error message
+      description: 'Error text shown below the input.'
+      default: null
+
+    fi_prefix:
+      type: ['string', 'null']
+      title: Prefix
+      description: 'Content rendered before the input.'
+      default: null
+
+    fi_suffix:
+      type: ['string', 'null']
+      title: Suffix
+      description: 'Content rendered after the input.'
+      default: null
+
+    fi_disabled:
+      type: ['string', 'boolean', 'null']
+      title: Disabled
+      description: 'Set to "disabled" or true to disable the field.'
+      default: null
+
+    fi_required:
+      type: boolean
+      title: Required
+      description: 'Shows a required marker on the label.'
+      default: false
+
+    fi_type:
+      type: ['string', 'null']
+      title: Input type
+      description: 'Used for BEM class generation (e.g. form-type--text).'
+      default: null
+
+    fi_name:
+      type: ['string', 'null']
+      title: Input name
+      description: 'Used for BEM class generation (e.g. form-item--email).'
+      default: null
+
+    fi_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      description: Extra classes added to the wrapper element.
+      default: []
+
+    fi_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      description: HTML attributes for the wrapper element.
+
+slots:
+  default:
+    title: Input
+    description: 'The form input element (input, select, textarea, etc.).'

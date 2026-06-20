@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Tooltip component — CSS-only, no JavaScript required.
+ *
+ * Usage: wraps an element with data-tooltip attribute for a CSS tooltip.
+ * Can also be used directly on any HTML element without this template.
+ *
+ * Available properties:
+ * - tooltip_text: (string) Tooltip text content.
+ * - tooltip_placement: (string) default: 'top'
+ *    Placement: top, bottom, start, end.
+ * - tooltip_content: (block/string) The element the tooltip is attached to.
+ *
+ * Available Utility classes -> uc
+ * - tooltip_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - tooltip_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * Direct usage (no template needed):
+ * <button data-tooltip="Text" data-tooltip-placement="top">Hover me</button>
+ */
+#}
+
+{% set tooltip_placement = tooltip_placement|default('top') %}
+
+{# Create attributes #}
+{% set tooltip_att = tooltip_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set tooltip_classes = [
+    'tooltip-wrapper',
+  ]|merge(tooltip_uc ?: [])
+%}
+
+{% if tooltip_att %}
+  {% set tooltip_att = tooltip_att.setAttribute('data-tooltip', tooltip_text) %}
+  {% set tooltip_att = tooltip_att.setAttribute('data-tooltip-placement', tooltip_placement) %}
+{% endif %}
+
+<span{{ tooltip_att.addClass(tooltip_classes) }}>
+  {%- block tooltip_content -%}
+    {{- tooltip_content|raw -}}
+  {%- endblock -%}
+</span>

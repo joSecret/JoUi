@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * List group component — a flexible list of items with borders and optional action styles.
+ *
+ * Available properties:
+ * - list_group_items: (array) default: ([])
+ *    Items array, each with:
+ *    - label: (string) Display text.
+ *    - href: (string|null) Link URL (renders as action item).
+ *    - active: (boolean) Active state.
+ *    - disabled: (boolean) Disabled state.
+ *    - color: (string|null) Color variant (primary, success, etc.).
+ * - list_group_flush: (boolean) default: false — removes outer border/radius.
+ * - list_group_horizontal: (boolean) default: false — horizontal layout.
+ * - list_group_tag: (string) default: 'ul' — wrapper tag.
+ *
+ * Available Utility classes -> uc
+ * - list_group_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - list_group_att: Attributes (Drupal\Core\Template\Attribute).
+ */
+#}
+
+{% set list_group_items = list_group_items|default([]) %}
+{% set list_group_flush = list_group_flush|default(false) %}
+{% set list_group_horizontal = list_group_horizontal|default(false) %}
+{% set list_group_tag = list_group_tag|default('ul') %}
+
+{# Create attributes #}
+{% set list_group_att = list_group_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set list_group_classes = [
+    'list-group',
+    list_group_flush ? 'list-group-flush',
+    list_group_horizontal ? 'list-group-horizontal',
+  ]|filter|merge(list_group_uc ?: [])
+%}
+
+<{{ list_group_tag }}{{ list_group_att.addClass(list_group_classes) }}>
+  {%- for item in list_group_items -%}
+    {%
+      set item_classes = [
+        'list-group-item',
+        item.href ? 'list-group-item-action',
+        item.active ? 'active',
+        item.disabled ? 'disabled',
+        item.color ? 'list-group-item-' ~ item.color,
+      ]|filter
+    %}
+    {%- if item.href -%}
+      <li>
+        <a
+          class="{{ item_classes|join(' ') }}"
+          href="{{ item.disabled ? '' : item.href }}"
+          {{ item.active ? 'aria-current="true"' }}
+          {{ item.disabled ? 'aria-disabled="true" tabindex="-1"' }}
+        >
+          {{- item.label -}}
+        </a>
+      </li>
+    {%- else -%}
+      <li
+        class="{{ item_classes|join(' ') }}"
+        {{ item.active ? 'aria-current="true"' }}
+        {{ item.disabled ? 'aria-disabled="true"' }}
+      >
+        {{- item.label -}}
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- block slot_items -%}{%- endblock -%}
+</{{ list_group_tag }}>

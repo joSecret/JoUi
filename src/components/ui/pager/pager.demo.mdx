@@ -1,0 +1,116 @@
+---
+title: Pager
+description: Navigation component for paginated content
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Pager from './Pager.astro'
+
+export const pages = {
+  pages: {
+    1: { href: '#' },
+    2: { href: '#' },
+    3: { href: '#' },
+    4: { href: '#' },
+    5: { href: '#' },
+  },
+  previous: { href: '#' },
+  next: { href: '#' },
+}
+
+export const fullPages = {
+  first: { href: '#' },
+  previous: { href: '#' },
+  pages: {
+    4: { href: '#' },
+    5: { href: '#' },
+    6: { href: '#' },
+  },
+  next: { href: '#' },
+  last: { href: '#' },
+}
+
+# Pager
+
+Navigation component for paginated content. Displays first, previous, page numbers, ellipsis, next, and last links.
+
+## Installation
+
+```bash
+npx joui add pager --platform astro
+```
+
+```bash
+npx joui add pager --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Pager from '@ui/pager/Pager.astro'
+---
+<Pager
+  items={{
+    previous: { href: '#' },
+    pages: { 1: { href: '#' }, 2: { href: '#' }, 3: { href: '#' } },
+    next: { href: '#' },
+  }}
+  current={2}
+/>
+```
+
+## Examples
+
+### Default
+
+<Pager items={pages} current={3} />
+
+```astro
+<Pager items={pages} current={3} />
+```
+
+### With first/last + ellipsis
+
+<Pager items={fullPages} current={5} ellipses={{ previous: true, next: true }} />
+
+```astro
+<Pager items={fullPages} current={5} ellipses={{ previous: true, next: true }} />
+```
+
+### Alignment — center
+
+<Pager items={pages} current={3} alignment="center" />
+
+```astro
+<Pager items={pages} current={3} alignment="center" />
+```
+
+### Alignment — end
+
+<Pager items={pages} current={3} alignment="end" />
+
+```astro
+<Pager items={pages} current={3} alignment="end" />
+```
+
+### Alignment — vertical
+
+<Pager items={pages} current={3} alignment="vertical" />
+
+```astro
+<Pager items={pages} current={3} alignment="vertical" />
+```
+
+### Hide first/last
+
+<Pager items={fullPages} current={5} showFirst={false} showLast={false} />
+
+```astro
+<Pager items={fullPages} current={5} showFirst={false} showLast={false} />
+```
+
+## API Reference
+
+See [`pager.md`](./pager.md) for the full reference and [`pager.astro.md`](./pager.astro.md) / [`pager.drupal.md`](./pager.drupal.md) for platform notes.

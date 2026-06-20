@@ -1,0 +1,34 @@
+:where(html) {
+  --is-below_xxs: false;
+  --is-below_xs: false;
+  --is-below_sm: false;
+  --is-below_md: false;
+  --is-below_lg: false;
+  --is-below_xl: false;
+  --is-below_xxl: false;
+
+  @media screen and (max-width: 240px) {
+      --is-below_xxs: true;
+  }
+  @media screen and (max-width: 360px) {
+      --is-below_xs: true;
+  }
+  @media screen and (max-width: 480px) {
+      --is-below_sm: true;
+  }
+  @media screen and (max-width: 768px) {
+      --is-below_md: true;
+  }
+  @media screen and (max-width: 1024px) {
+      --is-below_lg: true;
+  }
+  @media screen and (max-width: 1440px) {
+      --is-below_xl: true;
+  }
+  @media screen and (max-width: 1920px) {
+      --is-below_xxl: true;
+  }
+}
+
+/* Use */
+/* @container style(--is-below_xxs: true) {} */

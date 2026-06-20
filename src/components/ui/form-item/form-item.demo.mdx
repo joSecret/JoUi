@@ -1,0 +1,81 @@
+---
+title: Form Item
+description: Wrapper for form fields — label, input, description, and error
+category: ui
+preview: ./thumbnail.svg
+---
+
+import FormItem from './FormItem.astro'
+
+# Form Item
+
+Wrapper that groups a form input with its label, description, and error into a single accessible unit. Overrides Drupal's `form-element.html.twig`.
+
+## Installation
+
+```bash
+npx joui add form-item --platform astro
+```
+
+```bash
+npx joui add form-item --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import FormItem from '@ui/form-item/FormItem.astro'
+---
+<FormItem label="Email address" required>
+  <input type="email" name="email" />
+</FormItem>
+```
+
+## Examples
+
+### Default
+
+<FormItem label="Full name">
+  <input type="text" name="name" />
+</FormItem>
+
+### Required
+
+<FormItem label="Email" required>
+  <input type="email" name="email" />
+</FormItem>
+
+### With description
+
+<FormItem label="Username" description="Letters and numbers only.">
+  <input type="text" name="username" />
+</FormItem>
+
+### Error state
+
+<FormItem label="Password" required error="Password must be at least 8 characters.">
+  <input type="password" name="password" />
+</FormItem>
+
+### Description before
+
+<FormItem label="Bio" description="Tell us about yourself." descriptionDisplay="before">
+  <textarea name="bio" rows="3"></textarea>
+</FormItem>
+
+### Checkbox (label after)
+
+<FormItem label="Accept terms and conditions" labelDisplay="after" type="checkbox">
+  <input type="checkbox" name="terms" />
+</FormItem>
+
+### Disabled
+
+<FormItem label="Account ID" disabled>
+  <input type="text" value="USR-00142" />
+</FormItem>
+
+## API Reference
+
+See [`form-item.md`](./form-item.md) for the full reference and [`form-item.astro.md`](./form-item.astro.md) / [`form-item.drupal.md`](./form-item.drupal.md) for platform notes.

@@ -1,0 +1,81 @@
+---
+title: Navbar
+description: Responsive navigation bar with brand, links, and mobile hamburger toggle
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Navbar from './Navbar.astro'
+
+# Navbar
+
+Responsive navigation bar. Collapses into a hamburger menu on mobile. Requires `navbar.js` for the toggle behavior.
+
+## Installation
+
+```bash
+npx joui add navbar --platform astro
+```
+
+```bash
+npx joui add navbar --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Navbar from '@ui/navbar/Navbar.astro'
+---
+<Navbar
+  brand="My Site"
+  brandUrl="/"
+  items={[
+    { label: 'Home', href: '/', active: true },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ]}
+/>
+```
+
+## Examples
+
+### With brand
+
+<Navbar
+  brand="joui"
+  brandUrl="/"
+  items={[
+    { label: 'Home', href: '#', active: true },
+    { label: 'Components', href: '#' },
+    { label: 'About', href: '#' },
+    { label: 'Disabled', href: '#', disabled: true },
+  ]}
+/>
+
+```astro
+<Navbar
+  brand="joui"
+  brandUrl="/"
+  items={[
+    { label: 'Home', href: '/', active: true },
+    { label: 'Components', href: '/components' },
+    { label: 'About', href: '/about' },
+  ]}
+/>
+```
+
+### Without brand
+
+<Navbar items={[{ label: 'Home', href: '#', active: true }, { label: 'Blog', href: '#' }, { label: 'Contact', href: '#' }]} />
+
+```astro
+<Navbar items={[
+  { label: 'Home', href: '/', active: true },
+  { label: 'Blog', href: '/blog' },
+]} />
+```
+
+## API Reference
+
+See [`navbar.md`](./navbar.md) for the full reference and [`navbar.astro.md`](./navbar.astro.md) / [`navbar.drupal.md`](./navbar.drupal.md) for platform notes.

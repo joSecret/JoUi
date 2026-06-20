@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Checkbox, radio, and switch form control component.
+ *
+ * Available properties:
+ * - check_type: (string) default: 'checkbox' — checkbox, radio, switch.
+ * - check_id: (string) Input id attribute.
+ * - check_name: (string) Input name attribute.
+ * - check_label: (string) Label text.
+ * - check_checked: (boolean) default: false.
+ * - check_disabled: (boolean) default: false.
+ * - check_inline: (boolean) default: false.
+ * - check_value: (string) Input value attribute.
+ * - check_required: (boolean) default: false.
+ *
+ * Available Utility classes -> uc
+ * - check_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - check_att: Attributes (Drupal\Core\Template\Attribute) for the input.
+ */
+#}
+
+{% set check_type = check_type|default('checkbox') %}
+{% set check_checked = check_checked|default(false) %}
+{% set check_disabled = check_disabled|default(false) %}
+{% set check_inline = check_inline|default(false) %}
+{% set check_required = check_required|default(false) %}
+{% set input_type = check_type == 'switch' ? 'checkbox' : check_type %}
+
+{# Create attributes #}
+{% set check_att = check_att ?: create_attribute() %}
+
+{# Wrapper classes #}
+{%
+  set wrapper_classes = [
+    'form-check',
+    check_type == 'switch' ? 'form-switch',
+    check_inline ? 'form-check-inline',
+  ]|filter|merge(check_uc ?: [])
+%}
+
+<div class="{{ wrapper_classes|join(' ') }}">
+  <input
+    {{ check_att.addClass('form-check-input') }}
+    type="{{ input_type }}"
+    {{ check_id ? 'id="' ~ check_id ~ '"' }}
+    {{ check_name ? 'name="' ~ check_name ~ '"' }}
+    {{ check_value ? 'value="' ~ check_value ~ '"' }}
+    {{ check_checked ? 'checked' }}
+    {{ check_disabled ? 'disabled' }}
+    {{ check_required ? 'required' }}
+    {{ check_type == 'switch' ? 'role="switch"' }}
+  >
+  {% if check_label %}
+    <label class="form-check-label" {{ check_id ? 'for="' ~ check_id ~ '"' }}>
+      {{- check_label -}}
+    </label>
+  {% endif %}
+</div>

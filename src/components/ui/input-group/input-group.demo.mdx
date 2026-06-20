@@ -1,0 +1,96 @@
+---
+title: Input Group
+description: Prepend or append text addons and buttons to form controls
+category: ui
+preview: ./thumbnail.svg
+---
+
+import InputGroup from './InputGroup.astro'
+
+# Input Group
+
+A flex wrapper that visually attaches text addons, icons, or buttons to form controls. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add input-group --platform astro
+```
+
+```bash
+npx joui add input-group --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import InputGroup from '@ui/input-group/InputGroup.astro'
+---
+<InputGroup>
+  <span class="input-group-text">@</span>
+  <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+</InputGroup>
+```
+
+## Examples
+
+### Text prepend
+
+<InputGroup>
+  <span class="input-group-text">@</span>
+  <input type="text" class="form-control" placeholder="Username" aria-label="Username" />
+</InputGroup>
+
+### Text append
+
+<InputGroup>
+  <input type="text" class="form-control" placeholder="Email" aria-label="Email" />
+  <span class="input-group-text">@example.com</span>
+</InputGroup>
+
+### Both sides
+
+<InputGroup>
+  <span class="input-group-text">$</span>
+  <input type="number" class="form-control" aria-label="Amount" />
+  <span class="input-group-text">.00</span>
+</InputGroup>
+
+```astro
+<InputGroup>
+  <span class="input-group-text">$</span>
+  <input type="number" class="form-control" aria-label="Amount">
+  <span class="input-group-text">.00</span>
+</InputGroup>
+```
+
+### Button addon
+
+<InputGroup>
+  <input type="text" class="form-control" placeholder="Search..." aria-label="Search" />
+  <button class="button button-primary" type="button">Search</button>
+</InputGroup>
+
+```astro
+<InputGroup>
+  <input type="text" class="form-control" placeholder="Search...">
+  <button class="button button-primary">Search</button>
+</InputGroup>
+```
+
+### Sizes
+
+<InputGroup size="sm">
+  <span class="input-group-text">SM</span>
+  <input type="text" class="form-control" aria-label="Small" />
+</InputGroup>
+
+<InputGroup size="lg">
+  <span class="input-group-text">LG</span>
+  <input type="text" class="form-control" aria-label="Large" />
+</InputGroup>
+
+## API Reference
+
+See [`input-group.md`](./input-group.md) for the full reference and [`input-group.astro.md`](./input-group.astro.md) / [`input-group.drupal.md`](./input-group.drupal.md) for platform notes.

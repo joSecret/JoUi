@@ -1,0 +1,50 @@
+---
+import './offcanvas.css';
+
+interface Props {
+  id?: string;
+  placement?: 'start' | 'end' | 'top' | 'bottom';
+  title?: string;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id,
+  placement = 'start',
+  title,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const offcanvasId = id || `offcanvas-${Math.random().toString(36).slice(2, 9)}`;
+
+const classList = ['offcanvas', `offcanvas-${placement}`, ...classes].filter(Boolean);
+const titleId = title ? `${offcanvasId}-title` : undefined;
+---
+
+<div
+  class:list={classList}
+  id={offcanvasId}
+  aria-labelledby={titleId}
+  {...attrs}
+>
+  <div class="offcanvas-backdrop" data-offcanvas-backdrop></div>
+  <div class="offcanvas-panel">
+    <div class="offcanvas-header">
+      {Astro.slots.has('header') ? (
+        <slot name="header" />
+      ) : (
+        <h5 class="offcanvas-title" id={titleId}>{title}</h5>
+      )}
+      <button type="button" class="close-button" data-offcanvas-dismiss aria-label="Close">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <slot />
+    </div>
+  </div>
+</div>

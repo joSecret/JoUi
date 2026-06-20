@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Template for a nav component.
+ *
+ * Available properties:
+ * - nav_variant: (string|null) default: (null)
+ *    enum: null | tabs | pills
+ * - nav_items: (array) default: ([])
+ *    Each item: { label, href, active, disabled, tab_target }
+ *
+ * Utility classes -> uc
+ * - nav_uc: An array of utility classes.
+ *
+ * Attributes -> att
+ * - nav_att: Attributes array.
+ *
+ * @see nav.md
+ */
+#}
+
+{% set nav_variant = nav_variant|default(null) %}
+{% set nav_items = nav_items|default([]) %}
+
+{% set nav_att = nav_att ?: create_attribute() %}
+
+{%
+  set nav_classes = [
+    'nav',
+    nav_variant ? 'nav-' ~ nav_variant,
+  ]|merge(nav_uc ?: [])
+%}
+
+{% set is_tablist = nav_variant == 'tabs' and nav_items|selectattr('tab_target')|list|length > 0 %}
+
+{% if is_tablist %}
+  {% set nav_att = nav_att.setAttribute('role', 'tablist') %}
+{% endif %}
+
+<ul{{ nav_att.addClass(nav_classes) }}>
+  {% for item in nav_items %}
+    {% set item_active = item.active|default(false) %}
+    {% set item_disabled = item.disabled|default(false) %}
+
+    {%
+      set item_classes = [
+        'nav-link',
+        item_active ? 'active',
+        item_disabled ? 'disabled',
+      ]|filter
+    %}
+
+    <li class="nav-item"{% if is_tablist %} role="presentation"{% endif %}>
+      {% if item.tab_target %}
+        <button
+          class="{{ item_classes|join(' ') }}"
+          role="tab"
+          data-tab-target="{{ item.tab_target }}"
+          aria-selected="{{ item_active ? 'true' : 'false' }}"
+          {% if item_disabled %}aria-disabled="true"{% endif %}
+        >
+          {{- item.label -}}
+        </button>
+      {% else %}
+        <a
+          class="{{ item_classes|join(' ') }}"
+          {% if not item_disabled and item.href %}href="{{ item.href }}"{% endif %}
+          {% if item_active %}aria-current="page"{% endif %}
+          {% if item_disabled %}aria-disabled="true"{% endif %}
+        >
+          {{- item.label -}}
+        </a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

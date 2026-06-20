@@ -1,0 +1,164 @@
+/* === Tooltip === */
+
+[data-tooltip] {
+  /* === Public vars === */
+  --tt_c: var(--c_white);
+  --tt_bg: var(--c_dark);
+  --tt_b-r: var(--b-r_md);
+  --tt_f-s: 0.8125rem;
+  --tt_p-b: var(--size_100);
+  --tt_p-i: var(--size_200);
+  --tt_max-w: 18rem;
+  --tt_z: 1000;
+  --tt_offset: var(--size_200);
+  --tt_arrow-s: 6px;
+  --tt_t: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+  /* === Private vars === */
+  --_tt_c: var(--tt-type_c, var(--tt_c));
+  --_tt_bg: var(--tt-type_bg, var(--tt_bg));
+  --_tt_b-r: var(--tt_b-r);
+  --_tt_f-s: var(--tt_f-s);
+  --_tt_p-b: var(--tt_p-b);
+  --_tt_p-i: var(--tt_p-i);
+
+  position: relative;
+
+  /* === Tooltip bubble === */
+  &::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    z-index: var(--tt_z);
+    max-width: var(--tt_max-w);
+    padding-block: var(--_tt_p-b);
+    padding-inline: var(--_tt_p-i);
+    color: var(--_tt_c);
+    background: var(--_tt_bg);
+    border-radius: var(--_tt_b-r);
+    font-size: var(--_tt_f-s);
+    line-height: 1.4;
+    white-space: normal;
+    word-break: break-word;
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--tt_t);
+    text-align: center;
+  }
+
+  /* === Arrow === */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: var(--tt_z);
+    border: var(--tt_arrow-s) solid transparent;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  /* === Placement: top (default) === */
+  &:not([data-tooltip-placement]),
+  &[data-tooltip-placement="top"] {
+    &::before {
+      bottom: calc(100% + var(--tt_offset));
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+    }
+
+    &::after {
+      bottom: calc(100% + var(--tt_offset) - var(--tt_arrow-s));
+      left: 50%;
+      transform: translateX(-50%);
+      border-top-color: var(--_tt_bg);
+      border-bottom: none;
+    }
+  }
+
+  /* === Placement: bottom === */
+  &[data-tooltip-placement="bottom"] {
+    &::before {
+      top: calc(100% + var(--tt_offset));
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    &::after {
+      top: calc(100% + var(--tt_offset) - var(--tt_arrow-s));
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-color: var(--_tt_bg);
+      border-top: none;
+    }
+  }
+
+  /* === Placement: start (left) === */
+  &[data-tooltip-placement="start"] {
+    &::before {
+      top: 50%;
+      right: calc(100% + var(--tt_offset));
+      transform: translateY(-50%) translateX(4px);
+    }
+
+    &::after {
+      top: 50%;
+      right: calc(100% + var(--tt_offset) - var(--tt_arrow-s));
+      transform: translateY(-50%);
+      border-left-color: var(--_tt_bg);
+      border-right: none;
+    }
+  }
+
+  /* === Placement: end (right) === */
+  &[data-tooltip-placement="end"] {
+    &::before {
+      top: 50%;
+      left: calc(100% + var(--tt_offset));
+      transform: translateY(-50%) translateX(-4px);
+    }
+
+    &::after {
+      top: 50%;
+      left: calc(100% + var(--tt_offset) - var(--tt_arrow-s));
+      transform: translateY(-50%);
+      border-right-color: var(--_tt_bg);
+      border-left: none;
+    }
+  }
+
+  /* === Show on hover / focus === */
+  &:hover,
+  &:focus-visible {
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    &:not([data-tooltip-placement]),
+    &[data-tooltip-placement="top"] {
+      &::before {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    &[data-tooltip-placement="bottom"] {
+      &::before {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    &[data-tooltip-placement="start"] {
+      &::before {
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+
+    &[data-tooltip-placement="end"] {
+      &::before {
+        transform: translateY(-50%) translateX(0);
+      }
+    }
+  }
+}

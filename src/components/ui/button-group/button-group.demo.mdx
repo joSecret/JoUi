@@ -1,0 +1,108 @@
+---
+title: Button Group
+description: Groups buttons into a visually connected horizontal or vertical row
+category: ui
+preview: ./thumbnail.svg
+---
+
+import ButtonGroup from './ButtonGroup.astro'
+import Button from '../button/Button.astro'
+
+# Button Group
+
+Groups multiple buttons into a visually connected row. Removes inner border radii and collapses borders. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add button-group --platform astro
+```
+
+```bash
+npx joui add button-group --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import ButtonGroup from '@ui/button-group/ButtonGroup.astro'
+import Button from '@ui/button/Button.astro'
+---
+<ButtonGroup label="Example group">
+  <Button>Left</Button>
+  <Button>Middle</Button>
+  <Button>Right</Button>
+</ButtonGroup>
+```
+
+## Examples
+
+### Default
+
+<ButtonGroup label="Basic group">
+  <Button>Left</Button>
+  <Button>Middle</Button>
+  <Button>Right</Button>
+</ButtonGroup>
+
+### Colors
+
+<ButtonGroup label="Primary group">
+  <Button color="primary">Save</Button>
+  <Button color="secondary">Cancel</Button>
+  <Button color="danger">Delete</Button>
+</ButtonGroup>
+
+```astro
+<ButtonGroup label="Actions">
+  <Button color="primary">Save</Button>
+  <Button color="secondary">Cancel</Button>
+  <Button color="danger">Delete</Button>
+</ButtonGroup>
+```
+
+### Outline
+
+<ButtonGroup label="Outline filter">
+  <Button color="primary" variant="outline">All</Button>
+  <Button color="primary" variant="outline">Active</Button>
+  <Button color="primary" variant="outline">Archived</Button>
+</ButtonGroup>
+
+```astro
+<ButtonGroup label="Filter">
+  <Button color="primary" variant="outline">All</Button>
+  <Button color="primary" variant="outline">Active</Button>
+</ButtonGroup>
+```
+
+### Sizes
+
+<ButtonGroup size="sm" label="Small">
+  <Button>A</Button><Button>B</Button><Button>C</Button>
+</ButtonGroup>
+
+<ButtonGroup size="lg" label="Large">
+  <Button>A</Button><Button>B</Button><Button>C</Button>
+</ButtonGroup>
+
+### Vertical
+
+<ButtonGroup vertical label="Vertical">
+  <Button>Top</Button>
+  <Button>Middle</Button>
+  <Button>Bottom</Button>
+</ButtonGroup>
+
+```astro
+<ButtonGroup vertical label="Vertical">
+  <Button>Top</Button>
+  <Button>Middle</Button>
+  <Button>Bottom</Button>
+</ButtonGroup>
+```
+
+## API Reference
+
+See [`button-group.md`](./button-group.md) for the full reference and [`button-group.astro.md`](./button-group.astro.md) / [`button-group.drupal.md`](./button-group.drupal.md) for platform notes.

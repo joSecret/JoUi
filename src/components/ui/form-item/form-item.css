@@ -1,0 +1,55 @@
+.c--form-item {
+  --_fi_gap: var(--fi_gap, var(--size_100));
+
+  /* Label */
+  --_fi-label_c: var(--fi-label_c, var(--body_c));
+  --_fi-label_f-s: var(--fi-label_f-s, var(--f-s_base));
+  --_fi-label_f-w: var(--fi-label_f-w, var(--f-w_medium));
+
+  /* Description */
+  --_fi-desc_c: var(--fi-desc_c, var(--c_muted));
+  --_fi-desc_f-s: var(--fi-desc_f-s, var(--f-s_sm));
+
+  /* Error */
+  --_fi-error_c: var(--fi-error_c, var(--c_danger_600));
+  --_fi-error_f-s: var(--fi-error_f-s, var(--f-s_sm));
+
+  /* Required marker */
+  --_fi-required_c: var(--fi-required_c, var(--c_danger_600));
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_fi_gap);
+
+  label,
+  .form-item__label {
+    color: var(--_fi-label_c);
+    font-size: var(--_fi-label_f-s);
+    font-weight: var(--_fi-label_f-w);
+  }
+
+  .form-item__description,
+  .description {
+    color: var(--_fi-desc_c);
+    font-size: var(--_fi-desc_f-s);
+  }
+
+  .form-item__error-message,
+  .form-item--error-message {
+    color: var(--_fi-error_c);
+    font-size: var(--_fi-error_f-s);
+  }
+
+  .form-required {
+    color: var(--_fi-required_c);
+  }
+
+  &.form-item--error {
+    --fi-label_c: var(--c_danger_600);
+  }
+
+  &.form-item--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}

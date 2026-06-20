@@ -1,0 +1,97 @@
+{
+  "name": "button",
+  "category": "actions",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Interactive button element supporting multiple colors, sizes, and visual styles.",
+  "props": {
+    "tag": {
+      "type": "string",
+      "default": "button",
+      "enum": ["button", "a", "span", "summary", "input"],
+      "description": "HTML tag to render."
+    },
+    "color": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary",
+        "accent",
+        "success",
+        "warning",
+        "danger",
+        "info",
+        "light",
+        "dark"
+      ],
+      "description": "Color variant (omit for default body coloring)."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg"],
+      "description": "Size variant."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["solid", "outline", "ghost", "clear", "iconOnly"],
+      "description": "Visual style variant."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state."
+    },
+    "url": {
+      "type": "string",
+      "description": "When tag is 'a', becomes the href attribute."
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Visible button text (used as default slot fallback)."
+    },
+    "iconLeft": {
+      "type": "boolean",
+      "description": "Whether an icon should be rendered before the label (Phase 0 renders a placeholder span)."
+    },
+    "iconRight": {
+      "type": "boolean",
+      "description": "Whether an icon should be rendered after the label (Phase 0 renders a placeholder span)."
+    },
+    "aria_label": {
+      "type": "string",
+      "description": "Override the accessible name (required for icon-only buttons)."
+    }
+  },
+  "slots": {
+    "default": "Button content (overrides label)",
+    "iconLeft": "Icon to render before the label",
+    "iconRight": "Icon to render after the label"
+  },
+  "tokensUsed": [
+    "--btn_c",
+    "--btn_bg",
+    "--btn_b-c",
+    "--c_primary_500",
+    "--c_secondary_500",
+    "--c_accent_500",
+    "--c_success_500",
+    "--c_warning_500",
+    "--c_danger_500",
+    "--c_info_500",
+    "--body_c",
+    "--body_bg",
+    "--br",
+    "--f-s_2",
+    "--size_300",
+    "--size_400"
+  ],
+  "dependencies": [],
+  "a11y": [
+    "Keyboard focusable; respects focus-visible outline",
+    "Icon-only buttons require aria-label",
+    "Disabled state announced via aria-disabled on non-button tags",
+    "Color is not the only signal for state — text label is always present"
+  ],
+  "aiHint": "Use tag='a' when the button navigates (becomes href), tag='button' for in-page actions. Prefer label+icon over icon-only for clarity."
+}

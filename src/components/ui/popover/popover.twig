@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Popover component — CSS-first using native <details>/<summary>.
+ *
+ * Available properties:
+ * - popover_title: (string|null) Popover header title.
+ * - popover_body: (string) Popover body content.
+ * - popover_placement: (string) default: 'bottom' — top, bottom, start, end.
+ *
+ * Available Utility classes -> uc
+ * - popover_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - popover_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * Slots:
+ * - slot_trigger: The <summary> trigger content (rendered inside <summary>).
+ * - slot_body: The popover body content.
+ */
+#}
+
+{% set popover_placement = popover_placement|default('bottom') %}
+
+{# Create attributes #}
+{% set popover_att = popover_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set popover_classes = [
+    'popover',
+    popover_placement != 'bottom' ? 'popover-' ~ popover_placement,
+  ]|filter|merge(popover_uc ?: [])
+%}
+
+<details{{ popover_att.addClass(popover_classes) }}>
+  <summary>
+    {%- block slot_trigger -%}
+      {{- popover_trigger|raw -}}
+    {%- endblock -%}
+  </summary>
+  <div class="popover-content">
+    {%- if popover_title -%}
+      <strong class="popover-title">{{- popover_title -}}</strong>
+    {%- endif -%}
+    <div class="popover-body">
+      {%- block slot_body -%}
+        {{- popover_body|raw -}}
+      {%- endblock -%}
+    </div>
+  </div>
+</details>

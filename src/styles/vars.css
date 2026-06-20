@@ -1,0 +1,91 @@
+:root {
+  /* color-scheme: light dark; */
+
+  /* Font */
+  --f-f: 'Inter', sans-serif;
+  /* --f-f-mono: 'AeonikMono', monospace; */
+  --f-f_code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+
+  --f-s_root: 1rem;
+  --f-s_base: 1rem;
+  --f-s_sm: var(--f-s_1);
+  --f-s_lg: var(--f-s_4);
+  --f-s_xl: var(--f-s_7);
+
+  /* Line height */
+  --l-h: 1.5;
+
+  /* Colors */
+  --c_primary: #24A1DE;
+  --c_accent: #81a1c1;
+  --c_secondary: #4c9f38;
+  --c_tertiary: #2c2c2c;
+  --c_neutral: #4c566a;
+  --c_gray: rgb(112, 112, 112);
+  --c_info: #0dcaf0;
+  --c_success: #198754;
+  --c_warning: #ffc107;
+  --c_danger: #dc3545;
+
+  --c_white: #ffffff;
+  --c_black: #000000;
+  --c_muted: light-dark(var(--c_gray_600), var(--c_gray_300));
+  --c_light: var(--c_gray_100);
+  --c_dark:  light-dark(var(--c_gray_900), var(--c_gray_100));
+
+  /* Transition */
+  --t: all var(--t_t) ease-in-out;
+  --t_t: 0.25s;
+
+  /* Body */
+  --body_c: light-dark(var(--c_gray_950), var(--c_gray_100));
+  --body_bg: light-dark(white, var(--c_gray_300));
+
+  /* Link */
+  --link_c: light-dark(var(--c_primary), var(--c_primary_300));
+  --link_bg: transparent;
+  --link_c_h: hsl(from var(--link_c) h s calc(l - 10));
+  --link_bg_h: transparent;
+  --link_c_a: hsl(from var(--link_c) h s calc(l - 20));
+  --link_bg_a: transparent;
+  --link_d: none;
+  --link_d_h: underline;
+
+  /* Line */
+  --hr_m-i: var(--spacer);
+  --hr_c: inherit;
+  --hr_b-w: var(--b-w);
+  --hr_b-c: var(--c_gray_300);
+  --hr_opacity: 0.25;
+
+  /* Heading */
+  --h_c: light-dark(var(--c_primary_700), var(--c_primary_300));
+  --h_f-f: var(--f-f);
+  --h_f-s: inherit;
+  --h_f-w: var(--f-w_semi-bold);
+  --h_l-h: 1.2;
+
+  --h1_f-s: 56px;
+  --h2_f-s: 32px;
+  --h3_f-s: 1.75rem;
+  --h4_f-s: 1.5rem;
+  --h5_f-s: 1.25rem;
+  --h6_f-s: 1rem;
+
+  --h1_m-b: 0.75em;
+  --h2_m-b: 0rem;
+  --h3_m-b: 0rem;
+  --h4_m-b: 1rem;
+  --h5_m-b: 0rem;
+
+  /* Sizes */
+  --spacer: var(--size_400);
+  --gutter: var(--size_500);
+
+  /* blockquote */
+  --blockquote_f-s: var(--blockquote_f-s, 20px);
+  --blockquote_c: var(--blockquote_c, light-dark(var(--c_primary), var(--c_primary_300)));
+  --blockquote_m-b: var(--blockquote_m-b, var(--spacer));
+  --blockquote_p-l: var(--blockquote_p-l, 20px);
+}

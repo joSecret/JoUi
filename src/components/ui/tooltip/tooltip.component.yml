@@ -1,0 +1,54 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Tooltip
+status: stable
+group: UI
+version: 1.0.0
+description: CSS-only tooltip shown on hover and focus-visible. Add data-tooltip directly to any element, or use this component as a wrapper. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    tooltip_text:
+      type: string
+      title: Tooltip Text
+      description: The tooltip message shown on hover/focus.
+      default: ''
+
+    tooltip_placement:
+      type: string
+      title: Placement
+      description: Direction the tooltip appears — top, bottom, start, end.
+      enum:
+        - 'top'
+        - 'bottom'
+        - 'start'
+        - 'end'
+      default: 'top'
+
+    tooltip_content:
+      type: ['string', 'null']
+      title: Content
+      description: HTML content of the element that receives the tooltip.
+      default: null
+
+    # uc -> utility_classes
+    tooltip_uc:
+      type: array
+      items:
+        type: string
+      title: Tooltip Utility Classes
+      default: []
+      description: An array of extra utility classes for the wrapper span.
+
+    # att -> attributes
+    tooltip_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the wrapper span.
+
+slots:
+  tooltip_content:
+    title: Content
+    description: The element inside the tooltip wrapper.

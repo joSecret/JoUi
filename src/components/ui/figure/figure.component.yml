@@ -1,0 +1,65 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Figure
+status: stable
+group: UI
+version: 1.0.0
+description: An image with an optional caption. Supports alignment variants and rounded corners.
+
+# Props.
+props:
+  type: object
+  properties:
+
+    figure_src:
+      type: string
+      title: Image src
+      description: The source URL of the image.
+      default: ''
+
+    figure_alt:
+      type: string
+      title: Image alt
+      description: Alt text for the image (required for accessibility).
+      default: ''
+
+    figure_caption:
+      type: ['string', 'null']
+      title: Caption
+      description: Caption text displayed below the image. Omit to skip rendering.
+      default: null
+
+    figure_caption_align:
+      type: string
+      title: Caption alignment
+      description: Alignment of the caption text.
+      default: start
+      enum:
+        - start
+        - center
+        - end
+
+    figure_rounded:
+      type: ['string', 'boolean']
+      title: Rounded
+      description: Add border-radius to the image. Use 'circle' for 50% radius.
+      default: false
+      enum:
+        - false
+        - true
+        - circle
+
+    # uc -> utility_classes
+    figure_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: An array of utility classes to add to the figure wrapper.
+
+    # att -> attributes
+    figure_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the figure element.

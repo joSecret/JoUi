@@ -1,0 +1,56 @@
+.breadcrumb {
+  /* === Public vars (consumers override these) === */
+  --bcrumb_sep: var(--bcrumb_separator, '/');
+  --bcrumb_c: var(--body_c);
+  --bcrumb_sep-c: var(--bcrumb_sep_c, var(--b-c));
+
+  /* === Private vars === */
+  --_bcrumb_d: var(--bcrumb_d, flex);
+  --_bcrumb_f-s: var(--bcrumb_f-s, 1rem);
+  --_bcrumb_l-h: var(--bcrumb_l-h, 1.5);
+  --_bcrumb_g: var(--bcrumb_g, 0.5em);
+  --_bcrumb_p: var(--bcrumb_p, 0px);
+
+  display: var(--_bcrumb_d);
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: var(--_bcrumb_p);
+  font-size: var(--_bcrumb_f-s);
+  line-height: var(--_bcrumb_l-h);
+  gap: var(--_bcrumb_g);
+  align-items: center;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--_bcrumb_g);
+  color: var(--bcrumb_c);
+
+  a {
+    color: var(--bcrumb-link_c, var(--link_c));
+    text-decoration: var(--bcrumb-link_t-d, none);
+
+    &:hover {
+      color: var(--bcrumb-link_c_h, var(--link_c_h));
+      text-decoration: var(--bcrumb-link_t-d_h, underline);
+    }
+  }
+
+  /* Separator — rendered after every item except the last */
+  &:not(:last-child)::after {
+    content: var(--bcrumb_sep);
+    color: var(--bcrumb_sep-c);
+    font-size: var(--bcrumb-sep_f-s, 0.9em);
+    line-height: 1;
+  }
+
+  /* Active / current item */
+  &.active,
+  &[aria-current] {
+    color: var(--bcrumb-active_c, var(--body_c));
+    opacity: var(--bcrumb-active_o, 0.65);
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,142 @@
+{#
+/**
+ * @file
+ * Template for a button component.
+ *
+ * Available properties:
+ * - button_tag: (string) default: (has url ? 'a' : 'button')
+ *    enum: a | button | span | input | summary.
+ * - button_color: (string | null) default: (null)
+ *    enum: primary | secondary.
+ * - button_type: (string | null) default: (null)
+ *    enum: null | outline | ghost | clear.
+ * - button_size: (string | null) default: (null)
+ *    enum: null | sm | lg
+ * - button_icon_position: (string) default: ('right')
+ *    enum: left | right | only
+ * - button_radius: (string | null) default: (null)
+ *    enum: null | none | sm | lg | pill
+ * - button_disabled: (boolean) default: (false)
+ *
+ * Available values
+ * - button_label: (string) default: ('')
+ * - button_url: (string) default: (null)
+ * - button_icon: (string) default: (null) - SVG should include aria-hidden="true"
+ * - button_id: (string) default: (null)
+ * - button_aria_label: (string) default: (null) - Required for icon-only buttons
+ * - button_aria_expanded: (boolean|null) default: (null) - Use only for expandable controls
+ *
+ * Availabel Utility classes -> uc
+ * - button_uc: An array of utility classes.
+ *
+ * Availabel attributes -> att
+ * - button_att: Attributes array.
+ *
+ * Availabel slots
+ * - slot_icon_before: Icon before content
+ * - slot_content: The content for the button
+ * - slot_icon: Icon after content
+ *
+ * * usage example: @see button.mdx
+ */
+#}
+
+{# Set default value #}
+{% if button_url %}
+  {% set button_tag = button_tag|default('a') %}
+{% else %}
+  {% set button_tag = button_tag|default('button') %}
+{% endif %}
+
+{% set button_color = button_color|default(null) %}
+{% set button_type = button_type|default(null) %}
+{% set button_size = button_size|default(null) %}
+{% set button_radius = button_radius|default(false) %}
+{% set button_disabled = button_disabled|default(false) %}
+{% set button_aria_expanded = button_aria_expanded|default(null) %}
+{% set button_aria_label = button_aria_label|default(null) %}
+{% set button_id = button_id|default(null) %}
+{% if button_icon %}
+  {% set button_icon_position = button_icon_position|default('right') %}
+{% endif %}
+
+{# Create attributes #}
+{% set button_att = button_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set button_classes = [
+    'button',
+    button_color ? 'button-' ~ button_color,
+    button_type ? 'button-' ~ button_type,
+    button_size ? 'button-' ~ button_size,
+    button_icon_position ? 'button-icon-' ~ button_icon_position,
+    button_radius ? 'button-radius-' ~ button_radius,
+  ]|merge(button_uc ?: [])
+%}
+
+{# Change attributes #}
+{% if button_url %}
+  {% set button_att = button_att.setAttribute('href', button_url) %}
+{% endif %}
+
+{# Handle disabled state #}
+{% if button_disabled %}
+  {% if button_tag == 'button' %}
+    {% set button_att = button_att.setAttribute('disabled', true) %}
+  {% else %}
+    {# Links can't be disabled, so prevent clicks and make them non-focusable #}
+    {% set button_att = button_att
+      .setAttribute('role', 'link')
+      .setAttribute('aria-disabled', 'true')
+      .setAttribute('tabindex', '-1')
+    %}
+  {% endif %}
+{% endif %}
+
+{# Add aria-expanded only when explicitly set #}
+{% if button_aria_expanded is not null %}
+  {% set button_att = button_att.setAttribute('aria-expanded', button_aria_expanded ? 'true' : 'false') %}
+{% endif %}
+
+{# Add aria-label for icon-only buttons or when explicitly provided #}
+{% if button_aria_label %}
+  {% set button_att = button_att.setAttribute('aria-label', button_aria_label) %}
+{% elseif button_icon_position == 'only' and not button_label %}
+  {# Warn: Icon-only buttons should have aria-label #}
+  {% set button_att = button_att.setAttribute('aria-label', 'Button') %}
+{% endif %}
+
+{% if button_id %}
+  {% set button_att = button_att.setAttribute('id', button_id) %}
+{% endif %}
+
+{# Add type attribute for button elements if not set #}
+{% if button_tag == 'button' and not button_att.offsetGet('type') %}
+  {% set button_att = button_att.setAttribute('type', 'button') %}
+{% endif %}
+
+{# Render component #}
+<{{button_tag}}{{ button_att.addClass(button_classes) }}>
+  {%- if button_icon_position == 'left' -%}
+    {%- block slot_icon_before -%}
+      {{- button_icon|raw -}}
+    {%- endblock -%}
+  {%- endif -%}
+
+    {%- block slot_content -%}
+      {%- if button_icon_position == 'only' -%}
+        <span class="visually-hidden">
+      {%- endif -%}
+        {{- button_label -}}
+      {%- if button_icon_position == 'only' -%}
+        </span>
+      {%- endif -%}
+    {%- endblock -%}
+
+  {%- if button_icon_position != 'left' -%}
+    {%- block slot_icon -%}
+      {{- button_icon|raw -}}
+    {%- endblock -%}
+  {%- endif -%}
+</{{button_tag}}>

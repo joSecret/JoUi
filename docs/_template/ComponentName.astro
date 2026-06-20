@@ -1,0 +1,24 @@
+---
+import './{{component-name}}.css';
+
+interface Props {
+  id?: string | null;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id = null,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = ['{{component-name}}', ...classes].filter(Boolean);
+
+const finalAttrs: Record<string, unknown> = { ...attrs };
+if (id) finalAttrs.id = id;
+---
+
+<div class:list={classList} {...finalAttrs}>
+  <slot />
+</div>

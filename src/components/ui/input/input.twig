@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * joui input component — overrides input.html.twig.
+ *
+ * Accepts both Drupal core variables and prefixed joui variables.
+ * Use as override: drop in templates/form/input.html.twig
+ * Use as SDC: {% include 'joui:input' with { inp_type: 'email' } %}
+ *
+ * Available variables:
+ * - inp_type (string) Input type. Default: 'text'.
+ * - inp_size (string|null) 'sm' | 'lg'. Default: null.
+ * - inp_uc (array) Utility classes.
+ * - inp_att (Attribute) HTML attributes.
+ */
+#}
+
+{% set inp_type = inp_type|default(type)|default('text') %}
+{% set inp_size = inp_size|default(null) %}
+{% set inp_att = inp_att|default(attributes) ?: create_attribute() %}
+
+{%
+  set inp_classes = [
+    'c--input',
+    inp_size ? 'is--' ~ inp_size,
+  ]|merge(inp_uc ?: [])
+%}
+
+<input {{ inp_att.addClass(inp_classes) }} type="{{ inp_type }}" />

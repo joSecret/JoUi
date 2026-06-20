@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * joui select component — overrides select.html.twig.
+ *
+ * Accepts both Drupal core variables and prefixed joui variables.
+ * Use as override: drop in templates/form/select.html.twig
+ * Use as SDC: {% include 'joui:select' with { sel_options: options } %}
+ *
+ * Available variables:
+ * - sel_options (array|null) Options array from Drupal or custom.
+ * - sel_empty_option (string|null) Placeholder empty option text.
+ * - sel_empty_value (string|null) Value for the empty option. Default: ''.
+ * - sel_multiple (bool) Multiple selection. Default: false.
+ * - sel_size (string|null) 'sm' | 'lg'. Default: null.
+ * - sel_uc (array) Utility classes.
+ * - sel_att (Attribute) HTML attributes.
+ */
+#}
+
+{% set sel_options = sel_options|default(options) %}
+{% set sel_empty_option = sel_empty_option|default(empty_option) %}
+{% set sel_empty_value = sel_empty_value|default(empty_value)|default('') %}
+{% set sel_multiple = sel_multiple|default(false) %}
+{% set sel_size = sel_size|default(null) %}
+{% set sel_att = sel_att|default(attributes) ?: create_attribute() %}
+
+{%
+  set sel_classes = [
+    'c--select',
+    sel_size ? 'is--' ~ sel_size,
+  ]|merge(sel_uc ?: [])
+%}
+
+<select {{ sel_att.addClass(sel_classes) }}{% if sel_multiple %} multiple{% endif %}>
+  {% if sel_empty_option %}
+    <option value="{{ sel_empty_value }}">{{ sel_empty_option }}</option>
+  {% endif %}
+
+  {% for key, option in sel_options %}
+    {% if option.type == 'optgroup' %}
+      <optgroup label="{{ option.label }}">
+        {% for opt_key, opt in option.options %}
+          <option value="{{ opt_key }}"{% if opt.selected %} selected{% endif %}{% if opt.disabled %} disabled{% endif %}>{{ opt.label }}</option>
+        {% endfor %}
+      </optgroup>
+    {% else %}
+      <option value="{{ key }}"{% if option.selected %} selected{% endif %}{% if option.disabled %} disabled{% endif %}>{{ option.label }}</option>
+    {% endif %}
+  {% endfor %}
+</select>

@@ -1,0 +1,98 @@
+.toast {
+  /* === Public vars === */
+  --toast_bg: var(--body_bg);
+  --toast_c: var(--body_c);
+  --toast_b-c: var(--b-c);
+  --toast_b-r: var(--b-r);
+  --toast_header-bg: color-mix(in oklab, var(--body_bg), light-dark(var(--c_black), var(--c_white)) 3%);
+  --toast_max-w: 350px;
+  --toast_t: opacity 0.15s linear, transform 0.15s ease-in-out;
+
+  /* === Private vars === */
+  --_toast_bg: var(--toast-type_bg, var(--toast_bg));
+  --_toast_c: var(--toast-type_c, var(--toast_c));
+  --_toast_b-r: var(--toast_b-r);
+
+  /* === Mix helpers === */
+  --_toast-mix_c: var(--toast-mix_c, light-dark(var(--c_black), var(--c_white)));
+
+  width: 350px;
+  max-width: var(--toast_max-w);
+  background: var(--_toast_bg);
+  color: var(--_toast_c);
+  border: 1px solid var(--toast_b-c);
+  border-radius: var(--_toast_b-r);
+  overflow: hidden;
+  box-shadow: 0 var(--size_100, 4px) var(--size_400, 16px) rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  transform: translateY(var(--toast_slide-y, -8px));
+  transition: var(--toast_t);
+  pointer-events: none;
+
+  &.is--open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  gap: var(--size_200, 0.5rem);
+  padding-block: var(--size_200, 0.5rem);
+  padding-inline: var(--size_300, 0.75rem);
+  background: var(--toast_header-bg);
+  border-block-end: 1px solid var(--toast_b-c);
+  color: var(--_toast_c);
+}
+
+.toast-title {
+  font-weight: var(--f-w_bold, 700);
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: var(--toast_title_f-s, 0.875rem);
+}
+
+.toast-time {
+  font-size: var(--toast_time_f-s, 0.75rem);
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.toast-body {
+  padding-block: var(--size_300, 0.75rem);
+  padding-inline: var(--size_300, 0.75rem);
+  font-size: var(--toast_body_f-s, 0.875rem);
+}
+
+/* === Toast container (positions multiple toasts) === */
+.toast-container {
+  position: fixed;
+  z-index: var(--toast_z, 1100);
+  display: flex;
+  flex-direction: column;
+  gap: var(--toast_gap, var(--size_200, 0.5rem));
+  padding: var(--toast_container_p, 1rem);
+  pointer-events: none;
+
+  > .toast {
+    pointer-events: all;
+  }
+}
+
+.toast-container-top-start    { top: 0; left: 0; }
+.toast-container-top-center   { top: 0; left: 50%; transform: translateX(-50%); }
+.toast-container-top-end      { top: 0; right: 0; }
+.toast-container-bottom-start { bottom: 0; left: 0; }
+.toast-container-bottom-center{ bottom: 0; left: 50%; transform: translateX(-50%); }
+.toast-container-bottom-end   { bottom: 0; right: 0; }
+
+/* === Color variants === */
+.toast-primary   { --toast-type_bg: color-mix(in oklab, var(--c_primary_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_primary_500), black 40%); }
+.toast-secondary { --toast-type_bg: color-mix(in oklab, var(--c_secondary_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_secondary_500), black 40%); }
+.toast-success   { --toast-type_bg: color-mix(in oklab, var(--c_success_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_success_500), black 40%); }
+.toast-warning   { --toast-type_bg: color-mix(in oklab, var(--c_warning_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_warning_500), black 40%); }
+.toast-danger    { --toast-type_bg: color-mix(in oklab, var(--c_danger_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_danger_500), black 40%); }
+.toast-info      { --toast-type_bg: color-mix(in oklab, var(--c_info_500), white 85%); --toast-type_c: color-mix(in oklab, var(--c_info_500), black 40%); }

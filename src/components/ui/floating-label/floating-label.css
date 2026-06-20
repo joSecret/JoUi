@@ -1,0 +1,81 @@
+.form-floating {
+  /* === Public vars === */
+  --fl_label-c: color-mix(in oklab, var(--body_c), transparent 40%);
+  --fl_label-c-f: var(--body_c);
+  --fl_label-f-s: 1rem;
+  --fl_label-f-s-f: 0.75em;
+  --fl_label-t: transform 0.15s ease-in-out, font-size 0.15s ease-in-out, color 0.15s;
+  --fl_p-b: 1rem;
+  --fl_p-i: 0.75rem;
+  --fl_input-h: 3.5rem;
+  --fl_label-top: 1rem;
+  --fl_label-top-f: 0.375rem;
+
+  /* === Private vars === */
+  --_fl_label-c: var(--fl_label-c);
+  --_fl_input-h: var(--fl_input-h);
+
+  position: relative;
+
+  > .form-control,
+  > .form-select {
+    height: var(--_fl_input-h);
+    min-height: var(--_fl_input-h);
+    padding-block: var(--fl_p-b);
+    padding-inline: var(--fl_p-i);
+    line-height: 1.25;
+
+    /* Placeholder must be a space so :placeholder-shown works */
+    &::placeholder {
+      color: transparent;
+    }
+
+    /* Textarea in floating label */
+    &[style*="height"],
+    textarea& {
+      height: auto;
+      padding-block-start: calc(var(--fl_p-b) * 1.75);
+    }
+  }
+
+  > label {
+    position: absolute;
+    top: var(--fl_label-top);
+    left: var(--fl_p-i);
+    z-index: 2;
+    color: var(--_fl_label-c);
+    font-size: var(--fl_label-f-s);
+    line-height: 1.25;
+    pointer-events: none;
+    transform: translateY(0) scale(1);
+    transform-origin: top left;
+    transition: var(--fl_label-t);
+    padding-inline: calc(var(--fl_p-i) * 0.25);
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - (var(--fl_p-i) * 2));
+  }
+
+  /* Float label on focus or when value exists */
+  > .form-control:focus ~ label,
+  > .form-control:not(:placeholder-shown) ~ label,
+  > .form-select ~ label,
+  > .form-control:-webkit-autofill ~ label {
+    top: var(--fl_label-top-f);
+    font-size: var(--fl_label-f-s-f);
+    color: var(--fl_label-c-f);
+    transform: translateY(0) scale(var(--fl_label-f-s-f));
+  }
+
+  > .form-control:focus ~ label {
+    color: var(--fl_label-c-f, var(--c_primary_500));
+  }
+}
+
+/* Select always shows floated label since it always has a value */
+.form-floating > .form-select {
+  padding-block-start: calc(var(--fl_p-b) * 1.625);
+  padding-block-end: calc(var(--fl_p-b) * 0.5);
+}

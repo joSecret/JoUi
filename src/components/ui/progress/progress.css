@@ -1,0 +1,71 @@
+.progress {
+  /* === Public vars === */
+  --prog_bg: var(--c_neutral_200, light-dark(#e9ecef, #343a40));
+  --prog_b-r: var(--b-r_md);
+  --prog_h: var(--size_300, 0.75rem);
+  --prog_bar_bg: var(--c_primary_500);
+  --prog_bar_c: var(--c_white);
+
+  /* === Private vars === */
+  --_prog_bg: var(--prog-type_bg, var(--prog_bg));
+  --_prog_b-r: var(--prog_b-r, var(--b-r_md));
+  --_prog_h: var(--prog_h);
+  --_prog_bar_bg: var(--prog-type_bar_bg, var(--prog_bar_bg));
+  --_prog_bar_c: var(--prog_bar_c);
+
+  /* === Styles === */
+  display: flex;
+  height: var(--_prog_h);
+  background: var(--_prog_bg);
+  border-radius: var(--_prog_b-r);
+  overflow: hidden;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--_prog_bar_c);
+  background-color: var(--_prog_bar_bg);
+  font-size: var(--prog_bar_f-s, 0.75em);
+  font-weight: var(--prog_bar_f-w, var(--f-w_bold));
+  white-space: nowrap;
+  overflow: hidden;
+  transition: width var(--t, 0.25s ease-in-out);
+}
+
+/* === Striped === */
+.progress-bar-striped {
+  background-image: linear-gradient(
+    45deg,
+    color-mix(in oklab, var(--c_white), transparent 75%) 25%,
+    transparent 25%,
+    transparent 50%,
+    color-mix(in oklab, var(--c_white), transparent 75%) 50%,
+    color-mix(in oklab, var(--c_white), transparent 75%) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: var(--prog_stripe_size, 1rem) var(--prog_stripe_size, 1rem);
+}
+
+/* === Animated === */
+.progress-bar-animated {
+  animation: progress-bar-stripes var(--prog_anim_d, 1s) linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from { background-position: var(--prog_stripe_size, 1rem) 0; }
+  to   { background-position: 0 0; }
+}
+
+/* === Color variants === */
+.progress-primary   { --prog_bar_bg: var(--c_primary_500); }
+.progress-secondary { --prog_bar_bg: var(--c_secondary_500); }
+.progress-success   { --prog_bar_bg: var(--c_success_500); }
+.progress-warning   { --prog_bar_bg: var(--c_warning_500); }
+.progress-danger    { --prog_bar_bg: var(--c_danger_500); }
+.progress-info      { --prog_bar_bg: var(--c_info_500); }
+.progress-light     { --prog_bar_bg: var(--c_light); --prog_bar_c: var(--c_dark); }
+.progress-dark      { --prog_bar_bg: var(--c_dark); --prog_bar_c: var(--c_light); }

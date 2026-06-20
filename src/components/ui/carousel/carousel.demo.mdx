@@ -1,0 +1,75 @@
+---
+title: Carousel
+description: Image slideshow with controls, indicators, auto-play, keyboard, and touch swipe
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Carousel from './Carousel.astro'
+
+# Carousel
+
+Image slideshow with previous/next controls, dot indicators, optional auto-play, keyboard navigation (←→), and touch swipe. Requires `carousel.js`.
+
+## Installation
+
+```bash
+npx joui add carousel --platform astro
+```
+
+```bash
+npx joui add carousel --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Carousel from '@ui/carousel/Carousel.astro'
+---
+<Carousel
+  items={[
+    { src: 'https://picsum.photos/800/400?1', alt: 'Slide 1' },
+    { src: 'https://picsum.photos/800/400?2', alt: 'Slide 2' },
+    { src: 'https://picsum.photos/800/400?3', alt: 'Slide 3' },
+  ]}
+/>
+```
+
+## Examples
+
+### Default
+
+<Carousel
+  items={[
+    { src: 'https://picsum.photos/800/350?10', alt: 'First slide', caption: { title: 'First Slide', text: 'Caption text.' } },
+    { src: 'https://picsum.photos/800/350?20', alt: 'Second slide' },
+    { src: 'https://picsum.photos/800/350?30', alt: 'Third slide' },
+  ]}
+/>
+
+```astro
+<Carousel
+  items={[
+    { src: '/img/1.jpg', alt: 'First', caption: { title: 'First Slide', text: 'Caption.' } },
+    { src: '/img/2.jpg', alt: 'Second' },
+    { src: '/img/3.jpg', alt: 'Third' },
+  ]}
+/>
+```
+
+### Auto-play (3s)
+
+```astro
+<Carousel interval={3000} items={[...]} />
+```
+
+### No controls
+
+```astro
+<Carousel controls={false} items={[...]} />
+```
+
+## API Reference
+
+See [`carousel.md`](./carousel.md) for the full reference and [`carousel.astro.md`](./carousel.astro.md) / [`carousel.drupal.md`](./carousel.drupal.md) for platform notes.

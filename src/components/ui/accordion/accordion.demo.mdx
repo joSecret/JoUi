@@ -1,0 +1,84 @@
+---
+title: Accordion
+description: Collapsible content panels built on native details/summary — no JS required
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Accordion from './Accordion.astro'
+
+export const items = [
+  { title: 'What is joui?', content: '<p>joui is a multi-platform CSS component library. It supports Astro, Drupal, React, Vue, and more.</p>' },
+  { title: 'Is JavaScript required?', content: '<p>No. The accordion is built on native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> — the browser handles toggle behavior without any JS.</p>' },
+  { title: 'Can I customize the styles?', content: '<p>Yes. All visual properties are exposed as CSS custom properties prefixed with <code>--acc_</code>. Override them at any scope.</p>' },
+]
+
+# Accordion
+
+Collapsible panels built on the native `<details>`/`<summary>` elements. No JavaScript. Full keyboard and screen reader support out of the box.
+
+## Installation
+
+```bash
+npx joui add accordion --platform astro
+```
+
+```bash
+npx joui add accordion --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Accordion from '@ui/accordion/Accordion.astro'
+---
+<Accordion items={[
+  { title: 'What is joui?', content: '<p>A multi-platform CSS component library.</p>' },
+  { title: 'Is JS required?', content: '<p>No — built on native details.</p>', open: true },
+]} />
+```
+
+## Examples
+
+### Default
+
+<Accordion items={items} />
+
+```astro
+<Accordion items={items} />
+```
+
+### Open by default
+
+<Accordion items={[
+  { title: 'This one starts open', content: '<p>Rendered open on load via the <code>open</code> field.</p>', open: true },
+  { title: 'This one is closed', content: '<p>Click to expand.</p>' },
+]} />
+
+```astro
+<Accordion items={[
+  { title: 'Open by default', content: '...', open: true },
+  { title: 'Closed', content: '...' },
+]} />
+```
+
+### Flush
+
+<Accordion flush items={items} />
+
+```astro
+<Accordion flush items={items} />
+```
+
+### Stay open
+
+<Accordion stayOpen items={items} />
+
+```astro
+<Accordion stayOpen items={items} />
+```
+
+## API Reference
+
+See [`accordion.md`](./accordion.md) for the full reference and [`accordion.astro.md`](./accordion.astro.md) / [`accordion.drupal.md`](./accordion.drupal.md) for platform notes.

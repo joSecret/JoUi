@@ -1,0 +1,91 @@
+.c--select {
+  /* === Public vars === */
+  --sel_c: var(--body_c);
+  --sel_bg: var(--body_bg);
+  --sel_b-c: var(--b-c);
+  --sel_b-c_focus: var(--link_c);
+
+  /* === Private vars === */
+  --_sel_c: var(--sel_c);
+  --_sel_bg: var(--sel_bg);
+  --_sel_b-c: var(--sel_b-c);
+
+  --_sel_w: var(--sel_w, 100%);
+  --_sel_f-s: var(--sel_f-s, var(--f-s_base));
+  --_sel_l-h: var(--sel_l-h, var(--l-h));
+  --_sel_p-b: var(--sel_p-b, var(--size_200));
+  --_sel_p-i: var(--sel_p-i, var(--size_300));
+  --_sel_p-i-e: var(--sel_p-i-e, var(--size_700));
+  --_sel_b-w: var(--sel_b-w, var(--b-w));
+  --_sel_b-r: var(--sel_b-r, var(--b-r));
+
+  /* Chevron icon via background */
+  --_sel_icon: var(--sel_icon, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"));
+
+  /* === Mix === */
+  --_sel-mix_c: var(--sel-mix_c, light-dark(var(--c_black), var(--c_white)));
+
+  /* === Styles === */
+  display: block;
+  width: var(--_sel_w);
+  color: var(--_sel_c);
+  background-color: var(--_sel_bg);
+  background-image: var(--_sel_icon);
+  background-repeat: no-repeat;
+  background-position: right var(--size_300) center;
+  background-size: var(--size_400);
+  border: var(--_sel_b-w) solid var(--_sel_b-c);
+  border-radius: var(--_sel_b-r);
+  font-size: var(--_sel_f-s);
+  font-family: inherit;
+  line-height: var(--_sel_l-h);
+  padding-block: var(--_sel_p-b);
+  padding-inline-start: var(--_sel_p-i);
+  padding-inline-end: var(--_sel_p-i-e);
+  cursor: pointer;
+  appearance: none;
+  transition: var(--t);
+
+  &:hover {
+    --_sel_b-c: var(--sel_b-c_h, color-mix(in oklab, var(--sel_b-c), var(--_sel-mix_c) 30%));
+  }
+
+  &:focus,
+  &:focus-visible {
+    --_sel_b-c: var(--sel_b-c_focus);
+    outline: 2px solid color-mix(in oklab, var(--sel_b-c_focus), transparent 70%);
+    outline-offset: 2px;
+    border-color: var(--_sel_b-c);
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid="true"] {
+    --_sel_b-c: var(--sel_b-c_invalid, var(--c_danger_500));
+  }
+
+  /* Size variants */
+  &.is--sm {
+    --_sel_f-s: var(--sel_sm_f-s, var(--f-s_sm));
+    --_sel_p-b: var(--sel_sm_p-b, var(--size_100));
+    --_sel_p-i: var(--sel_sm_p-i, var(--size_200));
+  }
+
+  &.is--lg {
+    --_sel_f-s: var(--sel_lg_f-s, var(--f-s_lg));
+    --_sel_p-b: var(--sel_lg_p-b, var(--size_300));
+    --_sel_p-i: var(--sel_lg_p-i, var(--size_400));
+  }
+
+  /* Multiple select */
+  &[multiple] {
+    background-image: none;
+    padding-inline-end: var(--_sel_p-i);
+    height: auto;
+  }
+}

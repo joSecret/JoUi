@@ -1,0 +1,33 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+
+export async function getStaticPaths() {
+	const components = await getCollection('components');
+	return components.map((entry) => ({
+		params: { slug: entry.id.split('/')[0] },
+		props: entry,
+	}));
+}
+
+type Props = CollectionEntry<'components'>;
+
+const entry = Astro.props;
+const { Content } = await render(entry);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={entry.data.title} description={entry.data.description} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<Content />
+		</main>
+		<Footer />
+	</body>
+</html>

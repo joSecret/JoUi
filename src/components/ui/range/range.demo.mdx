@@ -1,0 +1,61 @@
+---
+title: Range
+description: Custom-styled range slider with consistent cross-browser track and thumb appearance
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Range from './Range.astro'
+
+# Range
+
+Custom-styled range slider (`<input type="range">`). Consistent appearance across Chrome, Firefox, and Safari. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add range --platform astro
+```
+
+```bash
+npx joui add range --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Range from '@ui/range/Range.astro'
+---
+<Range id="example" label="Example range" />
+```
+
+## Examples
+
+### Default
+
+<Range id="r1" label="Default range" />
+
+```astro
+<Range id="r1" label="Default range" />
+```
+
+### Custom bounds
+
+<Range id="r2" label="Price (100–1000, step 50)" min={100} max={1000} step={50} value={500} />
+
+```astro
+<Range id="r2" label="Price" min={100} max={1000} step={50} value={500} />
+```
+
+### Disabled
+
+<Range id="r3" label="Disabled range" value={30} disabled />
+
+```astro
+<Range id="r3" label="Disabled" disabled />
+```
+
+## API Reference
+
+See [`range.md`](./range.md) for the full reference and [`range.astro.md`](./range.astro.md) / [`range.drupal.md`](./range.drupal.md) for platform notes.

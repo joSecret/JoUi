@@ -1,0 +1,88 @@
+.button-group {
+  /* === Public vars === */
+  --btng_b-r: var(--b-r);
+
+  /* === Private vars === */
+  --_btng_b-r: var(--btng-type_b-r, var(--btng_b-r));
+
+  display: inline-flex;
+  flex-direction: row;
+  border-radius: var(--_btng_b-r);
+  vertical-align: middle;
+
+  /* Remove inner radius on adjacent buttons */
+  > .button,
+  > [class*="button-"] {
+    border-radius: 0;
+    position: relative;
+    flex: 0 1 auto;
+
+    /* Collapse left border to avoid double border */
+    &:not(:first-child) {
+      margin-inline-start: calc(-1 * var(--b-w, 1px));
+    }
+
+    /* Restore radius on first child */
+    &:first-child {
+      border-start-start-radius: var(--_btng_b-r);
+      border-end-start-radius: var(--_btng_b-r);
+    }
+
+    /* Restore radius on last child */
+    &:last-child {
+      border-start-end-radius: var(--_btng_b-r);
+      border-end-end-radius: var(--_btng_b-r);
+    }
+
+    /* Lift active/focused buttons above others */
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &.active,
+    &:active {
+      z-index: 1;
+    }
+  }
+
+  /* === Vertical variant === */
+  &.button-group-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    > .button,
+    > [class*="button-"] {
+      width: 100%;
+
+      &:not(:first-child) {
+        margin-inline-start: 0;
+        margin-block-start: calc(-1 * var(--b-w, 1px));
+      }
+
+      &:first-child {
+        border-radius: 0;
+        border-start-start-radius: var(--_btng_b-r);
+        border-start-end-radius: var(--_btng_b-r);
+      }
+
+      &:last-child {
+        border-radius: 0;
+        border-end-start-radius: var(--_btng_b-r);
+        border-end-end-radius: var(--_btng_b-r);
+      }
+    }
+  }
+
+  /* === Size variants === */
+  &.button-group-sm > .button {
+    --_btn_f-s: var(--btn_sm_f-s, 0.875em);
+    --_btn_p-b: var(--btn_sm_p-b, 0.25em);
+    --_btn_p-i: var(--btn_sm_p-i, 0.5em);
+  }
+
+  &.button-group-lg > .button {
+    --_btn_f-s: var(--btn_lg_f-s, 1.25em);
+    --_btn_p-b: var(--btn_lg_p-b, 1em);
+    --_btn_p-i: var(--btn_lg_p-i, 2em);
+  }
+}

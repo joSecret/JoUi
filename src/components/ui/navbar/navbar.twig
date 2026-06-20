@@ -1,0 +1,89 @@
+{#
+/**
+ * @file
+ * Template for the navbar component.
+ *
+ * Available properties:
+ * - navbar_brand: (string|null) Brand name/text.
+ * - navbar_brand_url: (string) default: '/'  Brand link URL.
+ * - navbar_items: (array) default: ([])
+ *    Navigation items, each with:
+ *    - label: (string) Link text.
+ *    - href: (string|null) Link URL.
+ *    - active: (boolean) Active state.
+ *    - disabled: (boolean) Disabled state.
+ *
+ * Available Utility classes -> uc
+ * - navbar_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - navbar_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * usage example: @see navbar.drupal.md
+ */
+#}
+
+{% set navbar_brand_url = navbar_brand_url|default('/') %}
+{% set navbar_items = navbar_items|default([]) %}
+
+{# Create attributes #}
+{% set navbar_att = navbar_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set navbar_classes = [
+    'navbar',
+  ]|merge(navbar_uc ?: [])
+%}
+
+<nav{{ navbar_att.addClass(navbar_classes) }}>
+  <div class="navbar-inner">
+
+    {% if navbar_brand %}
+      <a class="navbar-brand" href="{{ navbar_brand_url }}">
+        {{- navbar_brand -}}
+      </a>
+    {% endif %}
+
+    {%- block slot_brand -%}{%- endblock -%}
+
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-navbar-toggle
+      aria-expanded="false"
+      aria-label="{{ 'Toggle navigation'|t }}"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse">
+      {% if navbar_items is not empty %}
+        <ul class="navbar-nav">
+          {% for item in navbar_items %}
+            {%
+              set link_classes = [
+                'nav-link',
+                item.active ? 'active',
+                item.disabled ? 'disabled',
+              ]|filter
+            %}
+            <li class="nav-item">
+              <a
+                class="{{ link_classes|join(' ') }}"
+                href="{{ item.disabled ? '' : item.href }}"
+                {{ item.active ? 'aria-current="page"' }}
+                {{ item.disabled ? 'aria-disabled="true"' }}
+              >
+                {{- item.label -}}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {%- block slot_content -%}{%- endblock -%}
+    </div>
+
+  </div>
+</nav>

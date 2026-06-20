@@ -1,0 +1,73 @@
+---
+import './list-group.css';
+
+interface ListGroupItem {
+  label: string;
+  href?: string;
+  active?: boolean;
+  disabled?: boolean;
+  color?: string;
+}
+
+interface Props {
+  items?: ListGroupItem[];
+  flush?: boolean;
+  horizontal?: boolean;
+  tag?: 'ul' | 'ol' | 'div';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  items = [],
+  flush = false,
+  horizontal = false,
+  tag = 'ul',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const Tag = tag;
+
+const classList = [
+  'list-group',
+  flush && 'list-group-flush',
+  horizontal && 'list-group-horizontal',
+  ...classes,
+].filter(Boolean);
+---
+
+<Tag class:list={classList} {...attrs}>
+  {items.map((item) => {
+    const itemClasses = [
+      'list-group-item',
+      item.href && 'list-group-item-action',
+      item.active && 'active',
+      item.disabled && 'disabled',
+      item.color && `list-group-item-${item.color}`,
+    ].filter(Boolean);
+
+    return item.href ? (
+      <li>
+        <a
+          class:list={itemClasses}
+          href={item.disabled ? undefined : item.href}
+          aria-current={item.active ? 'true' : undefined}
+          aria-disabled={item.disabled ? 'true' : undefined}
+          tabindex={item.disabled ? -1 : undefined}
+        >
+          {item.label}
+        </a>
+      </li>
+    ) : (
+      <li
+        class:list={itemClasses}
+        aria-current={item.active ? 'true' : undefined}
+        aria-disabled={item.disabled ? 'true' : undefined}
+      >
+        {item.label}
+      </li>
+    );
+  })}
+  <slot />
+</Tag>

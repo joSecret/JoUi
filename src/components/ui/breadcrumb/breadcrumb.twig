@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Template for a breadcrumb component.
+ *
+ * Available properties:
+ * - breadcrumb_separator: (string|null) default: (null)
+ *    Custom separator character. Defaults to '/' via CSS.
+ *
+ * Available values:
+ * - breadcrumb_items: (array) default: ([])
+ *    Array of breadcrumb items, each with:
+ *    - label: (string) The display text.
+ *    - url: (string|null) Link URL (omit or null for active/current item).
+ *    - active: (boolean) Whether this is the current page item.
+ *
+ * Available utility classes -> uc
+ * - breadcrumb_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - breadcrumb_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * @see breadcrumb.md
+ */
+#}
+
+{% set breadcrumb_items = breadcrumb_items|default([]) %}
+{% set breadcrumb_separator = breadcrumb_separator|default(null) %}
+
+{# Create attributes #}
+{% set breadcrumb_att = breadcrumb_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set breadcrumb_classes = [
+    'breadcrumb',
+  ]|merge(breadcrumb_uc ?: [])
+%}
+
+{# Inline style for custom separator #}
+{% set breadcrumb_style = '' %}
+{% if breadcrumb_separator %}
+  {% set breadcrumb_style = "--bcrumb_sep: '" ~ breadcrumb_separator ~ "'" %}
+{% endif %}
+
+<nav aria-label="{{ 'Breadcrumb'|t }}">
+  <ol{{ breadcrumb_att.addClass(breadcrumb_classes) }}{% if breadcrumb_style %} style="{{ breadcrumb_style }}"{% endif %}>
+    {%- for item in breadcrumb_items -%}
+      {%- set is_active = item.active|default(false) -%}
+      {%- set item_classes = ['breadcrumb-item'] -%}
+      {%- if is_active -%}
+        {%- set item_classes = item_classes|merge(['active']) -%}
+      {%- endif -%}
+      <li class="{{ item_classes|join(' ') }}"{% if is_active %} aria-current="page"{% endif %}>
+        {%- if not is_active and item.url -%}
+          <a href="{{ item.url }}">{{ item.label }}</a>
+        {%- else -%}
+          {{- item.label -}}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ol>
+</nav>

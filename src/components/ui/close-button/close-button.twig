@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Close button component — × dismiss button.
+ *
+ * Available properties:
+ * - close_button_label: (string) default: 'Close'
+ *    Accessible label for the button.
+ * - close_button_white: (boolean) default: false
+ *    White variant for use on dark backgrounds.
+ * - close_button_disabled: (boolean) default: false
+ *    Disabled state.
+ *
+ * Available Utility classes -> uc
+ * - close_button_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - close_button_att: Attributes (Drupal\Core\Template\Attribute).
+ */
+#}
+
+{% set close_button_label = close_button_label|default('Close') %}
+{% set close_button_white = close_button_white|default(false) %}
+{% set close_button_disabled = close_button_disabled|default(false) %}
+
+{# Create attributes #}
+{% set close_button_att = close_button_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set close_button_classes = [
+    'close-button',
+    close_button_white ? 'close-button-white',
+  ]|merge(close_button_uc ?: [])
+%}
+
+<button
+  type="button"
+  {{ close_button_att.addClass(close_button_classes) }}
+  aria-label="{{ close_button_label }}"
+  {{ close_button_disabled ? 'disabled' }}
+>
+  <svg viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+  </svg>
+</button>

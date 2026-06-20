@@ -1,0 +1,90 @@
+.c--input {
+  /* === Public vars (consumers override these) === */
+  --inp_c: var(--body_c);
+  --inp_bg: var(--body_bg);
+  --inp_b-c: var(--b-c);
+  --inp_b-c_focus: var(--link_c);
+
+  /* === Private vars (resolved from public) === */
+  --_inp_c: var(--inp_c);
+  --_inp_bg: var(--inp_bg);
+  --_inp_b-c: var(--inp_b-c);
+
+  --_inp_d: var(--inp_d, block);
+  --_inp_w: var(--inp_w, 100%);
+  --_inp_f-s: var(--inp_f-s, var(--f-s_2));
+  --_inp_l-h: var(--inp_l-h, var(--l-h));
+  --_inp_p-b: var(--inp_p-b, var(--size_200));
+  --_inp_p-i: var(--inp_p-i, var(--size_300));
+  --_inp_b-w: var(--inp_b-w, var(--b-w));
+  --_inp_b-s: var(--inp_b-s, solid);
+  --_inp_b-r: var(--inp_b-r, var(--b-r));
+  --_inp_o-o: var(--inp_o-o, 2px);
+  --_inp_o-w: var(--inp_o-w, 0px);
+  --_inp_o-s: var(--inp_o-s, solid);
+  --_inp_o-c: var(--inp_o-c, transparent);
+
+  /* === Mix Colors === */
+  --_inp-mix_c: var(--inp-mix_c, light-dark(var(--c_black), var(--c_white)));
+
+  /* === Styles === */
+  display: var(--_inp_d);
+  width: var(--_inp_w);
+  color: var(--_inp_c);
+  background: var(--_inp_bg);
+  border: var(--_inp_b-w) var(--_inp_b-s) var(--_inp_b-c);
+  border-radius: var(--_inp_b-r);
+  font-size: var(--_inp_f-s);
+  line-height: var(--_inp_l-h);
+  padding-block: var(--_inp_p-b);
+  padding-inline: var(--_inp_p-i);
+  outline-offset: var(--_inp_o-o);
+  outline: var(--_inp_o-w) var(--_inp_o-s) var(--_inp_o-c);
+  transition: var(--t);
+  appearance: none;
+
+  /* === States === */
+  &:hover {
+    --_inp_b-c: var(--inp_b-c_h, color-mix(in oklab, var(--inp_b-c), var(--_inp-mix_c) 30%));
+  }
+
+  &:focus,
+  &:focus-visible {
+    --_inp_b-c: var(--inp_b-c_focus);
+    --_inp_o-w: 2px;
+    --_inp_o-c: var(--inp_o-c_focus, color-mix(in oklab, var(--inp_b-c_focus), transparent 70%));
+    outline: var(--_inp_o-w) var(--_inp_o-s) var(--_inp_o-c);
+    border-color: var(--_inp_b-c);
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &[readonly] {
+    --_inp_bg: var(--inp_bg_readonly, color-mix(in oklab, var(--inp_bg), var(--_inp-mix_c) 5%));
+    cursor: default;
+  }
+
+  &[aria-invalid="true"],
+  &:invalid {
+    --_inp_b-c: var(--inp_b-c_invalid, var(--c_danger_500));
+    --_inp_o-c: var(--inp_o-c_invalid, color-mix(in oklab, var(--c_danger_500), transparent 70%));
+  }
+
+  /* === Size variants === */
+  &.is--sm {
+    --_inp_f-s: var(--inp_sm_f-s, var(--f-s_0));
+    --_inp_p-b: var(--inp_sm_p-b, var(--size_100));
+    --_inp_p-i: var(--inp_sm_p-i, var(--size_200));
+  }
+
+  &.is--lg {
+    --_inp_f-s: var(--inp_lg_f-s, var(--f-s_4));
+    --_inp_p-b: var(--inp_lg_p-b, var(--size_300));
+    --_inp_p-i: var(--inp_lg_p-i, var(--size_400));
+  }
+}

@@ -1,0 +1,83 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Check / Radio
+status: stable
+group: UI
+version: 1.0.0
+description: Styled checkbox, radio button, and toggle switch form controls. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    check_type:
+      type: string
+      title: Type
+      description: Control type — checkbox, radio, or switch.
+      enum:
+        - 'checkbox'
+        - 'radio'
+        - 'switch'
+      default: 'checkbox'
+
+    check_id:
+      type: ['string', 'null']
+      title: ID
+      description: The input id attribute (must match label for).
+      default: null
+
+    check_name:
+      type: ['string', 'null']
+      title: Name
+      description: Input name attribute.
+      default: null
+
+    check_label:
+      type: ['string', 'null']
+      title: Label
+      description: Label text.
+      default: null
+
+    check_checked:
+      type: boolean
+      title: Checked
+      description: Whether the input is checked by default.
+      default: false
+
+    check_disabled:
+      type: boolean
+      title: Disabled
+      description: Disabled state.
+      default: false
+
+    check_inline:
+      type: boolean
+      title: Inline
+      description: Render inline (for grouping multiple checkboxes/radios horizontally).
+      default: false
+
+    check_value:
+      type: ['string', 'null']
+      title: Value
+      description: Input value attribute.
+      default: null
+
+    check_required:
+      type: boolean
+      title: Required
+      description: Required validation attribute.
+      default: false
+
+    # uc -> utility_classes
+    check_uc:
+      type: array
+      items:
+        type: string
+      title: Check Utility Classes
+      default: []
+
+    # att -> attributes
+    check_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the input element.

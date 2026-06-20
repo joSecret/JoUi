@@ -1,0 +1,50 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Breadcrumb
+status: stable
+group: UI
+version: 1.0.0
+description: Navigation aid showing the current page location within a hierarchy.
+
+props:
+  type: object
+  properties:
+
+    breadcrumb_items:
+      type: array
+      title: Items
+      description: Array of breadcrumb items with label, url, and active fields.
+      default: []
+      items:
+        type: object
+        properties:
+          label:
+            type: string
+            title: Label
+          url:
+            type: ['string', 'null']
+            title: URL
+            default: null
+          active:
+            type: boolean
+            title: Active
+            default: false
+
+    breadcrumb_separator:
+      type: ['string', 'null']
+      title: Separator
+      description: Custom separator character between items. Defaults to '/' via CSS.
+      default: null
+
+    breadcrumb_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: An array of extra utility or custom CSS classes.
+
+    breadcrumb_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the breadcrumb list element.

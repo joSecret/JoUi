@@ -1,0 +1,113 @@
+---
+title: Button
+description: Flexible button component for UI actions, forms, and navigation
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Button from './Button.astro'
+
+# Button
+
+Flexible button component supporting multiple colors, sizes, styles, and states. Can render as `button`, `a`, `span`, `input`, or `summary`.
+
+## Installation
+
+```bash
+npx joui add button --platform astro
+```
+
+```bash
+npx joui add button --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Button from '@ui/button/Button.astro'
+---
+<Button label="Click me" />
+```
+
+## Examples
+
+### Colors
+```astro live
+---
+import Button from '@ui/button/Button.astro'
+---
+<Button label="Primary" color="primary" />
+<Button label="Secondary" color="secondary" />
+<Button label="Accent" color="accent" />
+<Button label="Success" color="success" />
+<Button label="Warning" color="warning" />
+<Button label="Danger" color="danger" />
+<Button label="Info" color="info" />
+<Button label="Light" color="light" />
+<Button label="Dark" color="dark" />
+```
+
+### Variants
+
+<Button label="Default" color="primary" />
+<Button label="Outline" color="primary" variant="outline" />
+<Button label="Ghost" color="primary" variant="ghost" />
+<Button label="Clear" color="primary" variant="clear" />
+
+```astro
+<Button label="Default" color="primary" />
+<Button label="Outline" color="primary" variant="outline" />
+<Button label="Ghost" color="primary" variant="ghost" />
+<Button label="Clear" color="primary" variant="clear" />
+```
+
+### Sizes
+
+<Button label="Small" size="sm" />
+<Button label="Default" />
+<Button label="Large" size="lg" />
+
+```astro
+<Button label="Small" size="sm" />
+<Button label="Default" />
+<Button label="Large" size="lg" />
+```
+
+### States
+
+<Button label="Normal" />
+<Button label="Disabled" disabled />
+<Button label="Disabled Outline" variant="outline" disabled />
+
+```astro
+<Button label="Normal" />
+<Button label="Disabled" disabled />
+<Button label="Disabled Outline" variant="outline" disabled />
+```
+
+### As link
+
+<Button label="Link" tag="a" url="#" />
+<Button label="Primary Link" tag="a" url="#" color="primary" />
+
+```astro
+<Button label="Link" tag="a" url="#" />
+<Button label="Primary Link" tag="a" url="#" color="primary" />
+```
+
+### With icons
+
+<Button label="Icon Right" icon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>' />
+<Button label="Icon Left" icon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>' iconPosition="left" />
+<Button icon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>' iconPosition="only" ariaLabel="Clock" />
+
+```astro
+<Button label="Icon Right" icon='<svg aria-hidden="true">...</svg>' />
+<Button label="Icon Left" icon='<svg aria-hidden="true">...</svg>' iconPosition="left" />
+<Button icon='<svg aria-hidden="true">...</svg>' iconPosition="only" ariaLabel="Clock" />
+```
+
+## API Reference
+
+See [`button.md`](./button.md) for the full reference and [`button.astro.md`](./button.astro.md) / [`button.drupal.md`](./button.drupal.md) for platform notes.

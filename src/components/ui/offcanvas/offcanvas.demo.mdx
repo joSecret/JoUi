@@ -1,0 +1,65 @@
+---
+title: Offcanvas
+description: Slide-in side panel with backdrop, opening from start, end, top, or bottom
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Offcanvas from './Offcanvas.astro'
+
+# Offcanvas
+
+Slide-in panel with a semi-transparent backdrop. Opens from start, end, top, or bottom. Closes on backdrop click, Escape key, or dismiss button. Requires `offcanvas.js`.
+
+## Installation
+
+```bash
+npx joui add offcanvas --platform astro
+```
+
+```bash
+npx joui add offcanvas --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Offcanvas from '@ui/offcanvas/Offcanvas.astro'
+---
+<button type="button" class="button button-primary" data-offcanvas-target="demo-ofc">
+  Open sidebar
+</button>
+
+<Offcanvas id="demo-ofc" title="Sidebar" placement="start">
+  <p>Sidebar content. Click outside or press Escape to close.</p>
+</Offcanvas>
+```
+
+## Examples
+
+### Start (default)
+
+<button type="button" class="button button-secondary" data-offcanvas-target="ofc-start-demo">Open left</button>
+
+<Offcanvas id="ofc-start-demo" title="Left Panel" placement="start">
+  <p>Content slides in from the start (left in LTR).</p>
+</Offcanvas>
+
+### End
+
+```astro
+<button data-offcanvas-target="ofc-end">Open right</button>
+<Offcanvas id="ofc-end" title="Right Panel" placement="end">Content</Offcanvas>
+```
+
+### Top / Bottom
+
+```astro
+<Offcanvas id="ofc-top" title="Top Panel" placement="top">Content</Offcanvas>
+<Offcanvas id="ofc-bottom" title="Bottom Panel" placement="bottom">Content</Offcanvas>
+```
+
+## API Reference
+
+See [`offcanvas.md`](./offcanvas.md) for the full reference and [`offcanvas.astro.md`](./offcanvas.astro.md) / [`offcanvas.drupal.md`](./offcanvas.drupal.md) for platform notes.

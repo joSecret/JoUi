@@ -1,0 +1,63 @@
+.close-button {
+  /* === Public vars === */
+  --cbtn_c: var(--body_c);
+  --cbtn_bg: transparent;
+  --cbtn_s: var(--cbtn_size, 1.5rem);
+  --cbtn_o: var(--cbtn_opacity, 0.5);
+  --cbtn_o_h: var(--cbtn_opacity_h, 0.75);
+  --cbtn_o_f: var(--cbtn_opacity_f, 1);
+  --cbtn_t: opacity 0.15s linear, outline 0.1s ease;
+
+  /* === Private vars === */
+  --_cbtn_c: var(--cbtn-type_c, var(--cbtn_c));
+  --_cbtn_bg: var(--cbtn-type_bg, var(--cbtn_bg));
+  --_cbtn_s: var(--cbtn_s);
+  --_cbtn_b-r: var(--cbtn_b-r, var(--b-r_md));
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--_cbtn_s);
+  height: var(--_cbtn_s);
+  padding: 0;
+  background: var(--_cbtn_bg);
+  border: none;
+  border-radius: var(--_cbtn_b-r);
+  color: var(--_cbtn_c);
+  opacity: var(--cbtn_o);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--cbtn_t);
+
+  svg {
+    width: calc(var(--_cbtn_s) * 0.5);
+    height: calc(var(--_cbtn_s) * 0.5);
+    fill: currentColor;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &.hover {
+    opacity: var(--cbtn_o_h);
+  }
+
+  &:focus,
+  &:focus-visible {
+    opacity: var(--cbtn_o_f);
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  /* === White variant (for dark backgrounds) === */
+  &.close-button-white {
+    --cbtn-type_c: var(--c_white);
+
+    filter: var(--cbtn-white_filter, invert(1) grayscale(100%) brightness(200%));
+  }
+}

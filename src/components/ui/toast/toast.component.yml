@@ -1,0 +1,65 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Toast
+status: stable
+group: UI
+version: 1.0.0
+description: Lightweight notification that auto-dismisses after a delay. Requires toast.js. Also provides joui.toast.show() for programmatic use.
+
+props:
+  type: object
+  properties:
+
+    toast_title:
+      type: ['string', 'null']
+      title: Title
+      description: Header title text.
+      default: null
+
+    toast_message:
+      type: ['string', 'null']
+      title: Message
+      description: Body message text (rendered raw).
+      default: null
+
+    toast_time:
+      type: ['string', 'null']
+      title: Time
+      description: Time text shown next to the title.
+      default: null
+
+    toast_color:
+      type: ['string', 'null']
+      title: Color
+      description: Color variant — primary, secondary, success, warning, danger, info.
+      default: null
+
+    toast_delay:
+      type: integer
+      title: Delay
+      description: Auto-dismiss delay in milliseconds. Set to 0 to disable auto-dismiss.
+      default: 5000
+
+    toast_show:
+      type: boolean
+      title: Show
+      description: Whether to render the toast in visible (is--open) state.
+      default: true
+
+    # uc -> utility_classes
+    toast_uc:
+      type: array
+      items:
+        type: string
+      title: Toast Utility Classes
+      default: []
+
+    # att -> attributes
+    toast_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+
+slots:
+  toast_content:
+    title: Content
+    description: Custom body content for the toast.

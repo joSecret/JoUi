@@ -1,0 +1,75 @@
+---
+import './floating-label.css';
+
+interface Props {
+  id?: string;
+  type?: string;
+  label: string;
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  tag?: 'input' | 'select' | 'textarea';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id,
+  type = 'text',
+  label,
+  name,
+  value,
+  placeholder = ' ',
+  required = false,
+  disabled = false,
+  tag = 'input',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const inputId = id || `floating-${Math.random().toString(36).slice(2, 7)}`;
+const classList = ['form-floating', ...classes].filter(Boolean);
+const Tag = tag;
+---
+
+<div class:list={classList}>
+  {Tag === 'input' && (
+    <input
+      class="form-control"
+      id={inputId}
+      type={type}
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      required={required || undefined}
+      disabled={disabled || undefined}
+      {...attrs}
+    />
+  )}
+  {Tag === 'textarea' && (
+    <textarea
+      class="form-control"
+      id={inputId}
+      name={name}
+      placeholder={placeholder}
+      required={required || undefined}
+      disabled={disabled || undefined}
+      {...attrs}
+    >{value}</textarea>
+  )}
+  {Tag === 'select' && (
+    <select
+      class="form-control form-select"
+      id={inputId}
+      name={name}
+      required={required || undefined}
+      disabled={disabled || undefined}
+      {...attrs}
+    >
+      <slot />
+    </select>
+  )}
+  <label for={inputId}>{label}</label>
+</div>

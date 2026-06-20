@@ -1,0 +1,11 @@
+:root {
+  --mw: 1200px;
+}
+
+.wrapper {
+  max-width: var(--mw);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacer);
+  padding-right: var(--spacer);
+}

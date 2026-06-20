@@ -1,0 +1,86 @@
+---
+import './form-item.css';
+
+interface Props {
+  label?: string | null;
+  labelDisplay?: 'before' | 'after' | 'invisible' | null;
+  description?: string | null;
+  descriptionDisplay?: 'before' | 'after' | 'invisible' | null;
+  error?: string | null;
+  prefix?: string | null;
+  suffix?: string | null;
+  disabled?: boolean;
+  required?: boolean;
+  type?: string | null;
+  name?: string | null;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  label = null,
+  labelDisplay = 'before',
+  description = null,
+  descriptionDisplay = 'after',
+  error = null,
+  prefix = null,
+  suffix = null,
+  disabled = false,
+  required = false,
+  type = null,
+  name = null,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'js-form-item',
+  'form-item',
+  'c--form-item',
+  type && `js-form-type-${type}`,
+  type && `form-type--${type}`,
+  name && `js-form-item-${name}`,
+  name && `form-item--${name}`,
+  !['before', 'after'].includes(labelDisplay ?? '') && 'form-item--no-label',
+  disabled && 'form-item--disabled',
+  error && 'form-item--error',
+  ...classes,
+].filter(Boolean);
+
+const descClasses = [
+  'form-item__description',
+  descriptionDisplay === 'invisible' && 'visually-hidden',
+].filter(Boolean);
+---
+
+<div class:list={classList} {...attrs}>
+  {labelDisplay === 'before' && label && (
+    <label class:list={['form-item__label', labelDisplay === 'invisible' && 'visually-hidden']}>
+      {label}
+      {required && <span class="form-required" aria-hidden="true"> *</span>}
+    </label>
+  )}
+
+  {prefix && <span class="form-item__prefix">{prefix}</span>}
+
+  {descriptionDisplay === 'before' && description && (
+    <div class:list={descClasses}>{description}</div>
+  )}
+
+  <slot />
+
+  {suffix && <span class="form-item__suffix">{suffix}</span>}
+
+  {labelDisplay === 'after' && label && (
+    <label class:list={['form-item__label', labelDisplay === 'invisible' && 'visually-hidden']}>
+      {label}
+      {required && <span class="form-required" aria-hidden="true"> *</span>}
+    </label>
+  )}
+
+  {error && <div class="form-item__error-message">{error}</div>}
+
+  {['after', 'invisible'].includes(descriptionDisplay ?? '') && description && (
+    <div class:list={descClasses}>{description}</div>
+  )}
+</div>

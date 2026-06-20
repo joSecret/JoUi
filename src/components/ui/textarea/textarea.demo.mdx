@@ -1,0 +1,44 @@
+---
+title: Textarea
+description: Multiline text input for forms
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Textarea from './Textarea.astro'
+
+# Textarea
+
+Multiline text input. Overrides Drupal's `textarea.html.twig`.
+
+## Usage
+
+```astro live
+---
+import Textarea from '@ui/textarea/Textarea.astro'
+---
+<Textarea placeholder="Enter your message..." rows={4} />
+```
+
+## Rows
+
+<Textarea rows={2} placeholder="2 rows" />
+<Textarea rows={5} placeholder="5 rows" />
+
+## Resize
+
+<Textarea placeholder="Default (vertical)" />
+<Textarea resize="none" placeholder="No resize" />
+<Textarea resize="horizontal" placeholder="Horizontal only" />
+<Textarea resize="both" placeholder="Both directions" />
+
+## States
+
+<Textarea placeholder="Default" />
+<Textarea placeholder="Disabled" disabled />
+<Textarea placeholder="Read-only" readonly value="Cannot edit" />
+<Textarea placeholder="Invalid" invalid />
+
+## API Reference
+
+See [`textarea.md`](./textarea.md) · [`textarea.astro.md`](./textarea.astro.md) · [`textarea.drupal.md`](./textarea.drupal.md)

@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Close Button
+status: stable
+group: UI
+version: 1.0.0
+description: A generic × dismiss button used inside alerts, modals, toasts, and offcanvas. No JavaScript — parent component handles dismiss logic.
+
+props:
+  type: object
+  properties:
+
+    close_button_label:
+      type: string
+      title: Accessible Label
+      description: aria-label value for screen readers.
+      default: 'Close'
+
+    close_button_white:
+      type: boolean
+      title: White variant
+      description: Use the white/inverted variant for dark backgrounds.
+      default: false
+
+    close_button_disabled:
+      type: boolean
+      title: Disabled
+      description: Disabled state.
+      default: false
+
+    # uc -> utility_classes
+    close_button_uc:
+      type: array
+      items:
+        type: string
+      title: Close Button Utility Classes
+      default: []
+      description: An array of extra utility classes.
+
+    # att -> attributes
+    close_button_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the button element.

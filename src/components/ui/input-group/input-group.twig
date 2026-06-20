@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Input group component — prepend/append addons to form controls.
+ *
+ * Available properties:
+ * - input_group_size: (string|null) default: null — 'sm' or 'lg'.
+ *
+ * Available Utility classes -> uc
+ * - input_group_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - input_group_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * Slots:
+ * - slot_content: The form control and addon elements.
+ *
+ * HTML pattern:
+ * <div class="input-group">
+ *   <span class="input-group-text">@</span>
+ *   <input type="text" class="form-control" placeholder="Username">
+ * </div>
+ */
+#}
+
+{# Create attributes #}
+{% set input_group_att = input_group_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set input_group_classes = [
+    'input-group',
+    input_group_size ? 'input-group-' ~ input_group_size,
+  ]|filter|merge(input_group_uc ?: [])
+%}
+
+<div{{ input_group_att.addClass(input_group_classes) }}>
+  {%- block slot_content -%}
+    {{- input_group_content|raw -}}
+  {%- endblock -%}
+</div>

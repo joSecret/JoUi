@@ -1,0 +1,77 @@
+---
+title: Collapse
+description: Collapsible content panel toggled by an external trigger — minimal JS, smooth CSS transition
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Collapse from './Collapse.astro'
+
+# Collapse
+
+A collapsible content panel controlled by an external trigger. The `.collapse` element transitions its height; the trigger is separate and can be any element.
+
+## Installation
+
+```bash
+npx joui add collapse --platform astro
+```
+
+```bash
+npx joui add collapse --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Collapse from '@ui/collapse/Collapse.astro'
+---
+<button type="button" data-collapse-target="demo-collapse" aria-expanded="false">
+  Toggle content
+</button>
+
+<Collapse id="demo-collapse">
+  <p>This content collapses and expands smoothly.</p>
+</Collapse>
+
+<script src="@ui/collapse/collapse.js"></script>
+```
+
+## Examples
+
+### Default (closed)
+
+<button type="button" data-collapse-target="collapse-default" aria-expanded="false">Toggle</button>
+
+<Collapse id="collapse-default">
+  <p>Hidden by default. Click the button above to reveal this content.</p>
+</Collapse>
+
+```astro
+<button type="button" data-collapse-target="my-collapse" aria-expanded="false">
+  Toggle
+</button>
+
+<Collapse id="my-collapse">
+  <p>Content that collapses.</p>
+</Collapse>
+```
+
+### Open by default
+
+<button type="button" data-collapse-target="collapse-open" aria-expanded="true">Toggle</button>
+
+<Collapse id="collapse-open" open>
+  <p>Visible on load. The <code>open</code> prop adds <code>is--open</code> to the element.</p>
+</Collapse>
+
+```astro
+<Collapse id="collapse-open" open>
+  <p>Visible by default.</p>
+</Collapse>
+```
+
+## API Reference
+
+See [`collapse.md`](./collapse.md) for the full reference and [`collapse.astro.md`](./collapse.astro.md) / [`collapse.drupal.md`](./collapse.drupal.md) for platform notes.

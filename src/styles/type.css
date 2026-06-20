@@ -1,0 +1,96 @@
+/* Headings */
+:where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6 .h6, ) {
+  margin-bottom: var(--_h-mb);
+  font-size: var(--_h-fs);
+  margin-top: 0;
+  font-family: var(--h_ff);
+  font-style: var(--h_fstyle);
+  font-weight: var(--h_fw);
+  line-height: var(--h_lh);
+  color: var(--h_c);
+}
+
+:where(h1, .h1) {
+  --_h-mb: var(--h1_mb);
+  --_h-fs: var(--h1_fs);
+}
+
+:where(h2, .h2) {
+  --_h-mb: var(--h2_mb);
+  --_h-fs: var(--h2_fs);
+}
+
+:where(h3, .h3) {
+  --_h-mb: var(--h3_mb);
+  --_h-fs: var(--h3_fs);
+}
+
+:where(h4, .h4) {
+  --_h-mb: var(--h4_mb);
+  --_h-fs: var(--h4_fs);
+}
+
+:where(h5, .h5) {
+  --_h-mb: var(--h5_mb);
+  --_h-fs: var(--h5_fs);
+}
+
+:where(h6, .h6) {
+  --_h-mb: var(--h6_mb);
+  --_h-fs: var(--h6_fs);
+}
+
+.lead {
+  --_lead_fs: var(--lead_fs, calc(var(--fs-base) * 1.125));
+  --_lead_fw: var(--lead_fw, var(--fw-light));
+
+  font-size: var(--_lead_fs);
+  font-weight: var(--_lead_fw);
+}
+
+/* Lists */
+.list-unstyled {
+  padding-inline-start: var(--list-unstyled_p-i-s, 0);
+  list-style: var(--list-unstyled_l-s, none);
+}
+
+/* Inline turns list items into inline-block */
+.list-inline {
+  --_list-inline_g: var(--list-inline_g, var(--scale-400));
+
+  padding-inline-start: var(--list-inline_p-i-s, 0px);
+  list-style: var(--list-inline_l-s, none);
+  display: var(--list-inline_d, flex);
+  gap: var(--_list-inline_g);
+
+  & > li {
+    display: var(--list-inline_li_d, inline-block);
+  }
+}
+
+/* Misc */
+/* Builds on `abbr` */
+.initialism {
+  font-size: var(--initialism_f-s, 0.875em);
+  text-transform: var(--initialism_t-t, uppercase);
+}
+
+/* Blockquotes */
+blockquote {
+  --_blockquote_b-c: var(--blockquote_b-c, currentColor);
+  --_blockquote_b-w: var(--blockquote_b-w, 0px);
+  --_blockquote_b-s: var(--blockquote_b-s, solid);
+  --_blockquote_b: var(--blockquote_b, var(--_blockquote_b-w)var(--_blockquote_b-s) var(--_blockquote_b-c));
+
+
+  margin-block-end: var(--_blockquote-m-b-e, var(--spacer));
+  font-size: var(--blockquote_fs, var(--fs-base));
+  color: var(--blockquote_c, var(--body_c));
+  margin-inline: var(--blockquote_m-i-s, 0px) var(--blockquote_m-i-e, 0px);
+  padding-inline-start: var(--blockquote_p-i-s, 0px);
+  border-inline-start: var(--_blockquote_b);
+
+  &:last-child {
+    margin-block-end: var(--_blockquote_last_m-b-e, 0px);
+  }
+}

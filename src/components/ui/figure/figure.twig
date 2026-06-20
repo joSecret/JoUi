@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Template for a figure component.
+ *
+ * Available properties:
+ * - figure_caption_align: (string) default: ('start')
+ *    enum: start | center | end
+ * - figure_rounded: (string | boolean) default: (false)
+ *    enum: false | true | 'circle'
+ *
+ * Available values:
+ * - figure_src: (string) Image source URL.
+ * - figure_alt: (string) Alt text for the image.
+ * - figure_caption: (string | null) Caption text. Omit to skip.
+ *
+ * Available utility classes -> uc
+ * - figure_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - figure_att: Attributes array.
+ *
+ * usage example: @see figure.demo.mdx
+ */
+#}
+
+{# Set defaults #}
+{% set figure_caption_align = figure_caption_align|default('start') %}
+{% set figure_rounded = figure_rounded|default(false) %}
+{% set figure_caption = figure_caption|default(null) %}
+
+{# Create attributes #}
+{% set figure_att = figure_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set figure_classes = [
+    'figure',
+    (figure_caption_align and figure_caption_align != 'start') ? 'figure-caption-' ~ figure_caption_align,
+    figure_rounded == 'circle' ? 'figure-rounded-circle' : (figure_rounded ? 'figure-rounded'),
+  ]|merge(figure_uc ?: [])
+%}
+
+{# Render component #}
+<figure{{ figure_att.addClass(figure_classes) }}>
+  <img src="{{ figure_src }}" alt="{{ figure_alt }}" class="figure-img">
+  {%- if figure_caption -%}
+    <figcaption class="figure-caption">{{ figure_caption }}</figcaption>
+  {%- endif -%}
+</figure>

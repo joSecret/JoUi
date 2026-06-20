@@ -1,0 +1,45 @@
+---
+import './table.css';
+
+interface Props {
+  caption?: string | null;
+  striped?: boolean;
+  bordered?: boolean;
+  hover?: boolean;
+  responsive?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  caption = null,
+  striped = false,
+  bordered = false,
+  hover = false,
+  responsive = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'c--table',
+  striped && 'table--striped',
+  bordered && 'table--bordered',
+  hover && 'table--hover',
+  ...classes,
+].filter(Boolean);
+---
+
+{responsive ? (
+  <div class="table--responsive">
+    <table class:list={classList} {...attrs}>
+      {caption && <caption>{caption}</caption>}
+      <slot />
+    </table>
+  </div>
+) : (
+  <table class:list={classList} {...attrs}>
+    {caption && <caption>{caption}</caption>}
+    <slot />
+  </table>
+)}

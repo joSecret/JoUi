@@ -1,0 +1,45 @@
+---
+import './language.css';
+
+// UI components
+import Button from '@ui/button/Button.astro';
+
+interface Props {
+  active?: 'ro' | 'ru';
+  roUrl?: string;
+  ruUrl?: string;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  active = 'ro',
+  roUrl = '/ro',
+  ruUrl = '/ru',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = ['c--lang', ...classes].filter(Boolean);
+---
+
+<nav class:list={classList} aria-label='Language switcher' {...attrs}>
+  <Button
+    url={roUrl}
+    class:list={['lang-item', active === 'ro' && 'is--active']}
+    lang='ro'
+    hreflang='ro'
+    aria-current={active === 'ro' ? 'true' : undefined}
+  >
+    RO
+  </Button>
+  <Button
+    url={ruUrl}
+    class:list={['lang-item', active === 'ru' && 'is--active']}
+    lang='ru'
+    hreflang='ru'
+    aria-current={active === 'ru' ? 'true' : undefined}
+  >
+    RU
+  </Button>
+</nav>

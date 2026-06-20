@@ -1,0 +1,6 @@
+<svg width="250" height="160" viewBox="0 0 250 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="30" y="40" width="130" height="12" rx="6" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.5"/>
+  <rect x="30" y="62" width="90" height="10" rx="5" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.4"/>
+  <rect x="30" y="82" width="170" height="10" rx="5" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.35"/>
+  <rect x="30" y="102" width="110" height="10" rx="5" fill="var(--c_neutral_400, #adb5bd)" fill-opacity="0.3"/>
+</svg>

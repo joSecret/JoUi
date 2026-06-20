@@ -1,0 +1,77 @@
+.form-range {
+  /* === Public vars === */
+  --rnge_thumb-bg: var(--c_primary_500);
+  --rnge_thumb-s: 1.125rem;
+  --rnge_thumb-b-r: 50%;
+  --rnge_track-h: 0.375rem;
+  --rnge_track-bg: color-mix(in oklab, var(--body_c), transparent 80%);
+  --rnge_track-b-r: 9999px;
+  --rnge_t: 0.15s ease-in-out;
+
+  appearance: none;
+  width: 100%;
+  height: var(--rnge_thumb-s);
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+
+  /* === Track === */
+  &::-webkit-slider-runnable-track {
+    height: var(--rnge_track-h);
+    background: var(--rnge_track-bg);
+    border-radius: var(--rnge_track-b-r);
+  }
+
+  &::-moz-range-track {
+    height: var(--rnge_track-h);
+    background: var(--rnge_track-bg);
+    border-radius: var(--rnge_track-b-r);
+    border: none;
+  }
+
+  /* === Thumb === */
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--rnge_thumb-s);
+    height: var(--rnge_thumb-s);
+    margin-top: calc((var(--rnge_track-h) - var(--rnge_thumb-s)) / 2);
+    background: var(--rnge_thumb-bg);
+    border: none;
+    border-radius: var(--rnge_thumb-b-r);
+    box-shadow: 0 0 0 0px color-mix(in oklab, var(--rnge_thumb-bg), transparent 70%);
+    transition: box-shadow var(--rnge_t);
+  }
+
+  &::-moz-range-thumb {
+    width: var(--rnge_thumb-s);
+    height: var(--rnge_thumb-s);
+    background: var(--rnge_thumb-bg);
+    border: none;
+    border-radius: var(--rnge_thumb-b-r);
+    box-shadow: 0 0 0 0px color-mix(in oklab, var(--rnge_thumb-bg), transparent 70%);
+    transition: box-shadow var(--rnge_t);
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--rnge_thumb-bg), transparent 70%);
+    }
+
+    &::-moz-range-thumb {
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--rnge_thumb-bg), transparent 70%);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+/* Label for the range input */
+.form-label {
+  display: inline-block;
+  margin-block-end: var(--size_100, 0.25rem);
+}

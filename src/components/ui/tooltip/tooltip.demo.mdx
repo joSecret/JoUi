@@ -1,0 +1,72 @@
+---
+title: Tooltip
+description: CSS-only tooltips shown on hover and focus-visible using data attributes
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Tooltip from './Tooltip.astro'
+
+# Tooltip
+
+Pure CSS tooltips using `data-tooltip` attribute and `::before`/`::after` pseudo-elements. Shows on `:hover` and `:focus-visible`. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add tooltip --platform astro
+```
+
+```bash
+npx joui add tooltip --platform drupal
+```
+
+## Usage
+
+Add `data-tooltip` to any element:
+
+```html
+<button data-tooltip="Tooltip text">Hover me</button>
+```
+
+Or use the Astro component wrapper:
+
+```astro live
+---
+import Tooltip from '@ui/tooltip/Tooltip.astro'
+---
+<Tooltip text="I am a tooltip!">
+  <button type="button" class="button button-primary">Hover me</button>
+</Tooltip>
+```
+
+## Examples
+
+### Placements
+
+<Tooltip text="Top tooltip" placement="top"><button class="button button-secondary" style="margin:4px">Top</button></Tooltip>
+<Tooltip text="Bottom tooltip" placement="bottom"><button class="button button-secondary" style="margin:4px">Bottom</button></Tooltip>
+<Tooltip text="Start tooltip" placement="start"><button class="button button-secondary" style="margin:4px">Start</button></Tooltip>
+<Tooltip text="End tooltip" placement="end"><button class="button button-secondary" style="margin:4px">End</button></Tooltip>
+
+```astro
+<Tooltip text="Top tooltip" placement="top"><button>Top</button></Tooltip>
+<Tooltip text="Bottom tooltip" placement="bottom"><button>Bottom</button></Tooltip>
+<Tooltip text="Start tooltip" placement="start"><button>Start</button></Tooltip>
+<Tooltip text="End tooltip" placement="end"><button>End</button></Tooltip>
+```
+
+### Direct usage (no component)
+
+```html
+<button data-tooltip="Simple tooltip">Hover me</button>
+<a href="#" data-tooltip="Link tooltip" data-tooltip-placement="bottom">Link</a>
+```
+
+## Accessibility note
+
+CSS `content: attr(data-tooltip)` is not read by all screen readers. For critical information, also provide `aria-label` or `aria-describedby`.
+
+## API Reference
+
+See [`tooltip.md`](./tooltip.md) for the full reference and [`tooltip.astro.md`](./tooltip.astro.md) / [`tooltip.drupal.md`](./tooltip.drupal.md) for platform notes.

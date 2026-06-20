@@ -1,0 +1,189 @@
+.card {
+  /* === Public vars (consumers override these) === */
+  --card_c: var(--body_c);
+  --card_bg: var(--body_bg);
+  --card_b-c: var(--b-c);
+
+  /* === Private vars (resolved from public + type modifier) === */
+  --_card_c: var(--card-type_c, var(--card_c));
+  --_card_bg: var(--card-type_bg, var(--card_bg));
+  --_card_b-c: var(--card-type_b-c, var(--card_b-c));
+
+  --_card_b-r: var(--card_b-r, var(--b-r));
+  --_card_b-w: var(--card_b-w, var(--b-w));
+  --_card_b-s: var(--card_b-s, solid);
+  --_card_shadow: var(--card_shadow, none);
+
+  /* === Styles === */
+  color: var(--_card_c);
+  background: var(--_card_bg);
+  border: var(--_card_b-w) var(--_card_b-s) var(--_card_b-c);
+  border-radius: var(--_card_b-r);
+  box-shadow: var(--_card_shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+}
+
+/* === Sub-parts === */
+
+.card-header {
+  --_card-header_p-b: var(--card-header_p-b, var(--size_200));
+  --_card-header_p-i: var(--card-header_p-i, var(--size_400));
+  --_card-header_b-c: var(--card-header_b-c, var(--_card_b-c));
+
+  padding-block: var(--_card-header_p-b);
+  padding-inline: var(--_card-header_p-i);
+  border-bottom: var(--_card_b-w) var(--_card_b-s) var(--_card-header_b-c);
+
+  &:first-child {
+    border-radius: calc(var(--_card_b-r) - var(--_card_b-w)) calc(var(--_card_b-r) - var(--_card_b-w)) 0 0;
+  }
+}
+
+.card-footer {
+  --_card-footer_p-b: var(--card-footer_p-b, var(--size_200));
+  --_card-footer_p-i: var(--card-footer_p-i, var(--size_400));
+  --_card-footer_b-c: var(--card-footer_b-c, var(--_card_b-c));
+
+  padding-block: var(--_card-footer_p-b);
+  padding-inline: var(--_card-footer_p-i);
+  border-top: var(--_card_b-w) var(--_card_b-s) var(--_card-footer_b-c);
+
+  &:last-child {
+    border-radius: 0 0 calc(var(--_card_b-r) - var(--_card_b-w)) calc(var(--_card_b-r) - var(--_card_b-w));
+  }
+}
+
+.card-body {
+  --_card-body_p-b: var(--card-body_p-b, var(--size_400));
+  --_card-body_p-i: var(--card-body_p-i, var(--size_400));
+
+  padding-block: var(--_card-body_p-b);
+  padding-inline: var(--_card-body_p-i);
+  flex: 1 1 auto;
+}
+
+.card-title {
+  margin-block-end: var(--card-title_m-b, var(--size_200));
+  font-weight: var(--card-title_f-w, var(--f-w_bold));
+}
+
+.card-subtitle {
+  margin-block-start: calc(-1 * var(--size_100));
+  margin-block-end: var(--card-subtitle_m-b, var(--size_200));
+  color: var(--card-subtitle_c, color-mix(in oklab, var(--_card_c), transparent 40%));
+}
+
+.card-text {
+  margin-block-end: var(--card-text_m-b, var(--size_400));
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+/* === Image === */
+
+.card-img-top {
+  width: 100%;
+  border-radius: var(--_card_b-r) var(--_card_b-r) 0 0;
+  display: block;
+  object-fit: cover;
+}
+
+.card-img-bottom {
+  width: 100%;
+  border-radius: 0 0 var(--_card_b-r) var(--_card_b-r);
+  display: block;
+  object-fit: cover;
+}
+
+.card-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* === Horizontal layout === */
+
+.card-horizontal {
+  flex-direction: row;
+
+  .card-img {
+    --_card-img_w: var(--card-img_w, 40%);
+
+    width: var(--_card-img_w);
+    flex-shrink: 0;
+    border-radius: var(--_card_b-r) 0 0 var(--_card_b-r);
+    object-fit: cover;
+  }
+}
+
+/* === Color variants === */
+
+.card-primary {
+  --card_c: var(--card-primary_c, var(--c_white));
+  --card_bg: var(--card-primary_bg, var(--c_primary_500));
+  --card_b-c: var(--card-primary_b-c, var(--c_primary_500));
+}
+
+.card-secondary {
+  --card_c: var(--card-secondary_c, var(--c_white));
+  --card_bg: var(--card-secondary_bg, var(--c_secondary_500));
+  --card_b-c: var(--card-secondary_b-c, var(--c_secondary_500));
+}
+
+.card-accent {
+  --card_c: var(--card-accent_c, var(--c_white));
+  --card_bg: var(--card-accent_bg, var(--c_accent_500));
+  --card_b-c: var(--card-accent_b-c, var(--c_accent_500));
+}
+
+.card-success {
+  --card_c: var(--card-success_c, var(--c_white));
+  --card_bg: var(--card-success_bg, var(--c_success_500));
+  --card_b-c: var(--card-success_b-c, var(--c_success_500));
+}
+
+.card-warning {
+  --card_c: var(--card-warning_c, var(--c_white));
+  --card_bg: var(--card-warning_bg, var(--c_warning_500));
+  --card_b-c: var(--card-warning_b-c, var(--c_warning_500));
+}
+
+.card-danger {
+  --card_c: var(--card-danger_c, var(--c_white));
+  --card_bg: var(--card-danger_bg, var(--c_danger_500));
+  --card_b-c: var(--card-danger_b-c, var(--c_danger_500));
+}
+
+.card-info {
+  --card_c: var(--card-info_c, var(--c_white));
+  --card_bg: var(--card-info_bg, var(--c_info_500));
+  --card_b-c: var(--card-info_b-c, var(--c_info_500));
+}
+
+.card-light {
+  --card_c: var(--card-light_c, var(--c_dark));
+  --card_bg: var(--card-light_bg, var(--c_light));
+  --card_b-c: var(--card-light_b-c, var(--c_light));
+}
+
+.card-dark {
+  --card_c: var(--card-dark_c, var(--c_light));
+  --card_bg: var(--card-dark_bg, var(--c_dark));
+  --card_b-c: var(--card-dark_b-c, var(--c_dark));
+}
+
+/* === Shadow variant === */
+
+.card-shadow {
+  --card_shadow: var(--card-shadow_val, 0 var(--size_100) var(--size_300) color-mix(in oklab, var(--c_black), transparent 85%));
+}
+
+.card-shadow-lg {
+  --card_shadow: var(--card-shadow-lg_val, 0 var(--size_200) var(--size_500) color-mix(in oklab, var(--c_black), transparent 80%));
+}

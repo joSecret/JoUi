@@ -1,0 +1,80 @@
+---
+title: Close Button
+description: Generic × dismiss button used inside alerts, modals, toasts, and offcanvas
+category: ui
+preview: ./thumbnail.svg
+---
+
+import CloseButton from './CloseButton.astro'
+
+# Close Button
+
+A reusable × dismiss button. Used inside alerts, modals, toasts, and offcanvas panels. The button itself is presentational — the parent component's JS handles the dismiss action. No JavaScript in the button.
+
+## Installation
+
+```bash
+npx joui add close-button --platform astro
+```
+
+```bash
+npx joui add close-button --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import CloseButton from '@ui/close-button/CloseButton.astro'
+---
+<CloseButton />
+```
+
+## Examples
+
+### Default
+
+<CloseButton />
+
+```astro
+<CloseButton />
+```
+
+### White variant
+
+<div style="background: #212529; padding: 1rem; border-radius: 6px; display: inline-block;">
+  <CloseButton white />
+</div>
+
+```astro
+<div style="background: #212529; padding: 1rem;">
+  <CloseButton white />
+</div>
+```
+
+### Disabled
+
+<CloseButton disabled />
+
+```astro
+<CloseButton disabled />
+```
+
+### Custom label
+
+```astro
+<CloseButton label="Dismiss this notification" />
+```
+
+### In context: alert
+
+```astro
+<div class="alert alert-warning alert-dismissible" role="alert">
+  A warning message.
+  <CloseButton attrs={{ 'data-alert-dismiss': '' }} />
+</div>
+```
+
+## API Reference
+
+See [`close-button.md`](./close-button.md) for the full reference and [`close-button.astro.md`](./close-button.astro.md) / [`close-button.drupal.md`](./close-button.drupal.md) for platform notes.

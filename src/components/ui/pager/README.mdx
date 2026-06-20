@@ -1,0 +1,322 @@
+# Pager
+
+A flexible and accessible pagination component for displaying a series of related content across multiple pages.
+
+## Features
+
+- **Fully Accessible**: Built with proper ARIA labels and semantic HTML
+- **Flexible Alignment**: Supports start, end, center, and vertical alignment
+- **Customizable Display**: Control visibility of first/last links and ellipsis
+- **Extensible Slots**: Override previous/next link content with custom templates
+- **Bootstrap Compatible**: Uses Bootstrap-like classes and structure
+- **CSS Custom Properties**: Easy theming through CSS variables
+
+## Component Properties
+
+### Variations
+
+#### `pager_alignment`
+- **Type**: `string|null`
+- **Default**: `null`
+- **Options**: `null`, `start`, `end`, `center`, `vertical`
+- **Description**: Determines the alignment of the pager component
+  - `null` or `start`: Default left alignment
+  - `end`: Right aligned
+  - `center`: Center aligned
+  - `vertical`: Vertically stacked
+
+### Fields
+
+#### `pager_show_first`
+- **Type**: `boolean`
+- **Default**: `true`
+- **Description**: Controls whether the "First page" link is displayed
+
+#### `pager_show_last`
+- **Type**: `boolean`
+- **Default**: `true`
+- **Description**: Controls whether the "Last page" link is displayed
+
+#### `pager_show_ellipsis`
+- **Type**: `boolean`
+- **Default**: `true`
+- **Description**: Controls whether ellipsis (...) indicators are shown for skipped pages
+
+#### `pager_items`
+- **Type**: `object|null`
+- **Default**: `null`
+- **Description**: Object containing pager items with the following structure:
+  - `first`: First page link data
+  - `previous`: Previous page link data
+  - `pages`: Array of page number links
+  - `next`: Next page link data
+  - `last`: Last page link data
+  - `current`: Current page indicator (optional)
+
+Each item should contain:
+```twig
+{
+  href: 'url',
+  text: 'Link text',
+  attributes: {} // Additional HTML attributes
+}
+```
+
+#### `pager_current`
+- **Type**: `integer|null`
+- **Default**: `null`
+- **Description**: The current active page number (used to highlight the active page)
+
+#### `pager_ellipses`
+- **Type**: `object|null`
+- **Default**: `null`
+- **Description**: Object indicating where ellipsis should appear
+```twig
+{
+  previous: true|false,
+  next: true|false
+}
+```
+
+### Utility Classes
+
+#### `pager_uc`
+- **Type**: `array`
+- **Default**: `[]`
+- **Description**: Array of utility classes to add custom classes to the component
+
+### Attributes
+
+#### `pager_att`
+- **Type**: `Drupal\Core\Template\Attribute`
+- **Description**: HTML attributes object for the pager navigation element
+
+## Slots
+
+### `slot_pager_previous`
+Override the default previous page link content. Use this to customize the previous button appearance.
+
+**Example**:
+```twig
+{% embed 'edwtfe:pager' with {
+  pager_items: items
+} %}
+  {% block slot_pager_previous %}
+    <a href="{{ pager_items.previous.href }}" class="page-link">
+      <svg><!-- Custom icon --></svg>
+      <span>Previous</span>
+    </a>
+  {% endblock %}
+{% endembed %}
+```
+
+### `slot_pager_next`
+Override the default next page link content. Use this to customize the next button appearance.
+
+**Example**:
+```twig
+{% embed 'edwtfe:pager' with {
+  pager_items: items
+} %}
+  {% block slot_pager_next %}
+    <a href="{{ pager_items.next.href }}" class="page-link">
+      <span>Next</span>
+      <svg><!-- Custom icon --></svg>
+    </a>
+  {% endblock %}
+{% endembed %}
+```
+
+## Usage Examples
+
+### Basic Usage
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_items: items,
+  pager_current: current
+} %}
+```
+
+### Center Aligned Pager
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_alignment: 'center',
+  pager_items: items,
+  pager_current: current
+} %}
+```
+
+### Without First/Last Links
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_items: items,
+  pager_current: current,
+  pager_show_first: false,
+  pager_show_last: false
+} %}
+```
+
+### Vertical Pager
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_alignment: 'vertical',
+  pager_items: items,
+  pager_current: current
+} %}
+```
+
+### With Utility Classes
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_items: items,
+  pager_current: current,
+  pager_uc: ['my-custom-class', 'another-class']
+} %}
+```
+
+### With Custom Attributes
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_items: items,
+  pager_current: current,
+  pager_att: create_attribute().setAttribute('data-tracking', 'pagination')
+} %}
+```
+
+### Complete Example with All Options
+
+```twig
+{% include 'edwtfe:pager' with {
+  pager_alignment: 'center',
+  pager_show_first: true,
+  pager_show_last: true,
+  pager_show_ellipsis: true,
+  pager_items: {
+    first: {
+      href: '/page-1',
+      text: 'First'
+    },
+    previous: {
+      href: '/page-2',
+      text: 'Prev'
+    },
+    pages: {
+      1: { href: '/page-1' },
+      2: { href: '/page-2' },
+      3: { href: '/page-3' },
+      4: { href: '/page-4' },
+      5: { href: '/page-5' }
+    },
+    next: {
+      href: '/page-4',
+      text: 'Next'
+    },
+    last: {
+      href: '/page-10',
+      text: 'Last'
+    }
+  },
+  pager_current: 3,
+  pager_ellipses: {
+    previous: false,
+    next: true
+  },
+  pager_uc: ['custom-pager']
+} %}
+```
+
+## Styling & Customization
+
+The component uses CSS custom properties for easy theming. You can override these variables in your own stylesheet:
+
+### Container Variables
+
+```css
+--pager_m: 0px;              /* Margin */
+--pager_m-b-s: 30px;         /* Margin block start (top margin) */
+--pager_p-b: 0px;            /* Padding block (vertical) */
+--pager_p-i: 0px;            /* Padding inline (horizontal) */
+--pager_f-s: 1rem;           /* Font size */
+--pager_bg: transparent;     /* Background color */
+--pager_b-w: 0px;            /* Border width */
+--pager_b-c: transparent;    /* Border color */
+--pager_b-r: 0px;            /* Border radius */
+```
+
+### List Variables
+
+```css
+--pager-ul_m: 0px;           /* List margin */
+--pager-gap: 8px;            /* Gap between items */
+--pager-flex-w: wrap;        /* Flex wrap behavior */
+```
+
+### Item Variables
+
+```css
+--pager-item_c: #111111;                      /* Text color */
+--pager-item_d: none;                         /* Text decoration */
+--pager-item-bg: #F6F6F6;                     /* Background color */
+--pager-item_f-w: 400;                        /* Font weight */
+--pager-item-b-r: 4px;                        /* Border radius */
+--pager-item-p-b: 8px;                        /* Padding block */
+--pager-item-p-i: 12px;                       /* Padding inline */
+--pager-item-m-w: 40px;                       /* Minimum width */
+--pager-item_c_h: var(--c-white);             /* Hover text color */
+--pager-item_bg_h: var(--c-primary-700);      /* Hover background */
+--pager-item_c_a: var(--_pager-item_c_h);     /* Active text color */
+--pager-item_bg_a: var(--_pager-item_bg_h);   /* Active background */
+```
+
+### Example Custom Theme
+
+```css
+.my-custom-pager {
+  --pager-gap: 12px;
+  --pager-item-bg: #e0e0e0;
+  --pager-item-b-r: 8px;
+  --pager-item_bg_h: #007bff;
+  --pager-item_c_h: white;
+}
+```
+
+## Accessibility
+
+The component is built with accessibility in mind:
+
+- **Semantic HTML**: Uses `<nav>` element with `role="navigation"`
+- **ARIA Labels**: Includes `aria-label="Pagination"` on the nav element
+- **Screen Reader Text**: Visually hidden text for screen readers (e.g., "Current page", "Go to page X")
+- **Current Page**: Uses `aria-current="page"` attribute (when applicable with `page-link` class)
+- **Link Relationships**: Uses `rel="prev"` and `rel="next"` for better SEO and navigation
+- **Descriptive Titles**: Each link has a descriptive `title` attribute
+
+## CSS Classes Reference
+
+- `.c--pager`: Main component container
+- `.pager__items`: List of pager items
+- `.pager__item`: Individual pager item
+- `.pager__item--first`: First page item
+- `.pager__item--previous`: Previous page item
+- `.pager__item--next`: Next page item
+- `.pager__item--last`: Last page item
+- `.pager__item--ellipsis`: Ellipsis item
+- `.is-active`, `.active`: Active/current page item
+- `.page-item`: Bootstrap-compatible item class
+- `.page-link`: Bootstrap-compatible link class
+- `.disabled`: Disabled item class
+
+## Browser Support
+
+This component uses modern CSS features including:
+- CSS Custom Properties (CSS Variables)
+- Flexbox
+- Logical Properties (`padding-inline`, `padding-block`)
+
+Ensure your target browsers support these features or include appropriate polyfills.

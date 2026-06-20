@@ -1,0 +1,84 @@
+---
+import './dropdown.css';
+
+interface DropdownItem {
+  label: string;
+  href?: string;
+  divider?: boolean;
+  disabled?: boolean;
+}
+
+interface Props {
+  label?: string;
+  color?: string;
+  items?: DropdownItem[];
+  direction?: 'down' | 'up' | 'end' | 'start';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  label = 'Dropdown',
+  color = 'secondary',
+  items = [],
+  direction = 'down',
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const wrapperClasses = [
+  'dropdown',
+  direction !== 'down' && `dropdown-${direction}`,
+  ...classes,
+].filter(Boolean);
+
+const buttonClasses = [
+  'button',
+  color && `button-${color}`,
+  'dropdown-toggle',
+].filter(Boolean);
+---
+
+<div class:list={wrapperClasses} {...attrs}>
+  <button
+    type="button"
+    class:list={buttonClasses}
+    data-dropdown-toggle
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    {label}
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    {items.map((item) =>
+      item.divider ? (
+        <li><hr class="dropdown-divider" /></li>
+      ) : (
+        <li>
+          {item.href ? (
+            <a
+              class:list={['dropdown-item', item.disabled && 'disabled']}
+              href={item.disabled ? undefined : item.href}
+              role="menuitem"
+              aria-disabled={item.disabled ? 'true' : undefined}
+              tabindex={item.disabled ? -1 : undefined}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <button
+              type="button"
+              class:list={['dropdown-item', item.disabled && 'disabled']}
+              role="menuitem"
+              aria-disabled={item.disabled ? 'true' : undefined}
+              disabled={item.disabled || undefined}
+            >
+              {item.label}
+            </button>
+          )}
+        </li>
+      )
+    )}
+    <slot />
+  </ul>
+</div>

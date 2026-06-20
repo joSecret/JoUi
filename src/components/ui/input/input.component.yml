@@ -1,0 +1,34 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Input
+status: stable
+version: 1.0.0
+group: Forms
+description: 'Text input field. Overrides input.html.twig. Supports text, email, password, search, number, tel, url, date, time.'
+
+props:
+  type: object
+  properties:
+    inp_type:
+      type: string
+      title: Type
+      description: 'HTML input type.'
+      default: text
+      enum: [text, email, password, search, number, tel, url, date, time]
+
+    inp_size:
+      type: ['string', 'null']
+      title: Size
+      description: 'Visual size variant.'
+      default: null
+      enum: [null, sm, lg]
+
+    inp_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+
+    inp_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes

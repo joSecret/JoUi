@@ -1,0 +1,113 @@
+---
+import './button.css';
+
+interface Props {
+  tag?: 'a' | 'button' | 'span' | 'input' | 'summary';
+  color?: string | null;
+  variant?: 'outline' | 'ghost' | 'clear' | null;
+  size?: string | null;
+  iconPosition?: 'left' | 'right' | 'only';
+  radius?: string | null;
+  disabled?: boolean;
+  id?: string | null;
+  label?: string;
+  url?: string | null;
+  icon?: string | null;
+  ariaLabel?: string | null;
+  ariaExpanded?: boolean | null;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  tag,
+  color = null,
+  variant = null,
+  size = null,
+  iconPosition = 'right',
+  radius = null,
+  disabled = false,
+  id = null,
+  label = '',
+  url = null,
+  icon = null,
+  ariaLabel = null,
+  ariaExpanded = null,
+  classes = [],
+  attrs = {},
+  ...passthroughAttrs
+} = Astro.props;
+
+// Determine HTML element
+const Element = tag || ((url ? 'a' : 'button') as any);
+const hasIcon = !!icon;
+const iconPos = hasIcon ? iconPosition : null;
+
+// Build class list
+const classList = [
+  'button',
+  color && `button-${color}`,
+  variant && `button-${variant}`,
+  size && `button-${size}`,
+  iconPos && `button-icon-${iconPos}`,
+  radius && `button-radius-${radius}`,
+  ...classes,
+].filter(Boolean);
+
+// Build final attributes
+const finalAttrs: Record<string, any> = { ...passthroughAttrs, ...attrs };
+
+// Set href for anchor tags
+if (url && Element === 'a') {
+  finalAttrs.href = url;
+}
+
+// Handle disabled state
+if (disabled) {
+  if (Element === 'button') {
+    finalAttrs.disabled = true;
+  } else if (Element === 'a') {
+    finalAttrs.role = 'link';
+    finalAttrs['aria-disabled'] = 'true';
+    finalAttrs.tabindex = '-1';
+  }
+}
+
+// Set aria-expanded if provided
+if (ariaExpanded !== null) {
+  finalAttrs['aria-expanded'] = ariaExpanded ? 'true' : 'false';
+}
+
+// Set aria-label for accessibility
+if (ariaLabel) {
+  finalAttrs['aria-label'] = ariaLabel;
+} else if (iconPos === 'only' && !label) {
+  finalAttrs['aria-label'] = 'Button';
+}
+
+// Set id if provided
+if (id) {
+  finalAttrs.id = id;
+}
+
+// Set default type for button elements
+if (Element === 'button' && !finalAttrs.type) {
+  finalAttrs.type = 'button';
+}
+---
+
+{
+  Element === 'input' ? (
+    <input class:list={classList} {...finalAttrs} value={label} />
+  ) : (
+    <Element class:list={classList} {...finalAttrs}>
+      {icon && iconPos === 'left' && <Fragment set:html={icon} />}
+      {iconPos === 'only' ? (
+        <span class='visually-hidden'>{label || <slot />}</span>
+      ) : (
+        label || <slot />
+      )}
+      {icon && iconPos !== 'left' && <Fragment set:html={icon} />}
+    </Element>
+  )
+}

@@ -1,0 +1,50 @@
+---
+title: Select
+description: Dropdown select for forms
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Select from './Select.astro'
+
+export const opts = [
+  { value: '1', label: 'Option 1' },
+  { value: '2', label: 'Option 2' },
+  { value: '3', label: 'Option 3' },
+]
+
+# Select
+
+Dropdown select. Overrides Drupal's `select.html.twig`.
+
+## Usage
+
+```astro live
+---
+import Select from '@ui/select/Select.astro'
+---
+<Select emptyOption="Choose..." options={[
+  { value: '1', label: 'Option 1' },
+  { value: '2', label: 'Option 2' },
+]} />
+```
+
+## Sizes
+
+<Select size="sm" options={opts} emptyOption="Small" />
+<Select options={opts} emptyOption="Default" />
+<Select size="lg" options={opts} emptyOption="Large" />
+
+## States
+
+<Select options={opts} emptyOption="Default" />
+<Select options={opts} emptyOption="Disabled" disabled />
+<Select options={opts} emptyOption="Invalid" invalid />
+
+## Multiple
+
+<Select multiple options={opts} />
+
+## API Reference
+
+See [`select.md`](./select.md) · [`select.astro.md`](./select.astro.md) · [`select.drupal.md`](./select.drupal.md)

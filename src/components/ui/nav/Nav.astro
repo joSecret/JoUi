@@ -1,0 +1,59 @@
+---
+import './nav.css';
+
+interface NavItem {
+  label: string;
+  href?: string;
+  active?: boolean;
+  disabled?: boolean;
+  tabTarget?: string;
+}
+
+interface Props {
+  variant?: 'tabs' | 'pills';
+  items?: NavItem[];
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const { variant, items = [], classes = [], attrs = {} } = Astro.props;
+
+const classList = [
+  'nav',
+  variant && `nav-${variant}`,
+  ...classes,
+].filter(Boolean);
+
+const isTablist = variant === 'tabs' && items.some((item) => item.tabTarget);
+---
+
+<ul class:list={classList} {...isTablist ? { role: 'tablist' } : {}} {...attrs}>
+  {items.length > 0 ? (
+    items.map((item) => (
+      <li class="nav-item" {...isTablist ? { role: 'presentation' } : {}}>
+        {item.tabTarget ? (
+          <button
+            class:list={['nav-link', item.active && 'active', item.disabled && 'disabled']}
+            role="tab"
+            data-tab-target={item.tabTarget}
+            aria-selected={item.active ? 'true' : 'false'}
+            {...item.disabled ? { 'aria-disabled': 'true' } : {}}
+          >
+            {item.label}
+          </button>
+        ) : (
+          <a
+            class:list={['nav-link', item.active && 'active', item.disabled && 'disabled']}
+            href={item.disabled ? undefined : item.href}
+            {...item.active ? { 'aria-current': 'page' } : {}}
+            {...item.disabled ? { 'aria-disabled': 'true' } : {}}
+          >
+            {item.label}
+          </a>
+        )}
+      </li>
+    ))
+  ) : (
+    <slot />
+  )}
+</ul>

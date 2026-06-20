@@ -1,0 +1,49 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Select
+status: stable
+version: 1.0.0
+group: Forms
+description: 'Dropdown select. Overrides select.html.twig. Supports single and multiple selection, optgroups.'
+
+props:
+  type: object
+  properties:
+    sel_options:
+      type: ['array', 'null']
+      title: Options
+      description: 'Array of options. Each item: { label, selected?, disabled? }. Optgroups: { type: optgroup, label, options: {...} }.'
+      default: null
+
+    sel_empty_option:
+      type: ['string', 'null']
+      title: Empty option
+      description: 'Placeholder option shown first.'
+      default: null
+
+    sel_empty_value:
+      type: string
+      title: Empty value
+      default: ''
+
+    sel_multiple:
+      type: boolean
+      title: Multiple
+      description: 'Allow multiple selection.'
+      default: false
+
+    sel_size:
+      type: ['string', 'null']
+      title: Size
+      default: null
+      enum: [null, sm, lg]
+
+    sel_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+
+    sel_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes

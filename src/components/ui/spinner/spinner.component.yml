@@ -1,0 +1,64 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Spinner
+status: stable
+group: UI
+version: 1.0.0
+description: Animated loading indicator in border or grow style.
+
+props:
+  type: object
+  properties:
+
+    spinner_type:
+      type: string
+      title: Type
+      description: Spinner animation type.
+      default: border
+      enum:
+        - border
+        - grow
+
+    spinner_color:
+      type: ['string', 'null']
+      title: Color
+      description: Spinner color variant.
+      default: null
+      enum:
+        - null
+        - primary
+        - secondary
+        - success
+        - warning
+        - danger
+        - info
+        - light
+        - dark
+
+    spinner_size:
+      type: ['string', 'null']
+      title: Size
+      description: Spinner size variant.
+      default: null
+      enum:
+        - null
+        - sm
+
+    spinner_label:
+      type: string
+      title: Accessible label
+      description: Visually hidden text for screen readers.
+      default: 'Loading...'
+
+    spinner_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: Extra utility classes on the spinner element.
+
+    spinner_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the spinner element.

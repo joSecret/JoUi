@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Template for a card component.
+ *
+ * Available properties:
+ * - card_color: (string | null) default: (null)
+ *    enum: null | primary | secondary | accent | success | warning | danger | info | light | dark
+ * - card_horizontal: (boolean) default: (false)
+ * - card_shadow: (string | null) default: (null)
+ *    enum: null | shadow | shadow-lg
+ *
+ * Available values:
+ * - card_header: (string) HTML content for the card header. Omit to skip rendering.
+ * - card_body: (string) HTML content for the card body. Omit to skip rendering.
+ * - card_footer: (string) HTML content for the card footer. Omit to skip rendering.
+ * - card_img: (object) Image for the card.
+ *    - src: (string) Image source URL.
+ *    - alt: (string) Alt text for the image.
+ *    - position: (string) 'top' | 'bottom' | 'side' (default 'top')
+ *
+ * Available utility classes -> uc
+ * - card_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - card_att: Attributes array.
+ *
+ * Available slots:
+ * - slot_header: Card header content (overrides card_header)
+ * - slot_body: Card body content (overrides card_body)
+ * - slot_footer: Card footer content (overrides card_footer)
+ *
+ * usage example: @see card.demo.mdx
+ */
+#}
+
+{# Set defaults #}
+{% set card_color = card_color|default(null) %}
+{% set card_horizontal = card_horizontal|default(false) %}
+{% set card_shadow = card_shadow|default(null) %}
+{% set card_img = card_img|default(null) %}
+
+{# Create attributes #}
+{% set card_att = card_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set card_classes = [
+    'card',
+    card_color ? 'card-' ~ card_color,
+    card_horizontal ? 'card-horizontal',
+    card_shadow ? 'card-' ~ card_shadow,
+  ]|merge(card_uc ?: [])
+%}
+
+{# Render component #}
+<div{{ card_att.addClass(card_classes) }}>
+
+  {%- if card_img and card_img.position == 'side' -%}
+    <img src="{{ card_img.src }}" alt="{{ card_img.alt }}" class="card-img">
+  {%- elseif card_img and card_img.position == 'bottom' -%}
+    {# Image at bottom — rendered after body/footer #}
+  {%- elseif card_img -%}
+    <img src="{{ card_img.src }}" alt="{{ card_img.alt }}" class="card-img-top">
+  {%- endif -%}
+
+  {%- if slot_header is defined or card_header is defined -%}
+    <div class="card-header">
+      {%- block slot_header -%}
+        {{- card_header|raw -}}
+      {%- endblock -%}
+    </div>
+  {%- endif -%}
+
+  {%- if slot_body is defined or card_body is defined -%}
+    <div class="card-body">
+      {%- block slot_body -%}
+        {{- card_body|raw -}}
+      {%- endblock -%}
+    </div>
+  {%- endif -%}
+
+  {%- if slot_footer is defined or card_footer is defined -%}
+    <div class="card-footer">
+      {%- block slot_footer -%}
+        {{- card_footer|raw -}}
+      {%- endblock -%}
+    </div>
+  {%- endif -%}
+
+  {%- if card_img and card_img.position == 'bottom' -%}
+    <img src="{{ card_img.src }}" alt="{{ card_img.alt }}" class="card-img-bottom">
+  {%- endif -%}
+
+</div>

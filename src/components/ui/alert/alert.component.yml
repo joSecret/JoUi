@@ -1,0 +1,58 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Alert
+status: stable
+group: UI
+version: 1.0.0
+description: Display contextual feedback messages for user actions with optional dismiss support.
+
+props:
+  type: object
+  properties:
+
+    alert_color:
+      type: ['string', 'null']
+      title: Color
+      description: Alert color variant.
+      default: null
+      enum:
+        - null
+        - primary
+        - secondary
+        - accent
+        - success
+        - warning
+        - danger
+        - info
+        - light
+        - dark
+
+    alert_dismissible:
+      type: boolean
+      title: Dismissible
+      description: When true, renders a close button that removes the alert.
+      default: false
+
+    alert_content:
+      type: string
+      title: Content
+      description: The alert message content (rendered raw).
+      default: ''
+
+    alert_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: An array of extra utility or custom CSS classes.
+
+    alert_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the alert wrapper.
+
+slots:
+  alert_content:
+    title: Content
+    description: The alert message content

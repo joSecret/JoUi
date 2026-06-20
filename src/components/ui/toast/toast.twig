@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Toast notification component.
+ *
+ * Available properties:
+ * - toast_title: (string|null) Header title.
+ * - toast_message: (string) Body message.
+ * - toast_time: (string|null) Time text in header.
+ * - toast_color: (string|null) Color variant.
+ * - toast_delay: (int) default: 5000 — auto-dismiss delay in ms (0 = no auto-dismiss).
+ * - toast_show: (boolean) default: true — renders with is--open class.
+ *
+ * Available Utility classes -> uc
+ * - toast_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - toast_att: Attributes (Drupal\Core\Template\Attribute).
+ */
+#}
+
+{% set toast_delay = toast_delay|default(5000) %}
+{% set toast_show = toast_show|default(true) %}
+
+{# Create attributes #}
+{% set toast_att = toast_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set toast_classes = [
+    'toast',
+    toast_color ? 'toast-' ~ toast_color,
+    toast_show ? 'is--open',
+  ]|filter|merge(toast_uc ?: [])
+%}
+
+{% if toast_delay > 0 %}
+  {% set toast_att = toast_att.setAttribute('data-toast-delay', toast_delay) %}
+{% endif %}
+
+<div
+  {{ toast_att.addClass(toast_classes) }}
+  role="alert"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  {%- if toast_title or toast_time -%}
+    <div class="toast-header">
+      {%- if toast_title -%}
+        <strong class="toast-title">{{- toast_title -}}</strong>
+      {%- endif -%}
+      {%- if toast_time -%}
+        <small class="toast-time">{{- toast_time -}}</small>
+      {%- endif -%}
+      <button type="button" class="close-button" data-toast-dismiss aria-label="{{ 'Close'|t }}" style="margin-inline-start:auto">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/></svg>
+      </button>
+    </div>
+  {%- endif -%}
+  <div class="toast-body">
+    {%- block toast_content -%}
+      {{- toast_message|raw -}}
+    {%- endblock -%}
+  </div>
+</div>

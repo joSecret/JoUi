@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Template for an alert component.
+ *
+ * Available properties:
+ * - alert_color: (string|null) default: (null)
+ *    enum: null | primary | secondary | accent | success | warning | danger | info | light | dark
+ * - alert_dismissible: (boolean) default: (false)
+ *    When true, renders a close button that removes the alert on click.
+ *
+ * Available values:
+ * - alert_content: (string) default: ('')
+ *    The alert message content (rendered raw).
+ *
+ * Available utility classes -> uc
+ * - alert_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - alert_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * @see alert.md
+ */
+#}
+
+{% set alert_color = alert_color|default(null) %}
+{% set alert_dismissible = alert_dismissible|default(false) %}
+
+{# Create attributes #}
+{% set alert_att = alert_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set alert_classes = [
+    'alert',
+    alert_color ? 'alert-' ~ alert_color,
+    alert_dismissible ? 'alert-dismissible',
+  ]|merge(alert_uc ?: [])
+%}
+
+<div{{ alert_att.addClass(alert_classes).setAttribute('role', 'alert') }}>
+  {%- block alert_content -%}
+    {{- alert_content|raw -}}
+  {%- endblock -%}
+
+  {%- if alert_dismissible -%}
+    <button
+      type="button"
+      class="close-button"
+      aria-label="{{ 'Close'|t }}"
+      data-alert-dismiss
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+      </svg>
+    </button>
+  {%- endif -%}
+</div>

@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * Carousel / image slider component.
+ *
+ * Available properties:
+ * - carousel_id: (string) Unique ID for the carousel.
+ * - carousel_items: (array) Slides — each with src, alt, caption (optional: { title, text }).
+ * - carousel_interval: (int) default: 0 — auto-play interval in ms (0 = no auto-play).
+ * - carousel_controls: (boolean) default: true — show prev/next controls.
+ * - carousel_indicators: (boolean) default: true — show dot indicators.
+ *
+ * Available Utility classes -> uc
+ * - carousel_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - carousel_att: Attributes (Drupal\Core\Template\Attribute).
+ */
+#}
+
+{% set carousel_items = carousel_items|default([]) %}
+{% set carousel_interval = carousel_interval|default(0) %}
+{% set carousel_controls = carousel_controls ?? true %}
+{% set carousel_indicators = carousel_indicators ?? true %}
+
+{# Create attributes #}
+{% set carousel_att = carousel_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set carousel_classes = [
+    'carousel',
+  ]|merge(carousel_uc ?: [])
+%}
+
+{% if carousel_id %}
+  {% set carousel_att = carousel_att.setAttribute('id', carousel_id) %}
+{% endif %}
+{% if carousel_interval > 0 %}
+  {% set carousel_att = carousel_att.setAttribute('data-carousel-interval', carousel_interval) %}
+{% endif %}
+
+<div{{ carousel_att.addClass(carousel_classes) }} data-carousel>
+  <div class="carousel-inner">
+    {% for item in carousel_items %}
+      <div class="carousel-item{{ loop.first ? ' active' }}">
+        <img
+          src="{{ item.src }}"
+          alt="{{ item.alt }}"
+          class="carousel-img"
+          loading="{{ loop.first ? 'eager' : 'lazy' }}"
+        >
+        {% if item.caption %}
+          <div class="carousel-caption">
+            {% if item.caption.title %}<h5>{{ item.caption.title }}</h5>{% endif %}
+            {% if item.caption.text %}<p>{{ item.caption.text }}</p>{% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {%- block slot_items -%}{%- endblock -%}
+  </div>
+
+  {% if carousel_controls and carousel_items|length > 1 %}
+    <button class="carousel-control carousel-control-prev" data-carousel-prev aria-label="{{ 'Previous'|t }}">
+      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+    </button>
+    <button class="carousel-control carousel-control-next" data-carousel-next aria-label="{{ 'Next'|t }}">
+      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+    </button>
+  {% endif %}
+
+  {% if carousel_indicators and carousel_items|length > 1 %}
+    <div class="carousel-indicators">
+      {% for item in carousel_items %}
+        <button
+          class="carousel-indicator{{ loop.first ? ' active' }}"
+          data-carousel-goto="{{ loop.index0 }}"
+          aria-label="{{ 'Slide %d'|t(loop.index) }}"
+        ></button>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

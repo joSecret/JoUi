@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Offcanvas slide-in panel component.
+ *
+ * Available properties:
+ * - offcanvas_id: (string) Required unique ID.
+ * - offcanvas_placement: (string) default: 'start' — start, end, top, bottom.
+ * - offcanvas_title: (string|null) Panel title.
+ *
+ * Available Utility classes -> uc
+ * - offcanvas_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - offcanvas_att: Attributes (Drupal\Core\Template\Attribute).
+ *
+ * Trigger: add data-offcanvas-target="{{ offcanvas_id }}" to a button.
+ */
+#}
+
+{% set offcanvas_placement = offcanvas_placement|default('start') %}
+
+{# Create attributes #}
+{% set offcanvas_att = offcanvas_att ?: create_attribute() %}
+
+{# Component classes #}
+{%
+  set offcanvas_classes = [
+    'offcanvas',
+    'offcanvas-' ~ offcanvas_placement,
+  ]|merge(offcanvas_uc ?: [])
+%}
+
+{% if offcanvas_id %}
+  {% set offcanvas_att = offcanvas_att.setAttribute('id', offcanvas_id) %}
+{% endif %}
+
+<div{{ offcanvas_att.addClass(offcanvas_classes) }}>
+  <div class="offcanvas-backdrop" data-offcanvas-backdrop></div>
+  <div class="offcanvas-panel">
+    <div class="offcanvas-header">
+      {%- block slot_header -%}
+        {%- if offcanvas_title -%}
+          <h5 class="offcanvas-title">{{- offcanvas_title -}}</h5>
+        {%- endif -%}
+      {%- endblock -%}
+      <button type="button" class="close-button" data-offcanvas-dismiss aria-label="{{ 'Close'|t }}">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      {%- block slot_content -%}
+        {{- offcanvas_content|raw -}}
+      {%- endblock -%}
+    </div>
+  </div>
+</div>

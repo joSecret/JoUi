@@ -1,0 +1,55 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Navbar
+status: stable
+group: UI
+version: 1.0.0
+description: Responsive navigation bar with brand, links, and a mobile hamburger toggle. Requires navbar.js.
+
+props:
+  type: object
+  properties:
+
+    navbar_brand:
+      type: ['string', 'null']
+      title: Brand
+      description: Brand name text displayed in the navbar.
+      default: null
+
+    navbar_brand_url:
+      type: string
+      title: Brand URL
+      description: URL for the brand link.
+      default: '/'
+
+    navbar_items:
+      type: array
+      title: Navigation Items
+      description: >
+        Array of nav link objects. Each item has:
+        label (string), href (string), active (boolean), disabled (boolean).
+      default: []
+
+    # uc -> utility_classes
+    navbar_uc:
+      type: array
+      items:
+        type: string
+      title: Navbar Utility Classes
+      default: []
+      description: An array of extra utility classes for the root nav element.
+
+    # att -> attributes
+    navbar_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the root nav element.
+
+slots:
+  slot_brand:
+    title: Brand slot
+    description: Custom brand content (rendered alongside or instead of navbar_brand).
+
+  slot_content:
+    title: Collapse content
+    description: Additional content inside the collapsible area (after navbar_nav).

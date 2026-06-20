@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Template for a placeholder (skeleton) component.
+ *
+ * Available properties:
+ * - placeholder_animation: (string) default: 'glow'
+ *    enum: glow | wave | none — Animation style for the placeholder.
+ * - placeholder_lines: (array) default: [] — Array of line definitions.
+ *    Each item: { cols: 1–12, size: null|xs|sm|lg }
+ *
+ * Utility classes / attributes:
+ * - placeholder_uc: (array) Extra utility classes on the wrapper.
+ * - placeholder_att: (Drupal\Core\Template\Attribute) Attributes for wrapper.
+ *
+ * @see placeholder.component.yml
+ */
+#}
+
+{% set placeholder_animation = placeholder_animation|default('glow') %}
+{% set placeholder_lines = placeholder_lines|default([]) %}
+
+{%
+  set wrapper_classes = [
+    placeholder_animation != 'none' ? 'placeholder-' ~ placeholder_animation,
+  ]|merge(placeholder_uc ?: [])
+%}
+
+{% set placeholder_att = placeholder_att ?: create_attribute() %}
+
+<p{{ placeholder_att.addClass(wrapper_classes) }}>
+  {%- if placeholder_lines|length -%}
+    {%- for line in placeholder_lines -%}
+      {%- set line_cols = [[line.cols|default(12), 1]|max, 12]|min -%}
+      {%- set line_classes = [
+        'placeholder',
+        'col-' ~ line_cols,
+        line.size ? 'placeholder-' ~ line.size,
+      ]|filter -%}
+      <span{{ create_attribute().addClass(line_classes) }}></span>
+    {%- endfor -%}
+  {%- else -%}
+    <span class="placeholder col-12"></span>
+  {%- endif -%}
+</p>

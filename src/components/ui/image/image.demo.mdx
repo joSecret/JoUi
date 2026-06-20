@@ -1,0 +1,65 @@
+---
+title: Image
+description: Responsive image with thumbnail style and rounded corner utility classes
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Image from './Image.astro'
+
+# Image
+
+Responsive image component with optional thumbnail frame and rounded corner utility classes. Renders a semantic `<img>` element. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add image --platform astro
+```
+
+```bash
+npx joui add image --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Image from '@ui/image/Image.astro'
+---
+<Image src="https://picsum.photos/400/250" alt="Sample photo" />
+```
+
+## Examples
+
+### Fluid (default)
+
+<Image src="https://picsum.photos/400/200" alt="Responsive image" />
+
+```astro
+<Image src="..." alt="Photo" />
+```
+
+### Thumbnail
+
+<Image src="https://picsum.photos/200/200?1" alt="Thumbnail" thumbnail />
+
+```astro
+<Image src="..." alt="Photo" thumbnail />
+```
+
+### Rounded variants
+
+<Image src="https://picsum.photos/120/120?2" alt="Rounded" rounded width={120} height={120} />
+<Image src="https://picsum.photos/120/120?3" alt="Circle" rounded="circle" width={120} height={120} />
+<Image src="https://picsum.photos/200/80?4" alt="Pill" rounded="pill" width={200} height={80} />
+
+```astro
+<Image src="..." alt="Rounded" rounded />
+<Image src="..." alt="Circle" rounded="circle" />
+<Image src="..." alt="Pill" rounded="pill" />
+```
+
+## API Reference
+
+See [`image.md`](./image.md) for the full reference and [`image.astro.md`](./image.astro.md) / [`image.drupal.md`](./image.drupal.md) for platform notes.

@@ -1,0 +1,76 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Image
+status: stable
+group: UI
+version: 1.0.0
+description: Responsive image component with optional thumbnail style and rounded corner variants. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    image_src:
+      type: string
+      title: Source
+      description: Image source URL.
+
+    image_alt:
+      type: string
+      title: Alt text
+      description: Alternative text for the image (required for accessibility).
+      default: ''
+
+    image_fluid:
+      type: boolean
+      title: Fluid
+      description: Makes the image responsive (max-width 100%, height auto).
+      default: true
+
+    image_thumbnail:
+      type: boolean
+      title: Thumbnail
+      description: Adds a border and padding thumbnail frame.
+      default: false
+
+    image_rounded:
+      type: ['string', 'boolean']
+      title: Rounded
+      description: Rounded variant — true, 'circle', 'pill', 'sm', 'lg', '0'.
+      default: false
+
+    image_width:
+      type: ['integer', 'null']
+      title: Width
+      description: Native width attribute.
+      default: null
+
+    image_height:
+      type: ['integer', 'null']
+      title: Height
+      description: Native height attribute.
+      default: null
+
+    image_loading:
+      type: string
+      title: Loading
+      description: Native loading attribute — lazy or eager.
+      enum:
+        - 'lazy'
+        - 'eager'
+      default: 'lazy'
+
+    # uc -> utility_classes
+    image_uc:
+      type: array
+      items:
+        type: string
+      title: Image Utility Classes
+      default: []
+      description: An array of extra utility classes.
+
+    # att -> attributes
+    image_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: HTML attributes for the img element.

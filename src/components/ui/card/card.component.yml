@@ -1,0 +1,112 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Card
+status: stable
+group: UI
+version: 1.0.0
+description: A flexible content container with optional image, header, body, and footer sections. Supports color variants and horizontal layout.
+
+# Props.
+props:
+  type: object
+  properties:
+
+    card_color:
+      type: ['string', 'null']
+      title: Color
+      description: Card color variant.
+      default: null
+      enum:
+        - null
+        - primary
+        - secondary
+        - accent
+        - success
+        - warning
+        - danger
+        - info
+        - light
+        - dark
+
+    card_horizontal:
+      type: boolean
+      title: Horizontal layout
+      description: Display the card in a horizontal (row) layout with image on the side.
+      default: false
+
+    card_shadow:
+      type: ['string', 'null']
+      title: Shadow
+      description: Box shadow variant.
+      default: null
+      enum:
+        - null
+        - shadow
+        - shadow-lg
+
+    card_header:
+      type: ['string', 'null']
+      title: Header
+      description: HTML content for the card header. Omit to skip rendering.
+      default: null
+
+    card_body:
+      type: ['string', 'null']
+      title: Body
+      description: HTML content for the card body.
+      default: null
+
+    card_footer:
+      type: ['string', 'null']
+      title: Footer
+      description: HTML content for the card footer. Omit to skip rendering.
+      default: null
+
+    card_img:
+      type: ['object', 'null']
+      title: Image
+      description: Image object with src, alt and optional position (top | bottom | side).
+      default: null
+      properties:
+        src:
+          type: string
+          title: Image src
+        alt:
+          type: string
+          title: Image alt
+        position:
+          type: string
+          title: Image position
+          default: top
+          enum:
+            - top
+            - bottom
+            - side
+
+    # uc -> utility_classes
+    card_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      default: []
+      description: An array of utility classes to add to the card wrapper.
+
+    # att -> attributes
+    card_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the card wrapper.
+
+slots:
+  slot_header:
+    title: Header
+    description: Card header content (overrides card_header string)
+
+  slot_body:
+    title: Body
+    description: Card body content (overrides card_body string)
+
+  slot_footer:
+    title: Footer
+    description: Card footer content (overrides card_footer string)

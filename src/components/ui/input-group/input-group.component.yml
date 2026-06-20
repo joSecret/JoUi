@@ -1,0 +1,45 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Input Group
+status: stable
+group: UI
+version: 1.0.0
+description: Layout wrapper that prepends or appends text addons and buttons to form controls. No JavaScript required.
+
+props:
+  type: object
+  properties:
+
+    input_group_size:
+      type: ['string', 'null']
+      title: Size
+      description: Size variant — sm or lg.
+      enum:
+        - 'sm'
+        - 'lg'
+        - null
+      default: null
+
+    input_group_content:
+      type: ['string', 'null']
+      title: Content
+      description: Form control and addon HTML.
+      default: null
+
+    # uc -> utility_classes
+    input_group_uc:
+      type: array
+      items:
+        type: string
+      title: Input Group Utility Classes
+      default: []
+
+    # att -> attributes
+    input_group_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+
+slots:
+  slot_content:
+    title: Content
+    description: Form control and addon elements (input-group-text, form-control, button, etc.).

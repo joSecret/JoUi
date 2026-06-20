@@ -1,0 +1,21 @@
+<svg width="250" height="160" viewBox="0 0 250 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>:root { --card: var(--c_neutral_100); --primary: var(--c_primary_500); --muted: var(--c_neutral_400); --danger: var(--c_danger_500); }</style>
+  <g clip-path="url(#c)">
+    <path d="M125 160V0" stroke="url(#gv)" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+    <!-- Default input -->
+    <rect x="30" y="30" width="190" height="28" rx="4" fill="white" stroke="var(--muted)" stroke-opacity="0.5" stroke-width="1"/>
+    <rect x="42" y="41" width="70" height="6" rx="3" fill="var(--muted)" fill-opacity="0.3"/>
+    <!-- Focus input -->
+    <rect x="30" y="68" width="190" height="28" rx="4" fill="white" stroke="var(--primary)" stroke-width="1.5"/>
+    <rect x="42" y="79" width="50" height="6" rx="3" fill="var(--muted)" fill-opacity="0.5"/>
+    <!-- Invalid input -->
+    <rect x="30" y="106" width="190" height="28" rx="4" fill="white" stroke="var(--danger)" stroke-width="1.5"/>
+    <rect x="42" y="117" width="80" height="6" rx="3" fill="var(--muted)" fill-opacity="0.3"/>
+  </g>
+  <defs>
+    <linearGradient id="gv" x1="125" y1="0" x2="125" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--muted)" stop-opacity="0"/><stop offset="0.5" stop-color="var(--muted)"/><stop offset="1" stop-color="var(--muted)" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="c"><rect width="250" height="160" fill="white"/></clipPath>
+  </defs>
+</svg>

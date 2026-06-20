@@ -1,0 +1,63 @@
+---
+import './toast.css';
+
+interface Props {
+  title?: string;
+  message?: string;
+  time?: string;
+  color?: string;
+  delay?: number;
+  show?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  title,
+  message,
+  time,
+  color,
+  delay = 5000,
+  show = true,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'toast',
+  color && `toast-${color}`,
+  show && 'is--open',
+  ...classes,
+].filter(Boolean);
+---
+
+<div
+  class:list={classList}
+  role="alert"
+  aria-live="polite"
+  aria-atomic="true"
+  data-toast-delay={delay > 0 ? delay : undefined}
+  {...attrs}
+>
+  {(title || time) && (
+    <div class="toast-header">
+      {title && <strong class="toast-title">{title}</strong>}
+      {time && <small class="toast-time">{time}</small>}
+      <button type="button" class="close-button" data-toast-dismiss aria-label="Close" style="margin-inline-start: auto;">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+        </svg>
+      </button>
+    </div>
+  )}
+  <div class="toast-body">
+    {message || <slot />}
+  </div>
+  {!(title || time) && (
+    <button type="button" class="close-button" data-toast-dismiss aria-label="Close" style="position: absolute; top: 0.5rem; inset-inline-end: 0.5rem;">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z"/>
+      </svg>
+    </button>
+  )}
+</div>

@@ -1,0 +1,92 @@
+---
+title: List Group
+description: Flexible bordered list with active, disabled, color, action, flush, and horizontal variants
+category: ui
+preview: ./thumbnail.svg
+---
+
+import ListGroup from './ListGroup.astro'
+
+# List Group
+
+Flexible list of bordered items with active, disabled, color, action link, flush, and horizontal layout support. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add list-group --platform astro
+```
+
+```bash
+npx joui add list-group --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import ListGroup from '@ui/list-group/ListGroup.astro'
+---
+<ListGroup items={[
+  { label: 'An item' },
+  { label: 'A second item' },
+  { label: 'A third item' },
+]} />
+```
+
+## Examples
+
+### Default
+
+<ListGroup items={[
+  { label: 'First item' },
+  { label: 'An active item', active: true },
+  { label: 'A third item' },
+  { label: 'A disabled item', disabled: true },
+]} />
+
+### Link items
+
+<ListGroup items={[
+  { label: 'Home', href: '#', active: true },
+  { label: 'About', href: '#' },
+  { label: 'Contact', href: '#' },
+  { label: 'Disabled', href: '#', disabled: true },
+]} />
+
+```astro
+<ListGroup items={[
+  { label: 'Home', href: '/', active: true },
+  { label: 'About', href: '/about' },
+]} />
+```
+
+### Color variants
+
+<ListGroup items={[
+  { label: 'Primary', color: 'primary' },
+  { label: 'Success', color: 'success' },
+  { label: 'Warning', color: 'warning' },
+  { label: 'Danger', color: 'danger' },
+  { label: 'Info', color: 'info' },
+]} />
+
+### Flush
+
+<ListGroup flush items={[
+  { label: 'Flush item one' },
+  { label: 'Flush item two' },
+  { label: 'Flush item three' },
+]} />
+
+### Horizontal
+
+<ListGroup horizontal items={[
+  { label: 'One' },
+  { label: 'Two', active: true },
+  { label: 'Three' },
+]} />
+
+## API Reference
+
+See [`list-group.md`](./list-group.md) for the full reference and [`list-group.astro.md`](./list-group.astro.md) / [`list-group.drupal.md`](./list-group.drupal.md) for platform notes.

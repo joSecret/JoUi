@@ -1,0 +1,95 @@
+---
+title: Progress
+description: Horizontal progress bar with optional striped and animated variants — no JS required
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Progress from './Progress.astro'
+
+# Progress
+
+Horizontal progress bar with color, striped, and animated stripe variants. Values are clamped to 0–100 automatically.
+
+## Installation
+
+```bash
+npx joui add progress --platform astro
+```
+
+```bash
+npx joui add progress --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Progress from '@ui/progress/Progress.astro'
+---
+<Progress value={60} color="primary" label={true} />
+```
+
+## Examples
+
+### Default
+
+<Progress value={25} />
+
+```astro
+<Progress value={25} />
+```
+
+### With label
+
+<Progress value={60} label={true} />
+
+```astro
+<Progress value={60} label={true} />
+```
+
+### Colors
+
+<Progress value={40} color="primary" />
+<Progress value={55} color="secondary" />
+<Progress value={70} color="success" />
+<Progress value={45} color="warning" />
+<Progress value={80} color="danger" />
+<Progress value={65} color="info" />
+
+```astro
+<Progress value={40} color="primary" />
+<Progress value={55} color="secondary" />
+<Progress value={70} color="success" />
+<Progress value={45} color="warning" />
+<Progress value={80} color="danger" />
+<Progress value={65} color="info" />
+```
+
+### Striped
+
+<Progress value={50} striped color="primary" />
+
+```astro
+<Progress value={50} striped color="primary" />
+```
+
+### Animated stripes
+
+<Progress value={75} animated color="primary" />
+
+```astro
+<Progress value={75} animated color="primary" />
+```
+
+### Custom height
+
+<Progress value={30} height="1.5rem" color="success" />
+
+```astro
+<Progress value={30} height="1.5rem" color="success" />
+```
+
+## API Reference
+
+See [`progress.md`](./progress.md) for the full reference and [`progress.astro.md`](./progress.astro.md) / [`progress.drupal.md`](./progress.drupal.md) for platform notes.

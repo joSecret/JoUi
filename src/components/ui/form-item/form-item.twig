@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * joui form-item component — overrides form-element.html.twig.
+ *
+ * Accepts both standard Drupal core variables and prefixed joui variables.
+ * Use as SDC: {% include 'joui:form-item' with { fi_label: 'Email' } %}
+ * Use as override: drop in templates/ — Drupal vars are picked up automatically.
+ *
+ * Available variables:
+ * - fi_label (string) Label text or rendered label element.
+ * - fi_label_display (string) 'before' | 'after' | 'invisible'. Default: 'before'.
+ * - fi_description (object|null) Description with .content and .attributes.
+ * - fi_description_display (string) 'before' | 'after' | 'invisible'. Default: 'after'.
+ * - fi_errors (string|null) Error message.
+ * - fi_prefix (string|null) Prefix before the input.
+ * - fi_suffix (string|null) Suffix after the input.
+ * - fi_disabled (bool) Disabled state.
+ * - fi_required (bool) Required marker.
+ * - fi_type (string|null) Input type (used for BEM class generation).
+ * - fi_name (string|null) Input name (used for BEM class generation).
+ * - fi_uc (array) Utility classes.
+ * - fi_att (Attribute) HTML attributes.
+ */
+#}
+
+{# Accept both Drupal core vars and prefixed joui vars #}
+{% set fi_label_display = fi_label_display|default(label_display)|default('before') %}
+{% set fi_description_display = fi_description_display|default(description_display)|default('after') %}
+{% set fi_errors = fi_errors|default(errors) %}
+{% set fi_prefix = fi_prefix|default(prefix) %}
+{% set fi_suffix = fi_suffix|default(suffix) %}
+{% set fi_disabled = fi_disabled|default(disabled) %}
+{% set fi_required = fi_required|default(required) %}
+{% set fi_type = fi_type|default(type) %}
+{% set fi_name = fi_name|default(name) %}
+{% set fi_label = fi_label|default(label) %}
+{% set fi_description = fi_description|default(description) %}
+
+{% set fi_att = fi_att|default(attributes) ?: create_attribute() %}
+
+{%
+  set fi_classes = [
+    'js-form-item',
+    'form-item',
+    'c--form-item',
+    fi_type ? 'js-form-type-' ~ fi_type|clean_class,
+    fi_type ? 'form-type--' ~ fi_type|clean_class,
+    fi_name ? 'js-form-item-' ~ fi_name|clean_class,
+    fi_name ? 'form-item--' ~ fi_name|clean_class,
+    fi_label_display not in ['after', 'before'] ? 'form-item--no-label',
+    fi_disabled == 'disabled' ? 'form-item--disabled',
+    fi_errors ? 'form-item--error',
+  ]|merge(fi_uc ?: [])
+%}
+
+{%
+  set fi_desc_classes = [
+    'form-item__description',
+    fi_description_display == 'invisible' ? 'visually-hidden',
+  ]
+%}
+
+<div {{ fi_att.addClass(fi_classes) }}>
+  {% if fi_label_display in ['before', 'invisible'] %}
+    {{ fi_label }}
+  {% endif %}
+
+  {% if fi_prefix is not empty %}
+    <span class="form-item__prefix{{ fi_disabled == 'disabled' ? ' is-disabled' }}">{{ fi_prefix }}</span>
+  {% endif %}
+
+  {% if fi_description_display == 'before' and fi_description.content %}
+    <div {{ fi_description.attributes.addClass(fi_desc_classes) }}>{{ fi_description.content }}</div>
+  {% endif %}
+
+  {{ children }}
+
+  {% if fi_suffix is not empty %}
+    <span class="form-item__suffix{{ fi_disabled == 'disabled' ? ' is-disabled' }}">{{ fi_suffix }}</span>
+  {% endif %}
+
+  {% if fi_label_display == 'after' %}
+    {{ fi_label }}
+  {% endif %}
+
+  {% if fi_errors %}
+    <div class="form-item__error-message">{{ fi_errors }}</div>
+  {% endif %}
+
+  {% if fi_description_display in ['after', 'invisible'] and fi_description.content %}
+    <div {{ fi_description.attributes.addClass(fi_desc_classes) }}>{{ fi_description.content }}</div>
+  {% endif %}
+</div>

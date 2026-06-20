@@ -1,0 +1,83 @@
+---
+title: Breadcrumb
+description: Navigation trail showing current page location within a site hierarchy
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Breadcrumb from './Breadcrumb.astro'
+
+# Breadcrumb
+
+Navigation aid that shows the user's current location within the site hierarchy. Built on a semantic `<ol>` wrapped in a `<nav>`. No JavaScript required.
+
+## Installation
+
+```bash
+npx joui add breadcrumb --platform astro
+```
+
+```bash
+npx joui add breadcrumb --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Breadcrumb from '@ui/breadcrumb/Breadcrumb.astro'
+---
+<Breadcrumb items={[
+  { label: 'Home', url: '/' },
+  { label: 'Library', url: '/library' },
+  { label: 'Data', active: true },
+]} />
+```
+
+## Examples
+
+### Default
+
+<Breadcrumb items={[
+  { label: 'Home', url: '/' },
+  { label: 'Library', url: '/library' },
+  { label: 'Data', active: true },
+]} />
+
+```astro
+<Breadcrumb items={[
+  { label: 'Home', url: '/' },
+  { label: 'Library', url: '/library' },
+  { label: 'Data', active: true },
+]} />
+```
+
+### Custom separator
+
+<Breadcrumb
+  separator="›"
+  items={[
+    { label: 'Home', url: '/' },
+    { label: 'Products', url: '/products' },
+    { label: 'Shoes', active: true },
+  ]}
+/>
+
+```astro
+<Breadcrumb
+  separator="›"
+  items={[{ label: 'Home', url: '/' }, { label: 'Products', url: '/products' }, { label: 'Shoes', active: true }]}
+/>
+```
+
+### Single level
+
+<Breadcrumb items={[{ label: 'Home', active: true }]} />
+
+```astro
+<Breadcrumb items={[{ label: 'Home', active: true }]} />
+```
+
+## API Reference
+
+See [`breadcrumb.md`](./breadcrumb.md) for the full reference and [`breadcrumb.astro.md`](./breadcrumb.astro.md) / [`breadcrumb.drupal.md`](./breadcrumb.drupal.md) for platform notes.

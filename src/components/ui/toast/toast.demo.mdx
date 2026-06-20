@@ -1,0 +1,72 @@
+---
+title: Toast
+description: Lightweight auto-dismissing notification popup with color variants and programmatic API
+category: ui
+preview: ./thumbnail.svg
+---
+
+import Toast from './Toast.astro'
+
+# Toast
+
+Lightweight notification popup. Auto-dismisses after a configurable delay. Supports color variants, header/body layout, and programmatic creation via `joui.toast.show()`. Requires `toast.js`.
+
+## Installation
+
+```bash
+npx joui add toast --platform astro
+```
+
+```bash
+npx joui add toast --platform drupal
+```
+
+## Usage
+
+```astro live
+---
+import Toast from '@ui/toast/Toast.astro'
+---
+<div class="toast-container toast-container-top-end" style="position:relative;height:80px;">
+  <Toast title="Notification" message="Your file was saved." color="success" :delay="0" />
+</div>
+```
+
+## Examples
+
+### With header
+
+<Toast title="joui" time="just now" message="Hello, world! This is a toast notification." show />
+
+```astro
+<Toast title="joui" time="just now" message="Hello, world!" />
+```
+
+### Colors
+
+<Toast message="Primary toast" color="primary" show />
+<Toast message="Success toast" color="success" show />
+<Toast message="Warning toast" color="warning" show />
+<Toast message="Danger toast" color="danger" show />
+
+```astro
+<Toast message="Success!" color="success" />
+<Toast message="Warning!" color="warning" />
+<Toast message="Error!" color="danger" />
+```
+
+### Programmatic
+
+```js
+joui.toast.show({
+  title: 'Saved',
+  message: 'Your changes were saved successfully.',
+  color: 'success',
+  delay: 4000,
+  position: 'bottom-end',
+});
+```
+
+## API Reference
+
+See [`toast.md`](./toast.md) for the full reference and [`toast.astro.md`](./toast.astro.md) / [`toast.drupal.md`](./toast.drupal.md) for platform notes.

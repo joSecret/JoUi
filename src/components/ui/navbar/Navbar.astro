@@ -1,0 +1,67 @@
+---
+import './navbar.css';
+
+interface NavItem {
+  label: string;
+  href?: string;
+  active?: boolean;
+  disabled?: boolean;
+}
+
+interface Props {
+  brand?: string | null;
+  brandUrl?: string;
+  items?: NavItem[];
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  brand = null,
+  brandUrl = '/',
+  items = [],
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = ['navbar', ...classes].filter(Boolean);
+---
+
+<nav class:list={classList} {...attrs}>
+  <div class="navbar-inner">
+    {brand && (
+      <a class="navbar-brand" href={brandUrl}>{brand}</a>
+    )}
+    <slot name="brand" />
+
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-navbar-toggle
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse">
+      {items.length > 0 && (
+        <ul class="navbar-nav">
+          {items.map((item) => (
+            <li class="nav-item">
+              <a
+                class:list={['nav-link', item.active && 'active', item.disabled && 'disabled']}
+                href={item.disabled ? undefined : item.href}
+                aria-current={item.active ? 'page' : undefined}
+                aria-disabled={item.disabled ? 'true' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <slot />
+    </div>
+  </div>
+</nav>

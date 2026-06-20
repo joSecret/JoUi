@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Template for {{ComponentName}} component.
+ *
+ * Available properties:
+ * - {{component_name}}_id: (string | null) default: (null)
+ *
+ * Available utility classes -> uc
+ * - {{component_name}}_uc: An array of utility classes.
+ *
+ * Available attributes -> att
+ * - {{component_name}}_att: Attributes array.
+ *
+ * @see {{component-name}}.md for the full reference.
+ * @see {{component-name}}.drupal.md for Drupal usage.
+ */
+#}
+
+{% set {{component_name}}_id = {{component_name}}_id|default(null) %}
+{% set {{component_name}}_uc = {{component_name}}_uc|default([]) %}
+{% set {{component_name}}_att = {{component_name}}_att ?: create_attribute() %}
+
+{% set {{component_name}}_classes = [
+  '{{component-name}}',
+]|merge({{component_name}}_uc ?: []) %}
+
+{% if {{component_name}}_id %}
+  {% set {{component_name}}_att = {{component_name}}_att.setAttribute('id', {{component_name}}_id) %}
+{% endif %}
+
+<div{{ {{component_name}}_att.addClass({{component_name}}_classes) }}>
+  {% block slot_content %}
+    {{- slot_content|default('') -}}
+  {% endblock %}
+</div>

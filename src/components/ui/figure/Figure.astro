@@ -1,0 +1,36 @@
+---
+import './figure.css';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  captionAlign?: 'start' | 'center' | 'end';
+  rounded?: boolean | 'circle';
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  captionAlign = 'start',
+  rounded = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const classList = [
+  'figure',
+  captionAlign !== 'start' && `figure-caption-${captionAlign}`,
+  rounded === 'circle' ? 'figure-rounded-circle' : rounded ? 'figure-rounded' : null,
+  ...classes,
+].filter(Boolean);
+---
+
+<figure class:list={classList} {...attrs}>
+  <img src={src} alt={alt} class="figure-img" />
+  {caption && <figcaption class="figure-caption">{caption}</figcaption>}
+  <slot />
+</figure>

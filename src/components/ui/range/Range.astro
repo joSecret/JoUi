@@ -1,0 +1,46 @@
+---
+import './range.css';
+
+interface Props {
+  id?: string;
+  name?: string;
+  label?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  value?: number;
+  disabled?: boolean;
+  classes?: string[];
+  attrs?: Record<string, unknown>;
+}
+
+const {
+  id,
+  name,
+  label,
+  min = 0,
+  max = 100,
+  step = 1,
+  value = 50,
+  disabled = false,
+  classes = [],
+  attrs = {},
+} = Astro.props;
+
+const inputId = id || `range-${Math.random().toString(36).slice(2, 7)}`;
+const classList = ['form-range', ...classes].filter(Boolean);
+---
+
+{label && <label class="form-label" for={inputId}>{label}</label>}
+<input
+  type="range"
+  class:list={classList}
+  id={inputId}
+  name={name}
+  min={min}
+  max={max}
+  step={step}
+  value={value}
+  disabled={disabled || undefined}
+  {...attrs}
+/>

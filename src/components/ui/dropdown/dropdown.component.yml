@@ -1,0 +1,62 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Dropdown
+status: stable
+group: UI
+version: 1.0.0
+description: A toggleable dropdown menu that opens on button click. Requires dropdown.js.
+
+props:
+  type: object
+  properties:
+
+    dropdown_label:
+      type: string
+      title: Toggle Label
+      description: Text label for the toggle button.
+      default: 'Dropdown'
+
+    dropdown_color:
+      type: string
+      title: Button Color
+      description: Color variant for the toggle button (primary, secondary, etc.).
+      default: 'secondary'
+
+    dropdown_direction:
+      type: string
+      title: Direction
+      description: Direction the menu opens — down, up, end, start.
+      enum:
+        - 'down'
+        - 'up'
+        - 'end'
+        - 'start'
+      default: 'down'
+
+    dropdown_items:
+      type: array
+      title: Items
+      description: >
+        Array of menu items. Each item is an object with:
+        label (string), href (string|null), divider (boolean), disabled (boolean).
+      default: []
+
+    # uc -> utility_classes
+    dropdown_uc:
+      type: array
+      items:
+        type: string
+      title: Dropdown Utility Classes
+      default: []
+      description: An array of utility classes to add to the dropdown wrapper.
+
+    # att -> attributes
+    dropdown_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      default: {}
+      description: A list of HTML attributes for the dropdown wrapper.
+
+slots:
+  slot_items:
+    title: Menu items
+    description: Custom menu items rendered inside the dropdown-menu ul.

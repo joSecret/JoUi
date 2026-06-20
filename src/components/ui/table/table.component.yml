@@ -1,0 +1,89 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Table
+status: stable
+version: 1.0.0
+group: Globals
+description: 'Styled table component. Overrides table.html.twig. CSS-only — no sorting or filtering.'
+
+props:
+  type: object
+
+  properties:
+    tbl_caption:
+      type: ['string', 'null']
+      title: Caption
+      description: 'Table caption text.'
+      default: null
+
+    tbl_header:
+      type: ['array', 'null']
+      title: Header
+      description: 'Array of header cells (tag, attributes, content).'
+      default: null
+
+    tbl_rows:
+      type: ['array', 'null']
+      title: Rows
+      description: 'Array of body rows (attributes, cells).'
+      default: null
+
+    tbl_footer:
+      type: ['array', 'null']
+      title: Footer
+      description: 'Array of footer rows (attributes, cells).'
+      default: null
+
+    tbl_colgroups:
+      type: ['array', 'null']
+      title: Column groups
+      description: 'Column group definitions.'
+      default: null
+
+    tbl_empty:
+      type: ['string', 'null']
+      title: Empty message
+      description: 'Message displayed when there are no rows.'
+      default: null
+
+    tbl_header_columns:
+      type: ['integer', 'null']
+      title: Header columns
+      description: 'Number of columns (used for empty row colspan).'
+      default: null
+
+    tbl_striped:
+      type: boolean
+      title: Striped
+      description: 'Alternating row background colors.'
+      default: false
+
+    tbl_bordered:
+      type: boolean
+      title: Bordered
+      description: 'Borders on all cells.'
+      default: false
+
+    tbl_hover:
+      type: boolean
+      title: Hover
+      description: 'Highlight row on hover.'
+      default: false
+
+    tbl_responsive:
+      type: boolean
+      title: Responsive
+      description: 'Wrap table in a horizontal-scroll container.'
+      default: false
+
+    tbl_uc:
+      type: array
+      items:
+        type: string
+      title: Utility Classes
+      description: Extra classes added to the table element.
+      default: []
+
+    tbl_att:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      description: HTML attributes for the table element.
